@@ -1,0 +1,1 @@
+cibler l'élément à modifier, puis copy selector, et mettre ce texte dans css pour pouvoir modifier l'endroit souhaité
