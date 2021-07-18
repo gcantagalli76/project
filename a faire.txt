@@ -1,0 +1,5 @@
+A faire pour la prochaine fois :
+
+Sur creationcpt.php : Faire en sorte que lorsqu'on a pas rempli tous les champs on ne puisse pas aller sur les autres pages
+
+Appliquer la même chose sur la connection et sur les autres formulaire comme les annonce à poster...Etc
