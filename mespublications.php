@@ -8,190 +8,250 @@
 
   <div class="container-fluid">
 
-
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/peinture.jpg" alt="paint" width="150px" style="max-height: 150px;">
+  <div class="card mb-3 favorite" style="width: 95%;">
+  <div class="row g-0">
+    <div class="col-md-2 d-flex align-items-center justify-content-center">
+    <img src="/assets/img/peinture.jpg" alt="paint" width="150px" style="max-height: 150px;">
+    </div>
+    <div class="col-md-2">
+      <div class="card-body">
+        <h4 class="card-title">Titre de l'article</h4>
+        <p class="card-text">Prix</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-      </div>
-      <div class="col-6">
-        <div>Descriptif : Descriptif : It is a long established fact that a reader will be distracted by the readable
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+      <h6 class="card-title">Descriptif :</h6>
+        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
           content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
+          normal.</p>
       </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+      <div class="d-flex align-items-center p-3 justify-content-center">
           <i class="bi bi-trash"></i>
           <div class="ms-2">Supprimer</div>
         </div>
-        <div class="d-flex align-items-center p-3">
+        <div class="d-flex align-items-center p-3 justify-content-center">
         <a href="publication.php"><i class="bi bi-pencil"></i></a>
         <a href="publication.php"><div class="ms-2">Modifier</div></a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/paint.JPG" alt="paint" width="150px" style="max-height: 150px;">
+<div class="card mb-3 favorite" style="width: 95%;">
+  <div class="row g-0">
+    <div class="col-md-2 d-flex align-items-center justify-content-center">
+    <img src="/assets/img/paint.JPG" alt="paint" width="150px" style="max-height: 150px;">
+    </div>
+    <div class="col-md-2">
+      <div class="card-body">
+        <h4 class="card-title">Titre de l'article</h4>
+        <p class="card-text">Prix</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-      </div>
-      <div class="col-6">
-        <div>Descriptif : Descriptif : It is a long established fact that a reader will be distracted by the readable
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+      <h6 class="card-title">Descriptif :</h6>
+        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
           content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
+          normal.</p>
       </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+      <div class="d-flex align-items-center p-3 justify-content-center">
           <i class="bi bi-trash"></i>
           <div class="ms-2">Supprimer</div>
         </div>
-        <div class="d-flex align-items-center p-3">
+        <div class="d-flex align-items-center p-3 justify-content-center">
         <a href="publication.php"><i class="bi bi-pencil"></i></a>
         <a href="publication.php"><div class="ms-2">Modifier</div></a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/carrelagelm.jpg" alt="paint" width="150px" style="max-height: 150px;">
+<div class="card mb-3 favorite" style="width: 95%;">
+  <div class="row g-0">
+    <div class="col-md-2 d-flex align-items-center justify-content-center">
+    <img src="/assets/img/carrelagelm.jpg" alt="paint" width="150px" style="max-height: 150px;">
+    </div>
+    <div class="col-md-2">
+      <div class="card-body">
+        <h4 class="card-title">Titre de l'article</h4>
+        <p class="card-text">Prix</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-      </div>
-      <div class="col-6">
-        <div>Descriptif : Descriptif : It is a long established fact that a reader will be distracted by the readable
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+      <h6 class="card-title">Descriptif :</h6>
+        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
           content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
+          normal.</p>
       </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+      <div class="d-flex align-items-center p-3 justify-content-center">
           <i class="bi bi-trash"></i>
           <div class="ms-2">Supprimer</div>
         </div>
-        <div class="d-flex align-items-center p-3">
+        <div class="d-flex align-items-center p-3 justify-content-center">
         <a href="publication.php"><i class="bi bi-pencil"></i></a>
         <a href="publication.php"><div class="ms-2">Modifier</div></a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/tetelit.jpg" alt="paint" width="150px" style="max-height: 150px;">
+<div class="card mb-3 favorite" style="width: 95%;">
+  <div class="row g-0">
+    <div class="col-md-2 d-flex align-items-center justify-content-center">
+    <img src="/assets/img/tetelit.jpg" alt="paint" width="150px" style="max-height: 150px;">
+    </div>
+    <div class="col-md-2">
+      <div class="card-body">
+        <h4 class="card-title">Titre de l'article</h4>
+        <p class="card-text">Prix</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-      </div>
-      <div class="col-6">
-        <div>Descriptif : Descriptif : It is a long established fact that a reader will be distracted by the readable
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+      <h6 class="card-title">Descriptif :</h6>
+        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
           content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
+          normal.</p>
       </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+      <div class="d-flex align-items-center p-3 justify-content-center">
           <i class="bi bi-trash"></i>
           <div class="ms-2">Supprimer</div>
         </div>
-        <div class="d-flex align-items-center p-3">
+        <div class="d-flex align-items-center p-3 justify-content-center">
         <a href="publication.php"><i class="bi bi-pencil"></i></a>
         <a href="publication.php"><div class="ms-2">Modifier</div></a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/meubletv.jpg" alt="paint" width="150px" style="max-height: 150px;">
+<div class="card mb-3 favorite" style="width: 95%;">
+  <div class="row g-0">
+    <div class="col-md-2 d-flex align-items-center justify-content-center">
+    <img src="/assets/img/meubletv.jpg" alt="paint" width="150px" style="max-height: 150px;">
+    </div>
+    <div class="col-md-2">
+      <div class="card-body">
+        <h4 class="card-title">Titre de l'article</h4>
+        <p class="card-text">Prix</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-      </div>
-      <div class="col-6">
-        <div>Descriptif : Descriptif : It is a long established fact that a reader will be distracted by the readable
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+      <h6 class="card-title">Descriptif :</h6>
+        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
           content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
+          normal.</p>
       </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+      <div class="d-flex align-items-center p-3 justify-content-center">
           <i class="bi bi-trash"></i>
           <div class="ms-2">Supprimer</div>
         </div>
-        <div class="d-flex align-items-center p-3">
+        <div class="d-flex align-items-center p-3 justify-content-center">
         <a href="publication.php"><i class="bi bi-pencil"></i></a>
         <a href="publication.php"><div class="ms-2">Modifier</div></a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/wc3.jpg" alt="paint" width="150px" style="max-height: 150px;">
+<div class="card mb-3 favorite" style="width: 95%;">
+  <div class="row g-0">
+    <div class="col-md-2 d-flex align-items-center justify-content-center">
+    <img src="/assets/img/wc3.jpg" alt="paint" width="150px" style="max-height: 150px;">
+    </div>
+    <div class="col-md-2">
+      <div class="card-body">
+        <h4 class="card-title">Titre de l'article</h4>
+        <p class="card-text">Prix</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-      </div>
-      <div class="col-6">
-        <div>Descriptif : Descriptif : It is a long established fact that a reader will be distracted by the readable
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+      <h6 class="card-title">Descriptif :</h6>
+        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
           content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
+          normal.</p>
       </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+      <div class="d-flex align-items-center p-3 justify-content-center">
           <i class="bi bi-trash"></i>
           <div class="ms-2">Supprimer</div>
         </div>
-        <div class="d-flex align-items-center p-3">
+        <div class="d-flex align-items-center p-3 justify-content-center">
         <a href="publication.php"><i class="bi bi-pencil"></i></a>
         <a href="publication.php"><div class="ms-2">Modifier</div></a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/wc2.jpg" alt="paint" width="150px" style="max-height: 150px;">
+<div class="card mb-3 favorite" style="width: 95%;">
+  <div class="row g-0">
+    <div class="col-md-2 d-flex align-items-center justify-content-center">
+    <img src="/assets/img/wc2.jpg" alt="paint" width="150px" style="max-height: 150px;">
+    </div>
+    <div class="col-md-2">
+      <div class="card-body">
+        <h4 class="card-title">Titre de l'article</h4>
+        <p class="card-text">Prix</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-      </div>
-      <div class="col-6">
-        <div>Descriptif : Descriptif : It is a long established fact that a reader will be distracted by the readable
+    </div>
+    <div class="col-md-5">
+      <div class="card-body">
+      <h6 class="card-title">Descriptif :</h6>
+        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
           content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
+          normal.</p>
       </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
+    </div>
+    <div class="col-md-3">
+      <div class="card-body">
+      <div class="d-flex align-items-center p-3 justify-content-center">
           <i class="bi bi-trash"></i>
           <div class="ms-2">Supprimer</div>
         </div>
-        <div class="d-flex align-items-center p-3">
+        <div class="d-flex align-items-center p-3 justify-content-center">
         <a href="publication.php"><i class="bi bi-pencil"></i></a>
         <a href="publication.php"><div class="ms-2">Modifier</div></a>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
   </div>
 

@@ -5,7 +5,7 @@
   <div class="container-fluid centerPage text-center">
 
     <div class="row justify-content-center">
-      <div class="col-sm-3 bg-light shadowblock">
+      <div class="col-sm-3 bg-light border shadowblock">
         <h1>Connectez-vous à votre compte</h1>
 
         <label class="form-label mt-4 d-flex justify-content-start"> Adresse email :</label>

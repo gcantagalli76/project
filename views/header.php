@@ -25,13 +25,31 @@
         <span class="navbar-toggler-icon"></span>
 
       </button>
-<div class="d-flex justify-content-end">
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
 
-        <a class="nav-item" type="button" href="publication.php">
+      <div class="d-flex justify-content-end">
+      <a class="nav-item" type="button" href="publication.php">
           <img src="/assets/img/deposerAnnonce.png" alt="depot" width="210px" class="mt-1">
         </a>
+        </div>
+
+
+<div class="d-flex justify-content-end">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+        <div class="navbar-nav">
+
+        
+        <li class="nav-item dropdown d-flex align-items-center">
+        <a class="nav-link dropdown-toggle navbarDropdown2" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          aria-expanded="">
+          Catégories
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item">Carrelage, parquet, sol</a></li>
+          <li><a class="dropdown-item">Peinture et droguerie</a></li>
+          <li><a class="dropdown-item">Matériaux de construction</a></li>
+        </ul>
+      </li>
 
           <a href="favoris.php">
           <li class="nav-item text-center" type="button">
@@ -46,6 +64,8 @@
               <a class="nav-link active" href="connection.php">Mon compte</a>
             </li>
             </a>
+
+            
             </div>
 
         </div>

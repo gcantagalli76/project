@@ -1,5 +1,37 @@
 <?php require 'views/header.php'; 
 
+if (isset($_POST['myButton'])) {
+
+    $name = $_POST["yourName"];
+    $firstname = $_POST["yourFirstName"];
+    $mail = $_POST["yourEmail"];
+    $city = $_POST["yourCity"];
+    $postalcode = $_POST["yourPostalCode"];
+
+    
+
+      if (!empty($name)) {
+        setcookie('utilisateur', $name, time() + (60 * 60 * 24));
+      };
+      if (!empty($firstname)) {
+        setcookie("surname", $firstname, time() + (60 * 60 * 24));
+      };
+      if (!empty($mail)) {
+        setcookie("email", $mail, time() + (60 * 60 * 24));
+      };
+      if (!empty($city)) {
+        setcookie("city", $city, time() + (60 * 60 * 24));
+      };
+      if (!empty($postalcode)) {
+        setcookie("postalcode", $postalcode, time() + (60 * 60 * 24));
+      };
+    
+      header("Location: moncompte.php");
+
+};
+
+
+
 ?>
 
 <div class="container-fluid centerPage text-center">
@@ -10,68 +42,69 @@
             <div class="d-flex justify-content-start">Créez votre compte rapidement et retrouvez toutes les informations
                 sur vos annonces postées et vos favoris</div>
 
-            <form action="moncompte.php" method="post">
+            <form action="" method="post">
 
-            <div class="row justify-content-center">
-                <div class="col-sm-5 bg-light">
-                    <label class="form-label mt-3 d-flex justify-content-start"> Nom :</label>
-                    <input type="text" class="form-control box" name="yourName" id="yourName">
-                    <span id="messageInfosName"></span>
-                </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-5 bg-light">
+                        <label class="form-label mt-3 d-flex justify-content-start"> Nom :</label>
+                        <input type="text" class="form-control box" name="yourName" id="yourName">
+                        <span id="messageInfosName"></span>
+                    </div>
                 </div>
 
                 <div class="row justify-content-center">
-                <div class="col-sm-5 bg-light">
-                    <label class="form-label mt-2 d-flex justify-content-start"> Prénom :</label>
-                    <input type="firstname" class="form-control box" id="yourFirstName">
-                    <span id="messageInfosFirstName"></span>
-                </div>
-                </div>
-
-                <div class="row justify-content-center">
-                <div class="col-sm-5 bg-light">
-                    <label class="form-label mt-2 d-flex justify-content-start"> Adresse email :</label>
-                    <input type="text" class="form-control box" id="yourEmail">
-                    <span id="messageInfosEmail"></span>
-                </div>
+                    <div class="col-sm-5 bg-light">
+                        <label class="form-label mt-2 d-flex justify-content-start"> Prénom :</label>
+                        <input type="text" class="form-control box" id="yourFirstName" name="yourFirstName">
+                        <span id="messageInfosFirstName"></span>
+                    </div>
                 </div>
 
                 <div class="row justify-content-center">
-                <div class="col-sm-5 bg-light">
-                    <label class="form-label mt-2 d-flex justify-content-start"> Ville :</label>
-                    <input type="text" class="form-control box" id="yourCity">
-                    <span id="messageInfosCity"></span>
-                </div>
-                </div>
-
-                <div class="row justify-content-center">
-                <div class="col-sm-5 bg-light">
-                    <label class="form-label mt-2 d-flex justify-content-start"> Code postale :</label>
-                    <input type="text" class="form-control box" id="yourPostalCode">
-                    <span id="messageInfosPostalCode"></span>
-                </div>
+                    <div class="col-sm-5 bg-light">
+                        <label class="form-label mt-2 d-flex justify-content-start"> Adresse email :</label>
+                        <input type="text" class="form-control box" id="yourEmail" name="yourEmail">
+                        <span id="messageInfosEmail"></span>
+                    </div>
                 </div>
 
                 <div class="row justify-content-center">
-                <div class="col-sm-5 bg-light">
-                    <label class="form-label mt-2 d-flex justify-content-start"> Mot de passe :</label>
-                    <input type="password" class="form-control box" id="yourPassword">
-                    <span id="messageInfosPassword"></span>
-                </div>
+                    <div class="col-sm-5 bg-light">
+                        <label class="form-label mt-2 d-flex justify-content-start"> Ville :</label>
+                        <input type="text" class="form-control box" id="yourCity" name="yourCity">
+                        <span id="messageInfosCity"></span>
+                    </div>
                 </div>
 
                 <div class="row justify-content-center">
-                <div class="col-sm-5 bg-light">
-                    <label class="form-label mt-2 d-flex justify-content-start"> Confirmation du mot de passe :</label>
-                    <input type="password" class="form-control box" id="yourConfirmPassword">
-                    <span id="messageInfosConfirmPassword"></span>
-                    <span id="messageInfosNotSamePassword"></span>
+                    <div class="col-sm-5 bg-light">
+                        <label class="form-label mt-2 d-flex justify-content-start"> Code postale :</label>
+                        <input type="text" class="form-control box" id="yourPostalCode" name="yourPostalCode">
+                        <span id="messageInfosPostalCode"></span>
+                    </div>
                 </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-sm-5 bg-light">
+                        <label class="form-label mt-2 d-flex justify-content-start"> Mot de passe :</label>
+                        <input type="password" class="form-control box" id="yourPassword">
+                        <span id="messageInfosPassword"></span>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-sm-5 bg-light">
+                        <label class="form-label mt-2 d-flex justify-content-start"> Confirmation du mot de passe
+                            :</label>
+                        <input type="password" class="form-control box" id="yourConfirmPassword">
+                        <span id="messageInfosConfirmPassword"></span>
+                        <span id="messageInfosNotSamePassword"></span>
+                    </div>
                 </div>
 
                 <div class="row justify-content-center">
                     <div class="col-sm-3d-flex justify-content-center">
-                        <button type="submit" class="btn btnConnect mt-5 mb-3" id='myButton'>Valider mes
+                        <button type="submit" class="btn btnConnect mt-5 mb-3" id='myButton' name="myButton">Valider mes
                             informations</button>
                         <span id="messageInfosProb"></span>
                     </div>
@@ -84,8 +117,6 @@
 </div>
 
 <?php require 'views/footer.php'; ?>
-
-
 
 
 <script type="text/javascript" src="/assets/js/script.js"></script>

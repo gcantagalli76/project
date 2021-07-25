@@ -7,30 +7,17 @@
 
     <div class="col-sm-4">
       <form class="d-flex searchBar">
-        <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search">
+        <input class="search-form" type="search" placeholder="Rechercher..." aria-label="Search">
         <button class="btn btn-outline-white bg-white" type="submit"><img src="./assets/img/search.svg"
             alt="search"></button>
       </form>
-    </div>
-    <div class="col-sm-2 text-center">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle navbarDropdown2" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          Catégories
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item">Carrelage, parquet, sol</a></li>
-          <li><a class="dropdown-item">Peinture et droguerie</a></li>
-          <li><a class="dropdown-item">Matériaux de construction</a></li>
-        </ul>
-      </li>
     </div>
   </div>
 
 
   <div class="container-fluid centerPage text-center">
     <div class="row">
-      <div class="col-6 lastPublication">
+      <div class="col-6 lastPublication justify-content-center">
         Les dernières publications
       </div>
 
@@ -38,7 +25,7 @@
 
     <div class="row justify-content-center">
 
-      <div class="col-md-2">
+      <div class="col-md-2 d-flex justify-content-center">
         <div class="card" style="width: 14rem;">
           <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
           <div class="card-body">
@@ -49,11 +36,11 @@
               <div class="col-md-3">
                 <a style="font-weight : bold">50€</a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-7">
                 <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
                 <a>Le Havre</a>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <img src="./assets/img/heart.svg" alt="heart" width="20px">
               </div>
             </div>
@@ -61,7 +48,7 @@
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2 d-flex justify-content-center">
         <div class="card" style="width: 14rem;">
           <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
           <div class="card-body">
@@ -72,11 +59,11 @@
               <div class="col-md-3">
                 <a style="font-weight : bold">50€</a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-7">
                 <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
                 <a>Le Havre</a>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <img src="./assets/img/heart.svg" alt="heart" width="20px">
               </div>
             </div>
@@ -84,7 +71,7 @@
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2 d-flex justify-content-center">
         <div class="card" style="width: 14rem;">
           <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
           <div class="card-body">
@@ -95,11 +82,11 @@
               <div class="col-md-3">
                 <a style="font-weight : bold">50€</a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-7">
                 <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
                 <a>Le Havre</a>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <img src="./assets/img/heart.svg" alt="heart" width="20px">
               </div>
             </div>
@@ -107,7 +94,7 @@
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2 d-flex justify-content-center">
         <div class="card" style="width: 14rem;">
           <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
           <div class="card-body">
@@ -118,11 +105,11 @@
               <div class="col-md-3">
                 <a style="font-weight : bold">50€</a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-7">
                 <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
                 <a>Le Havre</a>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <img src="./assets/img/heart.svg" alt="heart" width="20px">
               </div>
             </div>
@@ -130,7 +117,7 @@
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2 d-flex justify-content-center">
         <div class="card" style="width: 14rem;">
           <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
           <div class="card-body">
@@ -141,11 +128,11 @@
               <div class="col-md-3">
                 <a style="font-weight : bold">50€</a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-7">
                 <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
                 <a>Le Havre</a>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <img src="./assets/img/heart.svg" alt="heart" width="20px">
               </div>
             </div>
@@ -246,10 +233,11 @@
       </div>
     </div>
 
+    </div>
 
   <?php require './views/footer.php'; ?>
 
-  </div>
+ 
 
 
 
