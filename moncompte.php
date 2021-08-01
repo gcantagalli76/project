@@ -1,17 +1,17 @@
 <?php require 'views/header.php'; 
 
-$lastname = $_COOKIE['utilisateur'];
-$firstname = $_COOKIE['surname'];
-$mail = $_COOKIE['email'];
-$city = $_COOKIE['city'];
-$postalcode = $_COOKIE['postalcode'];
+// $lastname = $_COOKIE['utilisateur'];
+// $firstname = $_COOKIE['surname'];
+// $mail = $_COOKIE['email'];
+// $city = $_COOKIE['city'];
+// $postalcode = $_COOKIE['postalcode'];
 
 
-if (isset($_POST['disconnect'])) {
-  setcookie('utilisateur');
-    unset($_COOKIE['utilisateur']);
-  header("location: index.php");
-}
+// if (isset($_POST['disconnect'])) {
+//   setcookie('utilisateur');
+//     unset($_COOKIE['utilisateur']);
+//   header("location: index.php");
+// }
 
 
 ?>

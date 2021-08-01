@@ -7,6 +7,7 @@ if (isset($_POST['myButton'])) {
     $mail = $_POST["yourEmail"];
     $city = $_POST["yourCity"];
     $postalcode = $_POST["yourPostalCode"];
+    $yourpassword = $_POST["yourPassword"];
 
     
 
@@ -25,11 +26,34 @@ if (isset($_POST['myButton'])) {
       if (!empty($postalcode)) {
         setcookie("postalcode", $postalcode, time() + (60 * 60 * 24));
       };
+
+
+      try
+      {
+          $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+              echo('test');
+      }
+
+      $req = $bdd->prepare('INSERT INTO _user(user_firstname, user_lastname, user_email, user_city, user_zipcode, user_password, status_id) 
+      VALUES( :firstname, :lastname, :email, :city, :postalcode, :password, 2)');
+
+$req->execute(array(
+	'firstname' => $firstname,
+	':lastname' => $name,
+	'email' => $mail,
+	'city' => $city,
+	'postalcode' => $postalcode,
+	'password' => $yourpassword
+	));
+
     
       header("Location: moncompte.php");
 
 };
-
 
 
 ?>
@@ -87,7 +111,7 @@ if (isset($_POST['myButton'])) {
                 <div class="row justify-content-center">
                     <div class="col-sm-5 bg-light">
                         <label class="form-label mt-2 d-flex justify-content-start"> Mot de passe :</label>
-                        <input type="password" class="form-control box" id="yourPassword">
+                        <input type="password" class="form-control box" id="yourPassword" name="yourPassword">
                         <span id="messageInfosPassword"></span>
                     </div>
                 </div>

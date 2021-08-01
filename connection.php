@@ -1,6 +1,38 @@
-<?php require 'views/header.php'; ?>
+<?php require 'views/header.php'; 
+
+
+if (isset($_POST['connectButton'])) {
+
+  try
+  {
+      $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
+  }
+  catch (Exception $e)
+  {
+          die('Erreur : ' . $e->getMessage());
+          echo('test');
+  }
+
+  $reponse = $bdd->query('select * from _user');
+
+  while ($donnees = $reponse->fetch()) {
+
+    if ($_POST['yourEmail'] == $donnees['USER_EMAIL'] && $_POST['yourPassword'] == $donnees['USER_PASSWORD']) {
+      header("Location: moncompte.php");
+    }
+
+}
+
+$reponse->closeCursor();
+
+}
+
+
+?>
 
 <body>
+
+<form action="" method="post">
 
   <div class="container-fluid centerPage text-center">
 
@@ -9,12 +41,12 @@
         <h1>Connectez-vous à votre compte</h1>
 
         <label class="form-label mt-4 d-flex justify-content-start"> Adresse email :</label>
-        <input type="email" class="form-control box">
+        <input type="email" class="form-control box" name="yourEmail">
 
         <label class="form-label mt-2 d-flex justify-content-start">Mot de passe :</label>
-        <input type="password" class="form-control box">
+        <input type="password" class="form-control box" name="yourPassword">
 
-        <button type="submit" class="btn btnConnect mt-5">Se connecter</button>
+        <button type="submit" class="btn btnConnect mt-5" name="connectButton">Se connecter</button>
         <a href="creationcpt.php">
         <div class="mt-4 mb-3">Pas encore membre ? Créez votre compte !</div>
         </a>
@@ -22,6 +54,7 @@
     </div>
     </div>
 
+</form>
 
     <?php require 'views/footer.php'; ?>
 
