@@ -1,4 +1,37 @@
-<?php require 'views/header.php'; ?>
+<?php require 'views/header.php'; 
+
+if (!isset($_COOKIE['email'])) {
+  header("Location: connectforpublication.php");
+}else {
+
+// connection à la base de données, en cas de problème message d'erreur
+try
+{
+    $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
+}
+catch (Exception $e)
+{
+        die('Erreur : ' . $e->getMessage());
+}
+
+ // on récupère les informations dans la table article pour pouvoir les afficher en fonction de l'utilisateur connecté     
+
+ $reponse = $bdd->query('SELECT * FROM _user');
+
+ while ($donnees = $reponse->fetch()) {
+
+  if ($_COOKIE['email'] == $donnees['USER_EMAIL']) { 
+
+  $userId = $donnees['USER_ID'];
+    
+    
+  $req = $bdd->prepare('SELECT * FROM article where USER_ID = :userId');
+  $req->execute(array('userId' => $userId));
+
+  while ($donnees2 = $req->fetch()) {  
+    
+    ?>
+
 
 <body>
   
@@ -15,227 +48,15 @@
     </div>
     <div class="col-md-2">
       <div class="card-body">
-        <h4 class="card-title">Titre de l'article</h4>
-        <p class="card-text">Prix</p>
+        <h4 class="card-title"><?php echo $donnees2['ARTICLE_TITLE']?></h4>
+        <p class="card-text"><?php echo $donnees2['ARTICLE_PRICE']?></p>
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
     </div>
     <div class="col-md-5">
       <div class="card-body">
       <h6 class="card-title">Descriptif :</h6>
-        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card-body">
-      <div class="d-flex align-items-center p-3 justify-content-center">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3 justify-content-center">
-        <a href="publication.php"><i class="bi bi-pencil"></i></a>
-        <a href="publication.php"><div class="ms-2">Modifier</div></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card mb-3 favorite" style="width: 95%;">
-  <div class="row g-0">
-    <div class="col-md-2 d-flex align-items-center justify-content-center">
-    <img src="/assets/img/paint.JPG" alt="paint" width="150px" style="max-height: 150px;">
-    </div>
-    <div class="col-md-2">
-      <div class="card-body">
-        <h4 class="card-title">Titre de l'article</h4>
-        <p class="card-text">Prix</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-      <h6 class="card-title">Descriptif :</h6>
-        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card-body">
-      <div class="d-flex align-items-center p-3 justify-content-center">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3 justify-content-center">
-        <a href="publication.php"><i class="bi bi-pencil"></i></a>
-        <a href="publication.php"><div class="ms-2">Modifier</div></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card mb-3 favorite" style="width: 95%;">
-  <div class="row g-0">
-    <div class="col-md-2 d-flex align-items-center justify-content-center">
-    <img src="/assets/img/carrelagelm.jpg" alt="paint" width="150px" style="max-height: 150px;">
-    </div>
-    <div class="col-md-2">
-      <div class="card-body">
-        <h4 class="card-title">Titre de l'article</h4>
-        <p class="card-text">Prix</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-      <h6 class="card-title">Descriptif :</h6>
-        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card-body">
-      <div class="d-flex align-items-center p-3 justify-content-center">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3 justify-content-center">
-        <a href="publication.php"><i class="bi bi-pencil"></i></a>
-        <a href="publication.php"><div class="ms-2">Modifier</div></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card mb-3 favorite" style="width: 95%;">
-  <div class="row g-0">
-    <div class="col-md-2 d-flex align-items-center justify-content-center">
-    <img src="/assets/img/tetelit.jpg" alt="paint" width="150px" style="max-height: 150px;">
-    </div>
-    <div class="col-md-2">
-      <div class="card-body">
-        <h4 class="card-title">Titre de l'article</h4>
-        <p class="card-text">Prix</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-      <h6 class="card-title">Descriptif :</h6>
-        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card-body">
-      <div class="d-flex align-items-center p-3 justify-content-center">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3 justify-content-center">
-        <a href="publication.php"><i class="bi bi-pencil"></i></a>
-        <a href="publication.php"><div class="ms-2">Modifier</div></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card mb-3 favorite" style="width: 95%;">
-  <div class="row g-0">
-    <div class="col-md-2 d-flex align-items-center justify-content-center">
-    <img src="/assets/img/meubletv.jpg" alt="paint" width="150px" style="max-height: 150px;">
-    </div>
-    <div class="col-md-2">
-      <div class="card-body">
-        <h4 class="card-title">Titre de l'article</h4>
-        <p class="card-text">Prix</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-      <h6 class="card-title">Descriptif :</h6>
-        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card-body">
-      <div class="d-flex align-items-center p-3 justify-content-center">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3 justify-content-center">
-        <a href="publication.php"><i class="bi bi-pencil"></i></a>
-        <a href="publication.php"><div class="ms-2">Modifier</div></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card mb-3 favorite" style="width: 95%;">
-  <div class="row g-0">
-    <div class="col-md-2 d-flex align-items-center justify-content-center">
-    <img src="/assets/img/wc3.jpg" alt="paint" width="150px" style="max-height: 150px;">
-    </div>
-    <div class="col-md-2">
-      <div class="card-body">
-        <h4 class="card-title">Titre de l'article</h4>
-        <p class="card-text">Prix</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-      <h6 class="card-title">Descriptif :</h6>
-        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</p>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card-body">
-      <div class="d-flex align-items-center p-3 justify-content-center">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3 justify-content-center">
-        <a href="publication.php"><i class="bi bi-pencil"></i></a>
-        <a href="publication.php"><div class="ms-2">Modifier</div></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card mb-3 favorite" style="width: 95%;">
-  <div class="row g-0">
-    <div class="col-md-2 d-flex align-items-center justify-content-center">
-    <img src="/assets/img/wc2.jpg" alt="paint" width="150px" style="max-height: 150px;">
-    </div>
-    <div class="col-md-2">
-      <div class="card-body">
-        <h4 class="card-title">Titre de l'article</h4>
-        <p class="card-text">Prix</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-      <h6 class="card-title">Descriptif :</h6>
-        <p class="card-text">It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</p>
+        <p class="card-text"><?php echo $donnees2['ARTICLE_DESCRIPTION']?></p>
       </div>
     </div>
     <div class="col-md-3">
@@ -256,7 +77,7 @@
   </div>
 
 
-  <?php require 'views/footer.php'; ?>
+  <?php }}}} require 'views/footer.php'; ?>
 
 
   <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"

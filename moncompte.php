@@ -1,17 +1,39 @@
 <?php require 'views/header.php'; 
 
-// $lastname = $_COOKIE['utilisateur'];
-// $firstname = $_COOKIE['surname'];
-// $mail = $_COOKIE['email'];
-// $city = $_COOKIE['city'];
-// $postalcode = $_COOKIE['postalcode'];
+try
+{
+    $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
+}
+catch (Exception $e)
+{
+        die('Erreur : ' . $e->getMessage());
+        echo('test');
+}
 
+$reponse = $bdd->query('SELECT A.*,
+                               B.status_name
+                        FROM _user as A left join _status as B on A.status_id = B.status_id');
 
-// if (isset($_POST['disconnect'])) {
-//   setcookie('utilisateur');
-//     unset($_COOKIE['utilisateur']);
-//   header("location: index.php");
-// }
+while ($donnees = $reponse->fetch()) {
+
+  if ($_COOKIE['email'] == $donnees['USER_EMAIL']) {
+    $firstname = $donnees['USER_FIRSTNAME'];
+    $lastname = $donnees['USER_LASTNAME'];
+    $mail = $donnees['USER_EMAIL'];
+    $city = $donnees['USER_CITY'];
+    $postalcode = $donnees['USER_ZIPCODE'];
+    $status = $donnees['status_name'];
+  }
+
+}
+
+$reponse->closeCursor();
+
+if (isset($_POST['disconnect'])) {
+  setcookie('email');
+    unset($_COOKIE['email']);
+  header("location: index.php");
+}
 
 
 ?>
@@ -56,8 +78,7 @@
 
           <div class="col-sm-3 bg-light">
             <label class="form-label mt-2 d-flex justify-content-start"> Statut :</label>
-            <input type="name" class="form-control box" id="yourPassword">
-            <span id="messageInfosPassword"></span>
+            <div><?=$status?></div>
           </div>
 
         </div>

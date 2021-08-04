@@ -1,4 +1,70 @@
-<?php require 'views/header.php'; ?>
+<?php require 'views/header.php'; 
+
+
+// si il n'y a pas d'email dans les cookies alors tu renvois l'utilisateur direct sur la page connectpourpubli sinon tu lances le reste
+if (!isset($_COOKIE['email'])) {
+  header("Location: connectforpublication.php");
+}else {
+
+// si il valide la publication alors tu récupère les différents post et les mets dans des variables
+  if (isset($_POST['validPublication'])) {
+
+    $title = $_POST["yourTitle"];
+    $category = $_POST["yourCategory"];
+    $state = $_POST["yourState"];
+    $quantity = $_POST["yourQuantity"];
+    $buyDate = $_POST["yourBuyDate"];
+    $price = $_POST["yourPrice"];
+    $description = $_POST["yourDescription"];
+
+// si l'utilisateur coche je donne alors tu attribut 1 à give, sinon tu mets 0
+    if (isset($_POST['youGive'])) {
+      $give = 1;
+    } else {
+      $give = 0;
+      }
+ 
+// connection à la base de données, en cas de problème message d'erreur
+      try
+      {
+          $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+
+ // on récupère les informations dans la table _user pour pouvoir récupérer le user_id correspondant au cookie et donc à l'utilisateur connecté     
+
+$reponse = $bdd->query('SELECT * FROM _user');
+
+while ($donnees = $reponse->fetch()) {
+
+if ($_COOKIE['email'] == $donnees['USER_EMAIL']) {
+$userId = $donnees['USER_ID'];
+}}
+
+//on récupère les données remplies sur la publication pour les insérer dans la table article de notre base de données
+      $req = $bdd->prepare('INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id)
+      VALUES( :title, :quantity, :buyDate, :price, :give, :description, :category, :state, :userId)');
+
+
+$req->execute(array(
+	'title' => $title,
+  'quantity' => $quantity,
+  'buyDate' => $buyDate,
+	'price' => $price,
+  'give' => $give,
+  'description' => $description,
+  'category' => $category,
+  'state' => $state,
+  'userId' => $userId
+	));
+
+
+};
+
+?>
 
 <body>
 
@@ -6,17 +72,18 @@
     <div class="row justify-content-center">
       <div class="col-sm-10 bg-light border shadowblock">
         <h1 class="text-center">Votre annonce</h1>
+        <form action="" method="post">
         <div class="row justify-content-around">
           <div class="col-sm-6">
             <div class="row">
               <div class="col-sm-10 mt-3">
                 <label class="form-label mt-2 d-flex justify-content-start"> Titre de l'annonce :</label>
-                <input type="text" class="form-control box" id="yourTitle" maxlength="40">
+                <input type="text" class="form-control box" id="yourTitle" name="yourTitle" maxlength="40">
               </div>
             </div>
             <div class="row mt-4">
               <div class="col-sm-5 mt-2">
-                <select class="form-select" aria-label="Default select example" id="yourCategory">
+                <select class="form-select" aria-label="Default select example" id="yourCategory" name="yourCategory">
                   <option selected disabled>Catégorie :</option>
                   <option value="1">Carrelage, parquet, sol</option>
                   <option value="2">Peinture et droguerie</option>
@@ -24,7 +91,7 @@
                 </select>
               </div>
               <div class="col-sm-5 mt-2">
-                <select class="form-select" aria-label="Default select example" id="yourState">
+                <select class="form-select" aria-label="Default select example" id="yourState" name="yourState">
                   <option selected disabled>Etat du produit :</option>
                   <option value="1">Neuf</option>
                   <option value="2">Bon état</option>
@@ -37,13 +104,13 @@
             <div class="row mt-3">
               <div class="col-sm-10">
                 <label for="customRange3" class="form-label mt-2">Quantité restante comparée au produit neuf</label>
-                <input type="range" class=form-range mt-2 min="1" max="100" value="50" id="yourQuantity">
+                <input type="range" class=form-range mt-2 min="1" max="100" value="50" id="yourQuantity" name="yourQuantity">
               </div>
             </div>
 
             <div class="row mt-3">
               <div class="col-sm-10">
-              <span id="resultRange" class="fw-bold"></span>
+              <span id="resultRange" class="fw-bold" name="yourQuantity"></span>
             <span class="fw-bold">%</span>
               </div>
             </div>
@@ -55,24 +122,24 @@
             <div class="row mt-1">
               <div class="col-sm-4">
                 <label class="form-label mt-2 d-flex justify-content-start"> Date d'achat :</label>
-                <input type="date" class="form-control box" id="yourBuyDate">
+                <input type="date" class="form-control box" id="yourBuyDate" name="yourBuyDate">
                 <span id="messageInfosTitle"></span>
               </div>
               <div class="col-sm-3">
                 <label class="form-label mt-2 d-flex justify-content-start"> Prix de vente :</label>
-                <input type="number" class="form-control box" id="yourPrice" min="1" max="10000">
+                <input type="number" class="form-control box" id="yourPrice" name="yourPrice" min="1" max="10000">
                 <span id="messageInfosTitle"></span>
               </div>
               <div class="col-sm-2">
                 <label class="form-check-label mt-2 d-flex justify-content-start">Je donne!</label>
-                <input type="checkbox" class="form-check-input mt-2" id="youGive">
+                <input type="checkbox" class="form-check-input mt-2" id="youGive" name="youGive">
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-sm-10">
                 <label for="exampleFormControlTextarea1"
                   class="form-label mt-2 d-flex justify-content-start">Description du produit :</label>
-                <textarea class="form-control2" id="yourDescription" rows="5" maxlength="170"></textarea>
+                <textarea class="form-control2" id="yourDescription" name="yourDescription" rows="5" maxlength="170"></textarea>
                 <span id="messageInfosTitle"></span>
               </div>
             </div>
@@ -97,15 +164,15 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-sm-3 d-flex justify-content-center">
-              <button type="submit" class="btn btnConnect mt-5 mb-3" id="validPublication">Valider ma
-                publication</button>
+              <button type="submit" class="btn btnConnect mt-5 mb-3" id="validPublication" name="validPublication">Valider ma publication</button>
             </div>
           </div>
         </div>
+        </form>
       </div>
 
 
-      <?php require 'views/footer.php'; ?>
+      <?php } require 'views/footer.php'; ?>
 
       <script type="text/javascript" src="/assets/js/scriptPubli.js"></script>
 

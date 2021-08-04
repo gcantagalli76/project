@@ -1,6 +1,11 @@
 <?php require 'views/header.php'; 
 
 
+if (isset($_COOKIE['email'])) {
+  header("Location: moncompte.php");
+}else {
+ 
+
 if (isset($_POST['connectButton'])) {
 
   try
@@ -19,6 +24,9 @@ if (isset($_POST['connectButton'])) {
 
     if ($_POST['yourEmail'] == $donnees['USER_EMAIL'] && $_POST['yourPassword'] == $donnees['USER_PASSWORD']) {
       header("Location: moncompte.php");
+      setcookie('email', $_POST["yourEmail"], time() + (60 * 60 * 24));
+    }else {
+      $errorConnect = 'Adresse email ou mot de passe invalide';
     }
 
 }
@@ -26,7 +34,7 @@ if (isset($_POST['connectButton'])) {
 $reponse->closeCursor();
 
 }
-
+}
 
 ?>
 
@@ -50,6 +58,7 @@ $reponse->closeCursor();
         <a href="creationcpt.php">
         <div class="mt-4 mb-3">Pas encore membre ? Créez votre compte !</div>
         </a>
+        <div class="error"><?= $errorConnect ?? '' ?></div>
       </div>
     </div>
     </div>

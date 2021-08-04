@@ -9,23 +9,21 @@ if (isset($_POST['myButton'])) {
     $postalcode = $_POST["yourPostalCode"];
     $yourpassword = $_POST["yourPassword"];
 
-    
-
-      if (!empty($name)) {
-        setcookie('utilisateur', $name, time() + (60 * 60 * 24));
-      };
-      if (!empty($firstname)) {
-        setcookie("surname", $firstname, time() + (60 * 60 * 24));
-      };
+    //   if (!empty($name)) {
+    //     setcookie('utilisateur', $name, time() + (60 * 60 * 24));
+    //   };
+    //   if (!empty($firstname)) {
+    //     setcookie("surname", $firstname, time() + (60 * 60 * 24));
+    //   };
       if (!empty($mail)) {
         setcookie("email", $mail, time() + (60 * 60 * 24));
       };
-      if (!empty($city)) {
-        setcookie("city", $city, time() + (60 * 60 * 24));
-      };
-      if (!empty($postalcode)) {
-        setcookie("postalcode", $postalcode, time() + (60 * 60 * 24));
-      };
+    //   if (!empty($city)) {
+    //     setcookie("city", $city, time() + (60 * 60 * 24));
+    //   };
+    //   if (!empty($postalcode)) {
+    //     setcookie("postalcode", $postalcode, time() + (60 * 60 * 24));
+    //   };
 
 
       try
