@@ -2,7 +2,11 @@
 
 if (!isset($_COOKIE['email'])) {
   header("Location: connectforpublication.php");
-}else {
+}else { ?>
+
+<h1 class="text-center p-5">Mes publications</h1>
+
+<?php 
 
 // connection à la base de données, en cas de problème message d'erreur
 try
@@ -16,7 +20,7 @@ catch (Exception $e)
 
  // on récupère les informations dans la table article pour pouvoir les afficher en fonction de l'utilisateur connecté     
 
- $reponse = $bdd->query('SELECT * FROM _user');
+$reponse = $bdd->query('SELECT A.*,B.USER_EMAIL FROM article as A left join _user as B on A.USER_ID = B.USER_ID;');
 
  while ($donnees = $reponse->fetch()) {
 
@@ -28,16 +32,12 @@ catch (Exception $e)
   $req = $bdd->prepare('SELECT * FROM article where USER_ID = :userId');
   $req->execute(array('userId' => $userId));
 
-  while ($donnees2 = $req->fetch()) {  
-    
+
     ?>
 
 
 <body>
   
-
-  <h1 class="text-center p-5">Mes publications</h1>
-
 
   <div class="container-fluid">
 
@@ -48,36 +48,38 @@ catch (Exception $e)
     </div>
     <div class="col-md-2">
       <div class="card-body">
-        <h4 class="card-title"><?php echo $donnees2['ARTICLE_TITLE']?></h4>
-        <p class="card-text"><?php echo $donnees2['ARTICLE_PRICE']?></p>
+        <h4 class="card-title"><?php echo $donnees['ARTICLE_TITLE']?></h4>
+        <p class="card-text"><?php echo $donnees['ARTICLE_PRICE']?></p>
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
     </div>
     <div class="col-md-5">
       <div class="card-body">
       <h6 class="card-title">Descriptif :</h6>
-        <p class="card-text"><?php echo $donnees2['ARTICLE_DESCRIPTION']?></p>
+        <p class="card-text"><?php echo $donnees['ARTICLE_DESCRIPTION']?></p>
       </div>
     </div>
-    <div class="col-md-3">
+
+    <form class="col-md-3" action="" method="post">
       <div class="card-body">
-      <div class="d-flex align-items-center p-3 justify-content-center">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
+
+      <div class="d-flex align-items-center p-3 justify-content-center" >
+         <a type="submit" class=" btn bi bi-trash ms-2" name="delete" href="delete.php?iddelete=<?php echo $donnees['ARTICLE_ID'];?>">   Supprimer</a> 
         </div>
+
         <div class="d-flex align-items-center p-3 justify-content-center">
-        <a href="publication.php"><i class="bi bi-pencil"></i></a>
-        <a href="publication.php"><div class="ms-2">Modifier</div></a>
+        <div type="submit" class="bi bi-pencil ms-2" name="modify">   Modifier</div>
         </div>
+
       </div>
-    </div>
+  </form>
   </div>
 </div>
 
   </div>
 
 
-  <?php }}}} require 'views/footer.php'; ?>
+  <?php  }}$reponse->closeCursor();} require 'views/footer.php'; ?>
 
 
   <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"

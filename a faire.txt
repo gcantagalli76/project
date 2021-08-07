@@ -1,9 +1,5 @@
 A faire pour la prochaine fois :
 
-Faire en sorte de virer le titre qui apparait plusieur fois dans mes publications
-
-Voir pour supprimer l'annonce quand on clic sur le bouton supprimer dans mes publications
-
 Voir pour modifier l'annonce quand on clic sur modifier dans mes publications
 
 
