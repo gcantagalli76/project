@@ -68,7 +68,7 @@ $reponse = $bdd->query('SELECT A.*,B.USER_EMAIL FROM article as A left join _use
         </div>
 
         <div class="d-flex align-items-center p-3 justify-content-center">
-        <div type="submit" class="bi bi-pencil ms-2" name="modify">   Modifier</div>
+        <a type="submit" class="bi bi-pencil ms-2" name="modify" href="publicationmodify.php?idmodify=<?php echo $donnees['ARTICLE_ID'];?>">   Modifier</a>
         </div>
 
       </div>

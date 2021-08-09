@@ -1,6 +1,16 @@
 A faire pour la prochaine fois :
 
-Voir pour modifier l'annonce quand on clic sur modifier dans mes publications
+1 - Voir pour écraser l'ancienne annonce quand on clic sur valider ma modification
+
+2 - Il faudra sûrement créer un JS spécial pour cette page car il faut cliquer dans chaque case pour faire apparaitre le bouton valider
+
+3 - Afficher les annonces dans les catégories concernées
+
+4 - Afficher les 5 dernières annonces sur la page d'acceuil
+
+5 - Voir pour quand on clic sur le coeur de l'annonce elle s'intègre dans les favoris de l'utilisateur connecté
+
+
 
 
 
