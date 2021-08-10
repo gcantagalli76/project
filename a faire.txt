@@ -1,10 +1,8 @@
 A faire pour la prochaine fois :
 
-1 - Voir pour écraser l'ancienne annonce quand on clic sur valider ma modification
-
 2 - Il faudra sûrement créer un JS spécial pour cette page car il faut cliquer dans chaque case pour faire apparaitre le bouton valider
 
-3 - Afficher les annonces dans les catégories concernées
+3 - Sur l'affichage dans les catégories : voir pourquoi il n'affiche pas le premier article, et bosser sur l'affichage
 
 4 - Afficher les 5 dernières annonces sur la page d'acceuil
 

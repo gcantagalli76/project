@@ -45,9 +45,9 @@
           Catégories
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item">Carrelage, parquet, sol</a></li>
-          <li><a class="dropdown-item">Peinture et droguerie</a></li>
-          <li><a class="dropdown-item">Matériaux de construction</a></li>
+          <li><a class="dropdown-item" href="Categorie.php?idcategory=1">Carrelage, parquet, sol</a></li>
+          <li><a class="dropdown-item" href="Categorie.php?idcategory=2">Peinture et droguerie</a></li>
+          <li><a class="dropdown-item" href="Categorie.php?idcategory=3">Matériaux de construction</a></li>
         </ul>
       </li>
 

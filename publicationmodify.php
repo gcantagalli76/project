@@ -35,58 +35,45 @@ if (isset($_GET['idmodify'])) {
       $articlePurchasedate = $display['ARTICLE_BUYDATE'];
       $articleGive= $display['ARTICLE_GIVE'];
   
-  // }
+      
+// si il valide la modification alors tu récupère les différents post et les mets dans des variables
+  if (isset($_POST['validPublication'])) {
 
-  // }
+    $title = $_POST["yourTitle"];
+    $category = $_POST["yourCategory"];
+    $state = $_POST["yourState"];
+    $quantity = $_POST["yourQuantity"];
+    $buyDate = $_POST["yourBuyDate"];
+    $price = $_POST["yourPrice"];
+    $description = $_POST["yourDescription"];
+    $idarticle = $_GET['idmodify'];
 
-// si il valide la publication alors tu récupère les différents post et les mets dans des variables
-//   if (isset($_POST['validModification'])) {
-
-//     $title = $_POST["yourTitle"];
-//     $category = $_POST["yourCategory"];
-//     $state = $_POST["yourState"];
-//     $quantity = $_POST["yourQuantity"];
-//     $buyDate = $_POST["yourBuyDate"];
-//     $price = $_POST["yourPrice"];
-//     $description = $_POST["yourDescription"];
-
-// // si l'utilisateur coche je donne alors tu attribut 1 à give, sinon tu mets 0
-//     if (isset($_POST['youGive'])) {
-//       $give = 1;
-//     } else {
-//       $give = 0;
-//       }
+// si l'utilisateur coche je donne alors tu attribut 1 à give, sinon tu mets 0
+    if (isset($_POST['youGive'])) {
+      $give = 1;
+    } else {
+      $give = 0;
+      }
  
+//on récupère les données remplies sur la publication pour les insérer dans la table article et modifier l'article concerné
+      $req = $bdd->prepare('update article set ARTICLE_TITLE = :title, ARTICLE_QUANTITY = :quantity, ARTICLE_PURCHASEDATE = :buyDate, ARTICLE_PRICE = :price,
+      ARTICLE_GIVE = :give, ARTICLE_DESCRIPTION = :description, CATEGORY_ID = :category, CONDITION_ID = :state where ARTICLE_ID = :articleId');
+  
+$req->execute(array(
+	'title' => $title,
+  'quantity' => $quantity,
+  'buyDate' => $buyDate,
+	'price' => $price,
+  'give' => $give,
+  'description' => $description,
+  'category' => $category,
+  'state' => $state,
+  'articleId' => $idarticle
+	));
 
-//  // on récupère les informations dans la table _user pour pouvoir récupérer le user_id correspondant au cookie et donc à l'utilisateur connecté     
+  header("Location: mespublications.php");
 
-// $reponse = $bdd->query('SELECT * FROM _user');
-
-// while ($donnees = $reponse->fetch()) {
-
-// if ($_COOKIE['email'] == $donnees['USER_EMAIL']) {
-// $userId = $donnees['USER_ID'];
-// }}
-
-// //on récupère les données remplies sur la publication pour les insérer dans la table article de notre base de données
-//       $req = $bdd->prepare('INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id)
-//       VALUES( :title, :quantity, :buyDate, :price, :give, :description, :category, :state, :userId)');
-
-
-// $req->execute(array(
-// 	'title' => $title,
-//   'quantity' => $quantity,
-//   'buyDate' => $buyDate,
-// 	'price' => $price,
-//   'give' => $give,
-//   'description' => $description,
-//   'category' => $category,
-//   'state' => $state,
-//   'userId' => $userId
-// 	));
-
-
-// };
+};
 
 ?>
 
