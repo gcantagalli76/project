@@ -1,5 +1,20 @@
+<?php require './views/header.php'; 
 
-  <?php require './views/header.php'; ?>
+// connection à la base de données, en cas de problème message d'erreur
+try
+{
+    $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
+}
+catch (Exception $e)
+{
+        die('Erreur : ' . $e->getMessage());
+}
+
+// je récupère les 5 derniers articles pour les afficher sur la page d'acceuil
+
+$consult = $bdd->query("SELECT * FROM article limit 5");
+
+?>
 
   <div class="container-fluid">
 
@@ -25,16 +40,25 @@
 
     <div class="row justify-content-center">
 
+    <?php  while ($display = $consult->fetch()) {
+
+$articleTitle = $display['ARTICLE_TITLE'];
+$articleDescription = $display['ARTICLE_DESCRIPTION'];
+$articlePrice = $display['ARTICLE_PRICE'];
+
+
+?>
+    
+
       <div class="col-md-2 d-flex justify-content-center">
         <div class="card" style="width: 14rem;">
           <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
+            <h5 class="card-title"><?=$articleTitle?></h5>
+            <p class="card-text"><?=$articleDescription?></p>
             <div class="row">
               <div class="col-md-3">
-                <a style="font-weight : bold">50€</a>
+                <a style="font-weight : bold"><?=$articlePrice?>€</a>
               </div>
               <div class="col-md-7">
                 <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
@@ -48,97 +72,7 @@
         </div>
       </div>
 
-      <div class="col-md-2 d-flex justify-content-center">
-        <div class="card" style="width: 14rem;">
-          <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <div class="row">
-              <div class="col-md-3">
-                <a style="font-weight : bold">50€</a>
-              </div>
-              <div class="col-md-7">
-                <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
-                <a>Le Havre</a>
-              </div>
-              <div class="col-md-2">
-                <img src="./assets/img/heart.svg" alt="heart" width="20px">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-2 d-flex justify-content-center">
-        <div class="card" style="width: 14rem;">
-          <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <div class="row">
-              <div class="col-md-3">
-                <a style="font-weight : bold">50€</a>
-              </div>
-              <div class="col-md-7">
-                <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
-                <a>Le Havre</a>
-              </div>
-              <div class="col-md-2">
-                <img src="./assets/img/heart.svg" alt="heart" width="20px">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-2 d-flex justify-content-center">
-        <div class="card" style="width: 14rem;">
-          <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <div class="row">
-              <div class="col-md-3">
-                <a style="font-weight : bold">50€</a>
-              </div>
-              <div class="col-md-7">
-                <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
-                <a>Le Havre</a>
-              </div>
-              <div class="col-md-2">
-                <img src="./assets/img/heart.svg" alt="heart" width="20px">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-2 d-flex justify-content-center">
-        <div class="card" style="width: 14rem;">
-          <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <div class="row">
-              <div class="col-md-3">
-                <a style="font-weight : bold">50€</a>
-              </div>
-              <div class="col-md-7">
-                <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
-                <a>Le Havre</a>
-              </div>
-              <div class="col-md-2">
-                <img src="./assets/img/heart.svg" alt="heart" width="20px">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <?php } ?>
 
     </div>
 

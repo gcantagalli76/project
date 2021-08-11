@@ -2,10 +2,6 @@ A faire pour la prochaine fois :
 
 2 - Il faudra sûrement créer un JS spécial pour cette page car il faut cliquer dans chaque case pour faire apparaitre le bouton valider
 
-3 - Sur l'affichage dans les catégories : voir pourquoi il n'affiche pas le premier article, et bosser sur l'affichage
-
-4 - Afficher les 5 dernières annonces sur la page d'acceuil
-
 5 - Voir pour quand on clic sur le coeur de l'annonce elle s'intègre dans les favoris de l'utilisateur connecté
 
 
