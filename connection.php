@@ -1,40 +1,6 @@
 <?php require 'views/header.php'; 
 
-
-if (isset($_COOKIE['email'])) {
-  header("Location: moncompte.php");
-}else {
- 
-
-if (isset($_POST['connectButton'])) {
-
-  try
-  {
-      $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
-  }
-  catch (Exception $e)
-  {
-          die('Erreur : ' . $e->getMessage());
-          echo('test');
-  }
-
-  $reponse = $bdd->query('select * from _user');
-
-  while ($donnees = $reponse->fetch()) {
-
-    if ($_POST['yourEmail'] == $donnees['USER_EMAIL'] && $_POST['yourPassword'] == $donnees['USER_PASSWORD']) {
-      header("Location: moncompte.php");
-      setcookie('email', $_POST["yourEmail"], time() + (60 * 60 * 24));
-    }else {
-      $errorConnect = 'Adresse email ou mot de passe invalide';
-    }
-
-}
-
-$reponse->closeCursor();
-
-}
-}
+require './controllers/controller.php';
 
 ?>
 

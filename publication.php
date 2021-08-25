@@ -1,68 +1,6 @@
 <?php require 'views/header.php'; 
 
-
-// si il n'y a pas d'email dans les cookies alors tu renvois l'utilisateur direct sur la page connectpourpubli sinon tu lances le reste
-if (!isset($_COOKIE['email'])) {
-  header("Location: connectforpublication.php");
-}else {
-
-// si il valide la publication alors tu récupère les différents post et les mets dans des variables
-  if (isset($_POST['validPublication'])) {
-
-    $title = $_POST["yourTitle"];
-    $category = $_POST["yourCategory"];
-    $state = $_POST["yourState"];
-    $quantity = $_POST["yourQuantity"];
-    $buyDate = $_POST["yourBuyDate"];
-    $price = $_POST["yourPrice"];
-    $description = $_POST["yourDescription"];
-
-// si l'utilisateur coche je donne alors tu attribut 1 à give, sinon tu mets 0
-    if (isset($_POST['youGive'])) {
-      $give = 1;
-    } else {
-      $give = 0;
-      }
- 
-// connection à la base de données, en cas de problème message d'erreur
-      try
-      {
-          $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
-      }
-      catch (Exception $e)
-      {
-              die('Erreur : ' . $e->getMessage());
-      }
-
- // on récupère les informations dans la table _user pour pouvoir récupérer le user_id correspondant au cookie et donc à l'utilisateur connecté     
-
-$reponse = $bdd->query('SELECT * FROM _user');
-
-while ($donnees = $reponse->fetch()) {
-
-if ($_COOKIE['email'] == $donnees['USER_EMAIL']) {
-$userId = $donnees['USER_ID'];
-}}
-
-//on récupère les données remplies sur la publication pour les insérer dans la table article de notre base de données
-      $req = $bdd->prepare('INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id)
-      VALUES( :title, :quantity, :buyDate, :price, :give, :description, :category, :state, :userId)');
-
-
-$req->execute(array(
-	'title' => $title,
-  'quantity' => $quantity,
-  'buyDate' => $buyDate,
-	'price' => $price,
-  'give' => $give,
-  'description' => $description,
-  'category' => $category,
-  'state' => $state,
-  'userId' => $userId
-	));
-
-
-};
+require './controllers/controller.php';
 
 ?>
 
@@ -172,7 +110,7 @@ $req->execute(array(
       </div>
 
 
-      <?php } require 'views/footer.php'; ?>
+      <?php  require 'views/footer.php'; ?>
 
       <script type="text/javascript" src="/assets/js/scriptPubli.js"></script>
 

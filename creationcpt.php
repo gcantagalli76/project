@@ -1,58 +1,6 @@
 <?php require 'views/header.php'; 
 
-if (isset($_POST['myButton'])) {
-
-    $name = $_POST["yourName"];
-    $firstname = $_POST["yourFirstName"];
-    $mail = $_POST["yourEmail"];
-    $city = $_POST["yourCity"];
-    $postalcode = $_POST["yourPostalCode"];
-    $yourpassword = $_POST["yourPassword"];
-
-    //   if (!empty($name)) {
-    //     setcookie('utilisateur', $name, time() + (60 * 60 * 24));
-    //   };
-    //   if (!empty($firstname)) {
-    //     setcookie("surname", $firstname, time() + (60 * 60 * 24));
-    //   };
-      if (!empty($mail)) {
-        setcookie("email", $mail, time() + (60 * 60 * 24));
-      };
-    //   if (!empty($city)) {
-    //     setcookie("city", $city, time() + (60 * 60 * 24));
-    //   };
-    //   if (!empty($postalcode)) {
-    //     setcookie("postalcode", $postalcode, time() + (60 * 60 * 24));
-    //   };
-
-
-      try
-      {
-          $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
-      }
-      catch (Exception $e)
-      {
-              die('Erreur : ' . $e->getMessage());
-              echo('test');
-      }
-
-      $req = $bdd->prepare('INSERT INTO _user(user_firstname, user_lastname, user_email, user_city, user_zipcode, user_password, status_id) 
-      VALUES( :firstname, :lastname, :email, :city, :postalcode, :password, 2)');
-
-$req->execute(array(
-	'firstname' => $firstname,
-	':lastname' => $name,
-	'email' => $mail,
-	'city' => $city,
-	'postalcode' => $postalcode,
-	'password' => $yourpassword
-	));
-
-    
-      header("Location: moncompte.php");
-
-};
-
+require './controllers/controller.php';
 
 ?>
 

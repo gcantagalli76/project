@@ -26,11 +26,13 @@
 
       </button>
 
+      <form action="publication.php" method="POST">
       <div class="d-flex justify-content-end">
-      <a class="nav-item" type="button" href="publication.php">
+      <button class="nav-item border-0 bg-light" type="submit" href="publication.php" name="newPublication" >
           <img src="/assets/img/deposerAnnonce.png" alt="depot" width="210px" class="mt-1">
-        </a>
+      </button>
         </div>
+      </form>
 
 
 <div class="d-flex justify-content-end">
@@ -58,13 +60,12 @@
           </li>
           </a>
 
-          <a href="connection.php">
-            <li class="nav-item text-center" type="button" href="connection.php">
+<form action="connection.php" method="POST">
+            <button class="nav-item text-center bg-light border-0 p-0" type="submit" href="connection.php" name="myAcount">
               <img src="/assets/img/person.svg" alt="person" width="25px">
-              <a class="nav-link active" href="connection.php">Mon compte</a>
-            </li>
-            </a>
-
+              <a class="nav-link active">Mon compte</a>
+            </button>
+            </form>
             
             </div>
 

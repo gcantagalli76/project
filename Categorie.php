@@ -72,7 +72,7 @@ $categoryName = $display['CATEGORY_NAME'];
                 <a>Le Havre</a>
               </div>
               <div class="col-md-4">
-                <img src="/assets/img/heart.svg" alt="heart" width="20px">
+                <img src="/assets/img/heart.svg" alt="heart" width="20px" href="addfavorite.php?idfavorite=<?php echo $display['ARTICLE_ID'];?>">
               </div>
             </div>
           </div>
