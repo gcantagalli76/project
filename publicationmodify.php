@@ -1,79 +1,6 @@
-<?php require 'views/header.php'; 
+<?php require 'views/header.php';
 
-
-// si il n'y a pas d'email dans les cookies alors tu renvois l'utilisateur direct sur la page connectpourpubli sinon tu lances le reste
-if (!isset($_COOKIE['email'])) {
-  header("Location: connectforpublication.php");
-}else {
-
-
-// connection à la base de données, en cas de problème message d'erreur
-try
-{
-    $bdd = new PDO('mysql:host=localhost;dbname=bddproject;charset=utf8mb4', 'root', '');
-}
-catch (Exception $e)
-{
-        die('Erreur : ' . $e->getMessage());
-}
-
-// je récupère via le GET le numéro de l'article concerné pour afficher les infos de l'article à modifier sur la page
-
-if (isset($_GET['idmodify'])) {
-
-  $id = $_GET['idmodify'];
-  
-  $consult = $bdd->prepare("SELECT *, left(ARTICLE_PURCHASEDATE,10) as ARTICLE_BUYDATE FROM article WHERE ARTICLE_ID = :id");
-  $consult->execute(array( ':id' => $id ) );
-
-  while ($display = $consult->fetch()) {
-
-      $articleTitle = $display['ARTICLE_TITLE'];
-      $articleQuantity = $display['ARTICLE_QUANTITY'];
-      $articleDescription = $display['ARTICLE_DESCRIPTION'];
-      $articlePrice = $display['ARTICLE_PRICE'];
-      $articlePurchasedate = $display['ARTICLE_BUYDATE'];
-      $articleGive= $display['ARTICLE_GIVE'];
-  
-      
-// si il valide la modification alors tu récupère les différents post et les mets dans des variables
-  if (isset($_POST['validPublication'])) {
-
-    $title = $_POST["yourTitle"];
-    $category = $_POST["yourCategory"];
-    $state = $_POST["yourState"];
-    $quantity = $_POST["yourQuantity"];
-    $buyDate = $_POST["yourBuyDate"];
-    $price = $_POST["yourPrice"];
-    $description = $_POST["yourDescription"];
-    $idarticle = $_GET['idmodify'];
-
-// si l'utilisateur coche je donne alors tu attribut 1 à give, sinon tu mets 0
-    if (isset($_POST['youGive'])) {
-      $give = 1;
-    } else {
-      $give = 0;
-      }
- 
-//on récupère les données remplies sur la publication pour les insérer dans la table article et modifier l'article concerné
-      $req = $bdd->prepare('update article set ARTICLE_TITLE = :title, ARTICLE_QUANTITY = :quantity, ARTICLE_PURCHASEDATE = :buyDate, ARTICLE_PRICE = :price,
-      ARTICLE_GIVE = :give, ARTICLE_DESCRIPTION = :description, CATEGORY_ID = :category, CONDITION_ID = :state where ARTICLE_ID = :articleId');
-  
-$req->execute(array(
-	'title' => $title,
-  'quantity' => $quantity,
-  'buyDate' => $buyDate,
-	'price' => $price,
-  'give' => $give,
-  'description' => $description,
-  'category' => $category,
-  'state' => $state,
-  'articleId' => $idarticle
-	));
-
-  header("Location: mespublications.php");
-
-};
+require './controllers/controller.php';
 
 ?>
 
@@ -84,121 +11,119 @@ $req->execute(array(
       <div class="col-sm-10 bg-light border shadowblock">
         <h1 class="text-center">Votre annonce à modifier</h1>
         <form action="" method="post">
-        <div class="row justify-content-around">
-          <div class="col-sm-6">
-            <div class="row">
-              <div class="col-sm-10 mt-3">
-                <label class="form-label mt-2 d-flex justify-content-start"> Titre de l'annonce :</label>
-                <input type="text" class="form-control box" id="yourTitle" name="yourTitle" maxlength="40" value="<?=$articleTitle?>">
+          <div class="row justify-content-around">
+            <div class="col-sm-6">
+              <?php foreach ($displayArticleToModifArray as $displayB4Modif) { ?>
+                <div class="row">
+                  <div class="col-sm-10 mt-3">
+                    <label class="form-label mt-2 d-flex justify-content-start"> Titre de l'annonce :</label>
+                    <input type="text" class="form-control box" id="yourTitle" name="yourTitle" maxlength="40" value="<?= $displayB4Modif['ARTICLE_TITLE'] ?>">
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col-sm-5 mt-2">
+                    <select class="form-select" aria-label="Default select example" id="yourCategory" name="yourCategory">
+                      <option selected disabled>Catégorie :</option>
+                      <option value="1">Carrelage, parquet, sol</option>
+                      <option value="2">Peinture et droguerie</option>
+                      <option value="3">Matériaux de construction</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-5 mt-2">
+                    <select class="form-select" aria-label="Default select example" id="yourState" name="yourState">
+                      <option selected disabled>Etat du produit :</option>
+                      <option value="1">Neuf</option>
+                      <option value="2">Bon état</option>
+                      <option value="3">Etat satisfaisant</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="row mt-3">
+                  <div class="col-sm-10">
+                    <label for="customRange3" class="form-label mt-2">Quantité restante comparée au produit neuf</label>
+                    <input type="range" class=form-range mt-2 min="1" max="100" value="<?= $displayB4Modif['ARTICLE_QUANTITY'] ?>" id="yourQuantity" name="yourQuantity">
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-sm-10">
+                    <span id="resultRange" class="fw-bold" name="yourQuantity"></span>
+                    <span class="fw-bold">%</span>
+                  </div>
+                </div>
+
+
+
+                <!-- form-range  custom-range-->
+
+                <div class="row mt-1">
+                  <div class="col-sm-4">
+                    <label class="form-label mt-2 d-flex justify-content-start"> Date d'achat :</label>
+                    <input type="date" class="form-control box" id="yourBuyDate" name="yourBuyDate" value="<?= $displayB4Modif['ARTICLE_BUYDATE'] ?>">
+                    <span id="messageInfosTitle"></span>
+                  </div>
+                  <div class="col-sm-3">
+                    <label class="form-label mt-2 d-flex justify-content-start"> Prix de vente :</label>
+                    <input type="number" class="form-control box" id="yourPrice" name="yourPrice" min="1" max="10000" value="<?= $displayB4Modif['ARTICLE_PRICE'] ?>">
+                    <span id="messageInfosTitle"></span>
+                  </div>
+                  <div class="col-sm-2">
+                    <label class="form-check-label mt-2 d-flex justify-content-start">Je donne!</label>
+                    <input type="checkbox" class="form-check-input mt-2" id="youGive" name="youGive" value="<?= $displayB4Modif['ARTICLE_GIVE'] ?>">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm-10">
+                    <label for="exampleFormControlTextarea1" class="form-label mt-2 d-flex justify-content-start">Description du produit :</label>
+                    <textarea class="form-control2" id="yourDescription" name="yourDescription" rows="5" maxlength="170"><?= $displayB4Modif['ARTICLE_DESCRIPTION'] ?></textarea>
+                    <span id="messageInfosTitle"></span>
+                  </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mt-3">
+              <div class="row">
+                <label class="form-label mt-2 d-flex justify-content-center"> Ajoutez vos photos :</label>
+                <div class="text-center mt-1">
+                  <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
+                </div>
+              </div>
+              <div class="row">
+                <div class="text-center mt-1">
+                  <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
+                </div>
+              </div>
+              <div class="row">
+                <div class="text-center mt-1">
+                  <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
+                </div>
               </div>
             </div>
-            <div class="row mt-4">
-              <div class="col-sm-5 mt-2">
-                <select class="form-select" aria-label="Default select example" id="yourCategory" name="yourCategory">
-                  <option selected disabled>Catégorie :</option>
-                  <option value="1">Carrelage, parquet, sol</option>
-                  <option value="2">Peinture et droguerie</option>
-                  <option value="3">Matériaux de construction</option>
-                </select>
-              </div>
-              <div class="col-sm-5 mt-2">
-                <select class="form-select" aria-label="Default select example" id="yourState" name="yourState">
-                  <option selected disabled>Etat du produit :</option>
-                  <option value="1">Neuf</option>
-                  <option value="2">Bon état</option>
-                  <option value="3">Etat satisfaisant</option>
-                </select>
-              </div>
-            </div>
-
-
-            <div class="row mt-3">
-              <div class="col-sm-10">
-                <label for="customRange3" class="form-label mt-2">Quantité restante comparée au produit neuf</label>
-                <input type="range" class=form-range mt-2 min="1" max="100" value="<?=$articleQuantity?>" id="yourQuantity" name="yourQuantity">
-              </div>
-            </div>
-
-            <div class="row mt-3">
-              <div class="col-sm-10">
-              <span id="resultRange" class="fw-bold" name="yourQuantity"></span>
-            <span class="fw-bold">%</span>
-              </div>
-            </div>
-
-            
-
-            <!-- form-range  custom-range-->
-
-            <div class="row mt-1">
-              <div class="col-sm-4">
-                <label class="form-label mt-2 d-flex justify-content-start"> Date d'achat :</label>
-                <input type="date" class="form-control box" id="yourBuyDate" name="yourBuyDate" value="<?=$articlePurchasedate?>">
-                <span id="messageInfosTitle"></span>
-              </div>
-              <div class="col-sm-3">
-                <label class="form-label mt-2 d-flex justify-content-start"> Prix de vente :</label>
-                <input type="number" class="form-control box" id="yourPrice" name="yourPrice" min="1" max="10000" value="<?=$articlePrice?>">
-                <span id="messageInfosTitle"></span>
-              </div>
-              <div class="col-sm-2">
-                <label class="form-check-label mt-2 d-flex justify-content-start">Je donne!</label>
-                <input type="checkbox" class="form-check-input mt-2" id="youGive" name="youGive" value="<?=$articleGive?>">
-              </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-sm-10">
-                <label for="exampleFormControlTextarea1"
-                  class="form-label mt-2 d-flex justify-content-start">Description du produit :</label>
-                <textarea class="form-control2" id="yourDescription" name="yourDescription" rows="5" maxlength="170"><?=$articleDescription?></textarea> 
-                <span id="messageInfosTitle"></span>
+            <div class="row justify-content-center">
+              <div class="col-sm-3 d-flex justify-content-center">
+                <button type="submit" class="btn btnConnect mt-5 mb-3" id="validModification" name="validModification">Valider ma modification</button>
               </div>
             </div>
           </div>
-          <div class="col-sm-4 mt-3">
-            <div class="row">
-              <label class="form-label mt-2 d-flex justify-content-center"> Ajoutez vos photos :</label>
-              <div class="text-center mt-1">
-                <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
-              </div>
-            </div>
-            <div class="row">
-              <div class="text-center mt-1">
-                <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
-              </div>
-            </div>
-            <div class="row">
-              <div class="text-center mt-1">
-                <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
-              </div>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-sm-3 d-flex justify-content-center">
-              <button type="submit" class="btn btnConnect mt-5 mb-3" id="validPublication" name="validPublication">Valider ma modification</button>
-            </div>
-          </div>
-        </div>
+          <!-- Je met un input invisible qui recupère l'id de larticle en mettant le même name pour qu'au raffraichissement des page au clic sur les boutons je ne perde pas le post detail -->
+          <input type="hidden" name="idArticleModify" value="<?= $_POST['idArticleModify'] ?>">
         </form>
       </div>
 
 
-      <?php }
-      
-    
-    }?>
-    
-    <script type="text/javascript" src="/assets/js/scriptPubli.js"></script>
-    
-    <?php } require 'views/footer.php'; ?>
+
+      <script type="text/javascript" src="/assets/js/scriptPubli.js"></script>
+
+    <?php }
+              require 'views/footer.php'; ?>
 
     <script type="text/javascript" src="/assets/js/scriptPubli.js"></script>
 
     </div>
 
 
-    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
 
 </body>
