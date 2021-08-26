@@ -103,3 +103,8 @@ if (!isset($displayCategoryArticleArray[0]['CATEGORY_NAME'])) {
 }else {
   $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
 }
+
+// Si tu clics sur un article dans la catégorie alors tu lance la fonction qui affiche les détails de cet article dans annonce.php
+if (isset($_POST['idArticleConsult'])) {
+  $displayDetailsArticleArray = $articleObj->displayArticleDetails();
+}

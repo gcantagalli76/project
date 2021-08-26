@@ -16,8 +16,8 @@ require './controllers/controller.php';
     <div class="row justify-content-start">
 
       <?php foreach ($displayCategoryArticleArray as $display) { ?>
-        <div class="col-md-2 p-4">
-          <div class="card" style="width: 14rem;">
+        <form class="col-md-2 p-4" method="POST" action="Annonce.php">
+          <button class="card" style="width: 14rem" type="submit" name="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>" >
             <img src="/assets/img/peinture.jpg" class="card-img-top" alt="paint">
             <div class="card-body">
               <h5 class="card-title"><?= $display['ARTICLE_TITLE'] ?></h5>
@@ -27,16 +27,16 @@ require './controllers/controller.php';
                   <a style="font-weight : bold"><?= $display['ARTICLE_PRICE'] ?>€</a>
                 </div>
                 <div class="col-md-5">
-                  <img src="/assets/img/geo-alt.svg" alt="heart" width="20px">
-                  <a>Le Havre</a>
+                  <img src="/assets/img/geo-alt.svg" alt="city" width="20px">
+                  <a><?= $display['ARTICLE_CITY'] ?></a>
                 </div>
                 <div class="col-md-4">
                   <img src="/assets/img/heart.svg" alt="heart" width="20px" href="addfavorite.php?idfavorite=<?php echo $display['ARTICLE_ID']; ?>">
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+      </button>
+      </form>
       <?php  }
       require 'views/footer.php'; ?>
     </div>

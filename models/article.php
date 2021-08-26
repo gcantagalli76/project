@@ -49,8 +49,24 @@ class Article extends Database
     public function display5Article()
     {
         $database = $this->connectDatabase();
-        $myQuery = "SELECT * FROM `article` limit 5";
+        $myQuery = "SELECT A.*, B.USER_CITY as ARTICLE_CITY  FROM `article` as A left join _user as B on A.USER_ID = B.USER_ID limit 5";
         $queryArticle = $database->query($myQuery);
+        $fetch = $queryArticle->fetchAll();
+        return $fetch;
+    }
+
+    //fonction permettant d'afficher sur les détails de l'article sur la page annonce.php
+    public function displayArticleDetails()
+    {
+        $database = $this->connectDatabase();
+        $articleId = $_POST['idArticleConsult'];
+        $myQuery = "SELECT A.*, 
+                           DATE_FORMAT(`article_purchasedate`, '%d/%m/%Y') as ARTICLE_PURCHASEDATE,
+                           B.CONDITION_NAME
+                    FROM `article` as A left join _condition as B on A.CONDITION_ID = B.CONDITION_ID where ARTICLE_ID = :articleId";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
+        $queryArticle->execute();
         $fetch = $queryArticle->fetchAll();
         return $fetch;
     }
@@ -68,7 +84,6 @@ class Article extends Database
         $fetch = $queryArticle->fetchAll();
         return $fetch;
     }
-
 
 
     // fonction permettant de modifier l'article
@@ -116,8 +131,11 @@ class Article extends Database
         $database = $this->connectDatabase();
         $idcategory = $_POST['selectCategory'];
         $myQuery = "SELECT A.*,
-                       B.CATEGORY_NAME
-                FROM `article` as A left join `category` as B on A.CATEGORY_ID = B.CATEGORY_ID WHERE A.CATEGORY_ID = :idcategory";
+                           B.CATEGORY_NAME,
+                           C.USER_CITY as ARTICLE_CITY 
+                    FROM `article` as A left join `category` as B on A.CATEGORY_ID = B.CATEGORY_ID 
+                                        left join _user as C on A.USER_ID = C.USER_ID
+                    WHERE A.CATEGORY_ID = :idcategory";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':idcategory', $idcategory, PDO::PARAM_INT);
         $queryArticle->execute();

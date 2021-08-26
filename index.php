@@ -28,10 +28,8 @@ require './controllers/controller.php';
   <div class="row justify-content-center">
 
     <?php foreach ($display5ArticleArray as $display) { ?>
-
-
-      <div class="col-md-2 d-flex justify-content-center">
-        <div class="card" style="width: 14rem;">
+      <form class="col-md-2 d-flex justify-content-center" method="POST" action="Annonce.php">
+        <button class="card" style="width: 14rem" type="submit" name="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
           <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
           <div class="card-body">
             <h5 class="card-title"><?= $display['ARTICLE_TITLE'] ?></h5>
@@ -42,15 +40,15 @@ require './controllers/controller.php';
               </div>
               <div class="col-md-7">
                 <img src="./assets/img/geo-alt.svg" alt="heart" width="20px">
-                <a>Le Havre</a>
+                <a><?= $display['ARTICLE_CITY'] ?></a>
               </div>
               <div class="col-md-2">
                 <img src="./assets/img/heart.svg" alt="heart" width="20px">
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </button>
+    </form>
 
     <?php } ?>
 

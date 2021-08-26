@@ -1,4 +1,8 @@
-<?php require 'views/header.php'; ?>
+<?php require 'views/header.php';
+
+require './controllers/controller.php';
+
+?>
 
 <div class="container-fluid centerPage">
 
@@ -37,44 +41,45 @@
 
 
     <div class="col-6">
-      <h3 class="text-center mt-1">Titre de l'annonce</h3>
-      <div class="mt-5">Descriptif : It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</div>
+      <?php foreach ($displayDetailsArticleArray as $articles) { ?>
+        <h3 class="text-center mt-1"><?= $articles['ARTICLE_TITLE'] ?></h3>
+        <div class="mt-5"><?= $articles['ARTICLE_DESCRIPTION'] ?></div>
 
-      <div class="row mt-5">
-        <div class="col-4 text-center">
-          <div>Prix</div>
-          <div>50€</div>
+        <div class="row mt-5">
+          <div class="col-4 text-center">
+            <div>Prix</div>
+            <div><?= $articles['ARTICLE_PRICE'] ?></div>
+          </div>
+
+          <div class="col-4 text-center">
+            <div>Etat</div>
+            <div><?= $articles['CONDITION_NAME'] ?></div>
+          </div>
+
+          <div class="col-4 text-center">
+            <div>Date d'achat</div>
+            <div><?= $articles['ARTICLE_PURCHASEDATE'] ?></div>
+          </div>
         </div>
 
-        <div class="col-4 text-center">
-          <div>Etat</div>
-          <div>Neuf</div>
+        <div class="row mt-5">
+          <div class="col-6 text-center">
+            <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
+          </div>
+
+          <div class="col-6 text-center">
+            <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
+          </div>
+
         </div>
-
-        <div class="col-4 text-center">
-          <div>Date d'achat</div>
-          <div>16/09/2020</div>
-        </div>
-      </div>
-
-
-      <div class="row mt-5">
-        <div class="col-6 text-center">
-          <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
-        </div>
-
-        <div class="col-6 text-center">
-          <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
-        </div>
-
-      </div>
 
     </div>
 
   </div>
 </div>
 
-<?php require 'views/footer.php'; ?>
+<?php }
+      require 'views/footer.php'; ?>
 
 </div>
 
