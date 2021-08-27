@@ -108,3 +108,8 @@ if (!isset($displayCategoryArticleArray[0]['CATEGORY_NAME'])) {
 if (isset($_POST['idArticleConsult'])) {
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
 }
+
+if (isset($_GET['idfavorite'])) {
+  $articleObj->addFavouriteArticle();
+  $displayCategoryArticleArray = $articleObj->displayArticleCategory();
+}

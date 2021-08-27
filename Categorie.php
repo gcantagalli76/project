@@ -27,16 +27,19 @@ require './controllers/controller.php';
                   <a style="font-weight : bold"><?= $display['ARTICLE_PRICE'] ?>€</a>
                 </div>
                 <div class="col-md-5">
-                  <img src="/assets/img/geo-alt.svg" alt="city" width="20px">
+                  <img src="/assets/img/geo-alt.svg" alt="heart" width="20px">
                   <a><?= $display['ARTICLE_CITY'] ?></a>
                 </div>
                 <div class="col-md-4">
-                  <img src="/assets/img/heart.svg" alt="heart" width="20px" href="addfavorite.php?idfavorite=<?php echo $display['ARTICLE_ID']; ?>">
+                  <a class="btn bi bi-heart" type="submit" alt="heart" width="20px" href="Categorie.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>"> </a>
                 </div>
               </div>
             </div>
       </button>
       </form>
+
+
+      
       <?php  }
       require 'views/footer.php'; ?>
     </div>
