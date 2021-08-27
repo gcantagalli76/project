@@ -48,12 +48,12 @@
             </form>
             </li>
 
-            <a href="favoris.php">
-              <li class="nav-item text-center" type="button">
+            <form action="favoris.php" method="POST">
+              <button class="nav-item text-center bg-light border-0 p-0" type="submit" name="myFavorite">
                 <img src="/assets/img/heart.svg" alt="heart" width="25px">
-                <a class="nav-link active" href="favoris.php">Mes favoris</a>
-              </li>
-            </a>
+                <a class="nav-link active">Mes favoris</a>
+              </button>
+            </form>
 
             <form action="connection.php" method="POST">
               <button class="nav-item text-center bg-light border-0 p-0" type="submit" href="connection.php" name="myAcount">

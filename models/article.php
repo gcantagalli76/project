@@ -59,7 +59,7 @@ class Article extends Database
     public function displayArticleDetails()
     {
         $database = $this->connectDatabase();
-        $articleId = $_POST['idArticleConsult'];
+        $articleId = $_POST['idArticleConsult'] ?? $_GET['idarticle'] ?? $_POST['addFavorite'];
         $myQuery = "SELECT A.*, 
                            DATE_FORMAT(`article_purchasedate`, '%d/%m/%Y') as ARTICLE_PURCHASEDATE,
                            B.CONDITION_NAME
@@ -129,7 +129,7 @@ class Article extends Database
     public function displayArticleCategory()
     {
         $database = $this->connectDatabase();
-        $idcategory = $_POST['selectCategory'];
+        $idcategory = $_POST['selectCategory'] ?? $_GET['category_id'];
         $myQuery = "SELECT A.*,
                            B.CATEGORY_NAME,
                            C.USER_CITY as ARTICLE_CITY 
@@ -143,16 +143,43 @@ class Article extends Database
         return $fetch;
     }
 
-    // je créé une fonction qui récupère les champs remplis sur le formulaire et qui les insert dans la bdd via sql après connection à la bdd
+    // je créé une fonction qui ajoute les données de l'article mis en favori par l'utilisateur dans la table articlefavorite
     public function addFavouriteArticle()
     {
-        $articleId = $_GET['idfavorite'];
+        $articleId = $_GET['idfavorite'] ?? $_POST['addFavorite'];
         $userId = $_COOKIE["userId"];
         $database = $this->connectDatabase();
         $myQuery = 'INSERT INTO articlefavorite(article_title,article_price,article_description,article_quantity,article_purchasedate,article_give,category_id,condition_id,user_id,ARTICLE_ID)
                 SELECT article_title,article_price,article_description,article_quantity,article_purchasedate,article_give,category_id,condition_id, :userId as user_id, ARTICLE_ID FROM `article` where ARTICLE_ID = :articleId';
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
+        $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $execute = $queryArticle->execute();
+        return $execute;
+    }
+
+    //fonction permettant d'afficher les articles favoris de l'utilisateur connecté
+    public function displayArticleFavorite()
+    {
+        $database = $this->connectDatabase();
+        $userId = $_COOKIE["userId"];
+        $myQuery = "SELECT * FROM `articlefavorite` where USER_ID = :userId;";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $queryArticle->execute();
+        $fetch = $queryArticle->fetchAll();
+        return $fetch;
+    }
+
+    // fonction permettant de supprimer un article
+    public function deleteFavoriteArticle()
+    {
+        $database = $this->connectDatabase();
+        $idarticle = $_POST['idArticleFavoriteDelete'];
+        $userId = $_COOKIE["userId"];
+        $myQuery = "DELETE FROM `articlefavorite` where ARTICLE_ID = :id and USER_ID = :userId";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':id', $idarticle, PDO::PARAM_INT);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
         $execute = $queryArticle->execute();
         return $execute;

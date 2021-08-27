@@ -104,12 +104,31 @@ if (!isset($displayCategoryArticleArray[0]['CATEGORY_NAME'])) {
   $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
 }
 
-// Si tu clics sur un article dans la catégorie alors tu lance la fonction qui affiche les détails de cet article dans annonce.php
-if (isset($_POST['idArticleConsult'])) {
+// Si tu clics sur un article dans la catégorie ou dans tes favoris alors tu lance la fonction qui affiche les détails de cet article dans annonce.php
+if (isset($_POST['idArticleConsult']) || isset($_GET['idarticle'])) {
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
 }
 
+// Si tu clics sur le coeur pour mettre dans les favoris tu lance la fonction qui rajoute l'article dans les favoris de l'utilisateur
 if (isset($_GET['idfavorite'])) {
   $articleObj->addFavouriteArticle();
   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
+  $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
+}
+
+// Si dans l'annonce tu clics sur pour mettre dans les favoris tu lance la fonction qui rajoute l'article dans les favoris de l'utilisateur
+if (isset($_POST['addFavorite'])) {
+  $articleObj->addFavouriteArticle();
+  $displayDetailsArticleArray = $articleObj->displayArticleDetails();
+}
+
+// Si tu clics sur mesfavoris alors tu lances la fonction permettant d'afficher les favoris de l'utilisateur connecté
+if (isset($_POST['myFavorite'])) {
+  $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
+}
+
+// lors du clic pour supprimer un article dans mesfavoris tu lances la fonction qui supprime en base les données l'article concerné
+if (isset($_POST['idArticleFavoriteDelete'])) {
+  $articleObj->deleteFavoriteArticle();
+  $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
 }

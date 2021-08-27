@@ -59,11 +59,9 @@ require './controllers/controller.php';
       </form>
 
 
-      <div class="col-sm-3" href="favoris.php">
-        <a href="favoris.php">
-          <button type="button" class="btn btn-primary btn-lg">Mes favoris <br> <i class="bi bi-heart"></i> </button>
-        </a>
-      </div>
+      <form class="col-sm-3" action="favoris.php" method="post">
+        <button type="submit" class="btn btn-primary btn-lg" name="myFavorite">Mes favoris <br> <i class="bi bi-heart"></i> </button>
+      </form>
 
 
       <div class="col-sm-3">

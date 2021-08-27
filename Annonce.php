@@ -63,9 +63,9 @@ require './controllers/controller.php';
         </div>
 
         <div class="row mt-5">
-          <div class="col-6 text-center">
-            <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
-          </div>
+          <form class="col-6 text-center" method="post">
+            <button type="submit" class="btn text-white bg-primary mt-3 mb-3" name="addFavorite" value="<?=$articles['ARTICLE_ID']?>"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
+      </form>
 
           <div class="col-6 text-center">
             <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-envelope"></i> Contacter le vendeur</button>

@@ -31,7 +31,7 @@ require './controllers/controller.php';
                   <a><?= $display['ARTICLE_CITY'] ?></a>
                 </div>
                 <div class="col-md-4">
-                  <a class="btn bi bi-heart" type="submit" alt="heart" width="20px" href="Categorie.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>"> </a>
+                  <a class="btn bi bi-heart" type="submit" alt="heart" width="20px" href="Categorie.php?idfavorite=<?php echo $display['ARTICLE_ID']?>&amp;category_id=<?php echo $display['CATEGORY_ID'] ?>"> </a>
                 </div>
               </div>
             </div>

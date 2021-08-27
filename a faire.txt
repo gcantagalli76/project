@@ -2,10 +2,6 @@ A faire pour la prochaine fois :
 
 2 - Il faudra sûrement créer un JS spécial pour cette page car il faut cliquer dans chaque case pour faire apparaitre le bouton valider
 
-5 - Voir pour quand on clic sur le coeur de l'annonce elle s'intègre dans les favoris de l'utilisateur connecté : j'ai rajouté une feuille
-addfavorite.php qui quand on clic sur le coeur dans categorie.php récupère le numéro de l'article mais ensuite il faut que cet article
-soit rattaché à un utilisateur dans une table pour qu'on puisse dire qu'il fait bien partie de ses favoris. Donc il doit manquer une table
-dans ma base de donnée !
 
 
 
