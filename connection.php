@@ -24,6 +24,9 @@ require './controllers/controller.php';
           <a href="creationcpt.php">
             <div class="mt-4 mb-3">Pas encore membre ? Créez votre compte !</div>
           </a>
+          <a href="forgetpwd.php">
+            <div class="mt-4 mb-3">Mot de passe oublié ?</div>
+          </a>
           <div class="error"><?= $errorConnect ?? '' ?></div>
         </div>
       </div>

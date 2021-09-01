@@ -55,4 +55,55 @@ class User extends Database
         return $fetch;
     }
 
+    //fonction permettant de rajouter un token dans la table user lorsqu'il a oublié son mdp
+    public function addToken($token)
+    {
+        $mail = $_POST["yourEmail"];
+        $database = $this->connectDatabase();
+        $myQuery = "UPDATE `_user` SET token = :token where USER_EMAIL = :email";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':email', $mail, PDO::PARAM_STR);
+        $queryUser->bindValue(':token', $token, PDO::PARAM_STR);
+        $queryUser->execute();
+        return $queryUser;
+    }
+
+    //fonction permettant de créer un nouveau mdp
+    public function newPwd($token)
+    {
+        $newPwd = $_POST["yourPassword"];
+        $database = $this->connectDatabase();
+        $myQuery = "UPDATE `_user` SET user_password = :newpwd where token = :token";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':token', $token, PDO::PARAM_STR);
+        $queryUser->bindValue(':newpwd', $newPwd, PDO::PARAM_STR);
+        $queryUser->execute();
+        return $queryUser;
+    }
+
+    //fonction permettant de ressortir toutes les adresses emails des utilisateurs en bdd
+    public function displayEmail($email)
+    {
+        $database = $this->connectDatabase();
+        $myQuery = "SELECT * FROM _user where user_email = :email";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':email', $email, PDO::PARAM_STR);
+        $queryUser->execute();
+        $fetch = $queryUser->fetch();
+        return $fetch;
+    }
+
+    //fonction permettant de supprimer le token généré pour le changement de mdp
+    public function deleteToken($token)
+    {
+        $database = $this->connectDatabase();
+        $myQuery = "UPDATE `_user` SET token = null where token = :token";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':token', $token, PDO::PARAM_STR);
+        $queryUser->execute();
+        return $queryUser;
+    }
+
+
+
 }

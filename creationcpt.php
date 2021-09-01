@@ -34,7 +34,7 @@ require './controllers/controller.php';
                     <div class="col-sm-5 bg-light">
                         <label class="form-label mt-2 d-flex justify-content-start"> Adresse email :</label>
                         <input type="text" class="form-control box" id="yourEmail" name="yourEmail">
-                        <span id="messageInfosEmail"></span>
+                        <span id="messageInfosEmail" name="occupedEmail"></span>
                     </div>
                 </div>
 

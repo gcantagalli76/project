@@ -13,7 +13,7 @@ require './controllers/controller.php';
     <div class="col-sm-10 bg-light shadowblock">
       <h1 class="text-center">Mes informations personnelles</h1>
       <?php foreach ($displayUserArray as $user) {
-        if ($_COOKIE['email'] == $user['USER_EMAIL']) { ?>
+        if ($_SESSION['email'] == $user['USER_EMAIL']) { ?>
           <div class="row justify-content-around">
             <div class="col-sm-3 bg-light">
               <label class="form-label mt-2 d-flex justify-content-start"> Nom :</label>

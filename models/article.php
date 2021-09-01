@@ -15,7 +15,7 @@ class Article extends Database
         $buyDate = $_POST["yourBuyDate"];
         $price = $_POST["yourPrice"];
         $description = $_POST["yourDescription"];
-        $userId = $_COOKIE["userId"];
+        $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
         $myQuery = 'INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id)
             VALUES( :title, :quantity, :buyDate, :price, 0, :description, :category, :state, :userId)';
@@ -36,7 +36,7 @@ class Article extends Database
     public function articleUser()
     {
         $database = $this->connectDatabase();
-        $userId = $_COOKIE["userId"];
+        $userId = $_SESSION["userId"];
         $myQuery = "SELECT A.* FROM `article` as A left join _user as B on A.USER_ID = B.USER_ID where A.USER_ID = :userId;";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
@@ -147,7 +147,7 @@ class Article extends Database
     public function addFavouriteArticle()
     {
         $articleId = $_GET['idfavorite'] ?? $_POST['addFavorite'];
-        $userId = $_COOKIE["userId"];
+        $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
         $myQuery = 'INSERT INTO articlefavorite(article_title,article_price,article_description,article_quantity,article_purchasedate,article_give,category_id,condition_id,user_id,ARTICLE_ID)
                 SELECT article_title,article_price,article_description,article_quantity,article_purchasedate,article_give,category_id,condition_id, :userId as user_id, ARTICLE_ID FROM `article` where ARTICLE_ID = :articleId';
@@ -162,7 +162,7 @@ class Article extends Database
     public function displayArticleFavorite()
     {
         $database = $this->connectDatabase();
-        $userId = $_COOKIE["userId"];
+        $userId = $_SESSION["userId"];
         $myQuery = "SELECT * FROM `articlefavorite` where USER_ID = :userId;";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
@@ -176,7 +176,7 @@ class Article extends Database
     {
         $database = $this->connectDatabase();
         $idarticle = $_POST['idArticleFavoriteDelete'];
-        $userId = $_COOKIE["userId"];
+        $userId = $_SESSION["userId"];
         $myQuery = "DELETE FROM `articlefavorite` where ARTICLE_ID = :id and USER_ID = :userId";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':id', $idarticle, PDO::PARAM_INT);
