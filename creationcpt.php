@@ -94,6 +94,27 @@ require './controllers/controller.php';
 <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
 </script>
 
+<script src=" https://unpkg.com/sweetalert/dist/sweetalert.min.js "> </script>
+
+<?php
+
+//après avoir validé le formulaire tu lances le message de confirmation et au clic sur ok tu renvoi sur la page de connection
+if (isset($_POST['myButton'])) { ?>
+
+    <script>
+        swal({
+            title: "Demande validée !",
+            text: "Votre compte a bien été créé",
+            type: "success"
+        }).then(function() {
+            window.location = "connection.php";
+        });
+    </script>
+
+<?php } ?>
+
+
+
 </body>
 
 </html>

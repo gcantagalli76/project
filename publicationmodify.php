@@ -10,7 +10,7 @@ require './controllers/controller.php';
     <div class="row justify-content-center">
       <div class="col-sm-10 bg-light border shadowblock">
         <h1 class="text-center">Votre annonce à modifier</h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           <div class="row justify-content-around">
             <div class="col-sm-6">
               <?php foreach ($displayArticleToModifArray as $displayB4Modif) { ?>
@@ -82,24 +82,45 @@ require './controllers/controller.php';
                   </div>
                 </div>
             </div>
-            <div class="col-sm-4 mt-3">
+
+
+            <div class="col-sm-5 mt-3">
+
               <div class="row">
                 <label class="form-label mt-2 d-flex justify-content-center"> Ajoutez vos photos :</label>
-                <div class="text-center mt-1">
-                  <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
-                </div>
               </div>
-              <div class="row">
-                <div class="text-center mt-1">
-                  <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
+                <div class="row justify-content-center">
+                  <div class="col-sm-5 imgUp">
+                    <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview"></div>
+                    <label class="btn btn-primary">
+                      Upload<input type="file" class="uploadFile img" value="Upload Photo1" id="fileToUpload" name="fileToUpload" style="width: 0px;height: 0px;overflow: hidden;">
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="text-center mt-1">
-                  <img src="/assets/img/carrelagelm.jpg" class="rounded" alt="..." width="200px">
+
+                <div class="row justify-content-center">
+                  <div class="col-sm-5 imgUp">
+                    <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview2"></div>
+                    <label class="btn btn-primary">
+                      Upload<input type="file" class="uploadFile img" value="Upload Photo2" id="fileToUpload2" name="fileToUpload2" style="width: 0px;height: 0px;overflow: hidden;">
+                    </label>
+                  </div>
                 </div>
-              </div>
+
+                <div class="row justify-content-center">
+                  <div class="col-sm-5 imgUp">
+                    <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview3"></div>
+                    <label class="btn btn-primary">
+                      Upload<input type="file" class="uploadFile img" value="Upload Photo3" id="fileToUpload3" name="fileToUpload3" style="width: 0px;height: 0px;overflow: hidden;">
+                    </label>
+                  </div>
+                </div>
+
+
             </div>
+
+
+
             <div class="row justify-content-center">
               <div class="col-sm-3 d-flex justify-content-center">
                 <button type="submit" class="btn btnConnect mt-5 mb-3" id="validModification" name="validModification">Valider ma modification</button>

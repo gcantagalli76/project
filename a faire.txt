@@ -2,7 +2,7 @@ A faire pour la prochaine fois :
 
 2 - Il faudra sûrement créer un JS spécial pour cette page car il faut cliquer dans chaque case pour faire apparaitre le bouton valider
 
-3 -  Modal de confirmation sur les ajout d'annonce, modif d'annonce et suppression. Puis, sur les ajouts en favoris et suppression
+3 - Modal de confirmation sur les ajout d'annonce, modif d'annonce et suppression. Puis, sur les ajouts en favoris et suppression
 
 4 - Crypter les mots de pass
 
@@ -11,6 +11,8 @@ A faire pour la prochaine fois :
 6 - faire en sorte de ne pas pouvoir créer un compte si l'adresse email existe déjà
 
 7 - Faire la partie admin
+
+8 - Voir pour régler le problème sur les images trop grandes supérieures à 1Mo environ
 
 
 
