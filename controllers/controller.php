@@ -67,11 +67,11 @@ if (isset($_SESSION['email']) && isset($_POST['myAcount'])) {
 if (!isset($_SESSION['email']) && isset($_POST['newPublication'])) {
   header("Location: connectforpublication.php");
 } else {
-  // si il valide la publication alors tu récupère les différents post et les mets dans des variables
+  // si il valide la publication alors tu récupère les différents post et photos et lance la fonction pour rajouter l'article dans la bdd
   if (isset($_POST['validPublication'])) {
-    $articleObj->addArticle();
+    
 
-//changement de l'image au format base64 pour import dans la bdd
+//changement de l'image1 au format base64 pour import dans la bdd
     $img_file = $_FILES['fileToUpload']['tmp_name'];
     $type = pathinfo($img_file, PATHINFO_EXTENSION);
     // Load file contents into variable
@@ -79,9 +79,30 @@ if (!isset($_SESSION['email']) && isset($_POST['newPublication'])) {
     // Encode contents to Base64
     $picture1 = base64_encode($bin);
 
+    //changement de l'image2 au format base64 pour import dans la bdd
+    $img_file2 = $_FILES['fileToUpload2']['tmp_name'];
+    $type2 = pathinfo($img_file2, PATHINFO_EXTENSION);
+    // Load file contents into variable
+    $bin2 = file_get_contents($img_file2);
+    // Encode contents to Base64
+    $picture2 = base64_encode($bin2);
+
+    //changement de l'image3 au format base64 pour import dans la bdd
+    $img_file3 = $_FILES['fileToUpload3']['tmp_name'];
+    $type3 = pathinfo($img_file3, PATHINFO_EXTENSION);
+    // Load file contents into variable
+    $bin3 = file_get_contents($img_file3);
+    // Encode contents to Base64
+    $picture3 = base64_encode($bin3);
+
+
+
+    $articleObj->addArticle($picture1,$picture2,$picture3);
+
+
     //chemin à mettre pour faire apparaitre l'image sur le html
     //  $b64 = 'data:image/' . $type . ';base64,' . $picture1;
-
+    
   }
 }
 

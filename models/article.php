@@ -6,7 +6,7 @@ class Article extends Database
 {
 
     // je créé une fonction qui récupère les champs remplis sur le formulaire et qui les insert dans la bdd via sql après connection à la bdd
-    public function addArticle()
+    public function addArticle($picture1, $picture2, $picture3)
     {
         $title = $_POST["yourTitle"];
         $category = $_POST["yourCategory"];
@@ -17,8 +17,8 @@ class Article extends Database
         $description = $_POST["yourDescription"];
         $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
-        $myQuery = 'INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id)
-            VALUES( :title, :quantity, :buyDate, :price, 0, :description, :category, :state, :userId)';
+        $myQuery = 'INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id,picture1,picture2,picture3)
+            VALUES( :title, :quantity, :buyDate, :price, 0, :description, :category, :state, :userId,:picture1,:picture2,:picture3)';
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':title', $title, PDO::PARAM_STR);
         $queryArticle->bindValue(':quantity', $quantity, PDO::PARAM_INT);
@@ -28,6 +28,9 @@ class Article extends Database
         $queryArticle->bindValue(':category', $category, PDO::PARAM_INT);
         $queryArticle->bindValue(':state', $state, PDO::PARAM_INT);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $queryArticle->bindValue(':picture1', $picture1, PDO::PARAM_STR_CHAR);
+        $queryArticle->bindValue(':picture2', $picture2, PDO::PARAM_STR_CHAR);
+        $queryArticle->bindValue(':picture3', $picture3, PDO::PARAM_STR_CHAR);
         $execute = $queryArticle->execute();
         return $execute;
     }

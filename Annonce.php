@@ -17,15 +17,16 @@ require './controllers/controller.php';
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
+        <?php foreach ($displayDetailsArticleArray as $articles) { ?>
         <div class="carousel-inner p-2">
           <div class="carousel-item active">
-            <img src="/assets/img/carrelagelm.jpg" class="d-block w-100" alt="...">
+            <img src="data:image/png;base64, <?= $articles['picture1'] ?>" alt="picture1" class="d-block w-100">
           </div>
           <div class="carousel-item p-2">
-            <img src="/assets/img/carrelagelm.jpg" class="d-block w-100" alt="...">
+            <img src="data:image/png;base64, <?= $articles['picture2'] ?>" alt="picture2" class="d-block w-100">
           </div>
           <div class="carousel-item p-2">
-            <img src="/assets/img/carrelagelm.jpg" class="d-block w-100" alt="...">
+            <img src="data:image/png;base64, <?= $articles['picture3'] ?>" alt="picture3" class="d-block w-100">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -41,7 +42,7 @@ require './controllers/controller.php';
 
 
     <div class="col-6">
-      <?php foreach ($displayDetailsArticleArray as $articles) { ?>
+      
         <h3 class="text-center mt-1"><?= $articles['ARTICLE_TITLE'] ?></h3>
         <div class="mt-5"><?= $articles['ARTICLE_DESCRIPTION'] ?></div>
 
