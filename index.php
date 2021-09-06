@@ -30,7 +30,7 @@ require './controllers/controller.php';
     <?php foreach ($display5ArticleArray as $display) { ?>
       <form class="col-md-2 d-flex justify-content-center" method="POST" action="Annonce.php">
         <button class="card" style="width: 14rem" type="submit" name="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
-          <img src="./assets/img/peinture.jpg" class="card-img-top" alt="paint">
+          <img src="data:image/png;base64, <?= $display['picture1'] ?>" class="card-img-top" alt="picture1">
           <div class="card-body">
             <h5 class="card-title"><?= $display['ARTICLE_TITLE'] ?></h5>
             <p class="card-text"><?= $display['ARTICLE_DESCRIPTION'] ?></p>
@@ -43,8 +43,8 @@ require './controllers/controller.php';
                 <a><?= $display['ARTICLE_CITY'] ?></a>
               </div>
               <div class="col-md-2">
-                <img src="./assets/img/heart.svg" alt="heart" width="20px">
-              </div>
+                  <a class="btn bi bi-heart" type="submit" alt="heart" width="20px" href="index.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>&amp;category_id=<?php echo $display['CATEGORY_ID'] ?>"> </a>
+                </div>
             </div>
           </div>
         </button>
@@ -143,14 +143,38 @@ require './controllers/controller.php';
 
 <?php require './views/footer.php'; ?>
 
-
-
-
-
 <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async>
 </script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php
+
+//après avoir validé le coeur tu confirmes que l'annonce a bien été ajoutée aux favoris si l'utilisateur à bien une sessions d'ouverte
+if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) { ?>
+
+    <script>
+        Swal.fire({
+            title: "Annonce ajoutée à vos favoris !",
+            text: "Votre annonce a bien été rajoutée dans vos annonces favorites",
+            icon: "success",
+            confirmButtonColor: '#000'
+        })
+    </script>
+<?php } elseif (isset($_GET['idfavorite']) && !isset($_SESSION['email'])) {?>
+  <script>
+  Swal.fire({
+            title: "Veuillez vous connecter !",
+            text: "Vous devez vous connecter ou créer un compte pour rajouter un article dans vos favoris",
+            icon: 'error',
+            confirmButtonColor: '#000'
+        }).then(function() {
+            window.location = "connection.php";
+        });
+</script>
+<?php } ?>
 
 
 </body>

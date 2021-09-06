@@ -88,6 +88,36 @@ require './controllers/controller.php';
 <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
 </script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php
+
+//après avoir validé le coeur tu confirmes que l'annonce a bien été ajoutée aux favoris si l'utilisateur à bien une sessions d'ouverte
+if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) { ?>
+
+    <script>
+        Swal.fire({
+            title: "Annonce ajoutée à vos favoris !",
+            text: "Votre annonce a bien été rajoutée dans vos annonces favorites",
+            icon: "success",
+            confirmButtonColor: '#000'
+        })
+    </script>
+
+<?php } elseif (isset($_POST['addFavorite']) && !isset($_SESSION['email'])) {?>
+  <script>
+  Swal.fire({
+            title: "Veuillez vous connecter !",
+            text: "Vous devez vous connecter ou créer un compte pour rajouter un article dans vos favoris",
+            icon: 'error',
+            confirmButtonColor: '#000'
+        }).then(function() {
+            window.location = "connection.php";
+        });
+</script>
+<?php } ?>
+
+  
 </body>
 
 </html>

@@ -89,34 +89,32 @@ require './controllers/controller.php';
               <div class="row">
                 <label class="form-label mt-2 d-flex justify-content-center"> Ajoutez vos photos :</label>
               </div>
-                <div class="row justify-content-center">
-                  <div class="col-sm-5 imgUp">
-                    <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview"></div>
-                    <label class="btn btn-primary">
-                      Upload<input type="file" class="uploadFile img" value="Upload Photo1" id="fileToUpload" name="fileToUpload" style="width: 0px;height: 0px;overflow: hidden;">
-                    </label>
-                  </div>
+              <div class="row justify-content-center">
+                <div class="col-sm-5 imgUp">
+                  <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview"></div>
+                  <label class="btn btn-primary">
+                    Upload<input type="file" class="uploadFile img" value="Upload Photo1" id="fileToUpload" name="fileToUpload" style="width: 0px;height: 0px;overflow: hidden;">
+                  </label>
                 </div>
+              </div>
 
-                <div class="row justify-content-center">
-                  <div class="col-sm-5 imgUp">
-                    <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview2"></div>
-                    <label class="btn btn-primary">
-                      Upload<input type="file" class="uploadFile img" value="Upload Photo2" id="fileToUpload2" name="fileToUpload2" style="width: 0px;height: 0px;overflow: hidden;">
-                    </label>
-                  </div>
+              <div class="row justify-content-center">
+                <div class="col-sm-5 imgUp">
+                  <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview2"></div>
+                  <label class="btn btn-primary">
+                    Upload<input type="file" class="uploadFile img" value="Upload Photo2" id="fileToUpload2" name="fileToUpload2" style="width: 0px;height: 0px;overflow: hidden;">
+                  </label>
                 </div>
+              </div>
 
-                <div class="row justify-content-center">
-                  <div class="col-sm-5 imgUp">
-                    <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview3"></div>
-                    <label class="btn btn-primary">
-                      Upload<input type="file" class="uploadFile img" value="Upload Photo3" id="fileToUpload3" name="fileToUpload3" style="width: 0px;height: 0px;overflow: hidden;">
-                    </label>
-                  </div>
+              <div class="row justify-content-center">
+                <div class="col-sm-5 imgUp">
+                  <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview3"></div>
+                  <label class="btn btn-primary">
+                    Upload<input type="file" class="uploadFile img" value="Upload Photo3" id="fileToUpload3" name="fileToUpload3" style="width: 0px;height: 0px;overflow: hidden;">
+                  </label>
                 </div>
-
-
+              </div>
             </div>
 
 
@@ -139,13 +137,34 @@ require './controllers/controller.php';
     <?php }
               require 'views/footer.php'; ?>
 
-    <script type="text/javascript" src="/assets/js/scriptPubli.js"></script>
 
     </div>
 
 
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <?php
+
+    //après avoir modifié l'annonce tu lances le message de confirmation et au clic sur ok tu renvoi sur la page de mes publications
+    if (isset($_POST['validModification'])) { ?>
+
+      <script>
+        Swal.fire({
+          title: "Annonce modifiée !",
+          text: "Votre annonce a bien été modifiée",
+          icon: "success",
+          confirmButtonColor: '#000'
+        }).then(function() {
+          window.location = "mespublications.php";
+        });
+      </script>
+
+
+
+    <?php } ?>
 
 </body>
 

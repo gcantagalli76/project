@@ -2,8 +2,6 @@ A faire pour la prochaine fois :
 
 2 - Il faudra sûrement créer un JS spécial pour cette page car il faut cliquer dans chaque case pour faire apparaitre le bouton valider
 
-3 - Modal de confirmation sur les ajout d'annonce, modif d'annonce et suppression. Puis, sur les ajouts en favoris et suppression
-
 4 - Crypter les mots de pass
 
 5 - faire en sorte que nous ne puissions pas mettre 2 fois le même article dans les favoris
@@ -12,7 +10,8 @@ A faire pour la prochaine fois :
 
 7 - Faire la partie admin
 
-8 - Voir pour régler le problème sur les images trop grandes supérieures à 1Mo environ
+8 - Supprimer de la table des favoris les annonces qui ont été supprimés par les Users
+
 
 
 

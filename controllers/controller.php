@@ -161,20 +161,20 @@ if (isset($_POST['idArticleConsult']) || isset($_GET['idarticle'])) {
 }
 
 // Si tu clics sur le coeur pour mettre dans les favoris tu lance la fonction qui rajoute l'article dans les favoris de l'utilisateur
-if (isset($_GET['idfavorite'])) {
+if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
   $articleObj->addFavouriteArticle();
   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
   $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
 }
 
 // Si dans l'annonce tu clics sur pour mettre dans les favoris tu lance la fonction qui rajoute l'article dans les favoris de l'utilisateur
-if (isset($_POST['addFavorite'])) {
+if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
   $articleObj->addFavouriteArticle();
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
 }
 
 // Si tu clics sur mesfavoris alors tu lances la fonction permettant d'afficher les favoris de l'utilisateur connecté
-if (isset($_POST['myFavorite'])) {
+if (isset($_POST['myFavorite']) && isset($_SESSION['email'])) {
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
 }
 
@@ -182,4 +182,5 @@ if (isset($_POST['myFavorite'])) {
 if (isset($_POST['idArticleFavoriteDelete'])) {
   $articleObj->deleteFavoriteArticle();
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
+  $deleteSuccess = true;
 }
