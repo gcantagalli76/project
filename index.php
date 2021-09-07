@@ -28,8 +28,8 @@ require './controllers/controller.php';
   <div class="row justify-content-center">
 
     <?php foreach ($display5ArticleArray as $display) { ?>
-      <form class="col-md-2 d-flex justify-content-center" method="POST" action="Annonce.php">
-        <button class="card" style="width: 14rem" type="submit" name="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
+      <form class="col-md-2 d-flex justify-content-center" method="GET" action="Annonce.php">
+        <button class="card" style="width: 14rem" name="idArticleConsult" id="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
           <img src="data:image/png;base64, <?= $display['picture1'] ?>" class="card-img-top" alt="picture1">
           <div class="card-body">
             <h5 class="card-title"><?= $display['ARTICLE_TITLE'] ?></h5>
@@ -43,12 +43,12 @@ require './controllers/controller.php';
                 <a><?= $display['ARTICLE_CITY'] ?></a>
               </div>
               <div class="col-md-2">
-                  <a class="btn bi bi-heart" type="submit" alt="heart" width="20px" href="index.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>&amp;category_id=<?php echo $display['CATEGORY_ID'] ?>"> </a>
-                </div>
+                <a class="btn bi bi-heart" type="submit" alt="heart" width="20px" href="index.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>&amp;category_id=<?php echo $display['CATEGORY_ID'] ?>"> </a>
+              </div>
             </div>
           </div>
         </button>
-    </form>
+      </form>
 
     <?php } ?>
 
@@ -155,25 +155,25 @@ require './controllers/controller.php';
 //après avoir validé le coeur tu confirmes que l'annonce a bien été ajoutée aux favoris si l'utilisateur à bien une sessions d'ouverte
 if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) { ?>
 
-    <script>
-        Swal.fire({
-            title: "Annonce ajoutée à vos favoris !",
-            text: "Votre annonce a bien été rajoutée dans vos annonces favorites",
-            icon: "success",
-            confirmButtonColor: '#000'
-        })
-    </script>
-<?php } elseif (isset($_GET['idfavorite']) && !isset($_SESSION['email'])) {?>
   <script>
-  Swal.fire({
-            title: "Veuillez vous connecter !",
-            text: "Vous devez vous connecter ou créer un compte pour rajouter un article dans vos favoris",
-            icon: 'error',
-            confirmButtonColor: '#000'
-        }).then(function() {
-            window.location = "connection.php";
-        });
-</script>
+    Swal.fire({
+      title: "<?= $titleSweet ?>",
+      text: "<?= $textSweet ?>",
+      icon: "<?= $iconSweet ?>",
+      confirmButtonColor: '#000'
+    })
+  </script>
+<?php } elseif (isset($_GET['idfavorite']) && !isset($_SESSION['email'])) { ?>
+  <script>
+    Swal.fire({
+      title: "Veuillez vous connecter !",
+      text: "Vous devez vous connecter ou créer un compte pour rajouter un article dans vos favoris",
+      icon: 'error',
+      confirmButtonColor: '#000'
+    }).then(function() {
+      window.location = "connection.php";
+    });
+  </script>
 <?php } ?>
 
 

@@ -156,22 +156,57 @@ if (!isset($displayCategoryArticleArray[0]['CATEGORY_NAME'])) {
 }
 
 // Si tu clics sur un article dans la catégorie ou dans tes favoris alors tu lance la fonction qui affiche les détails de cet article dans annonce.php
-if (isset($_POST['idArticleConsult']) || isset($_GET['idarticle'])) {
+if (isset($_GET['idArticleConsult']) || isset($_GET['idarticle'])) {
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
 }
 
-// Si tu clics sur le coeur pour mettre dans les favoris tu lance la fonction qui rajoute l'article dans les favoris de l'utilisateur
+// Si tu clics sur le coeur pour mettre dans les favoris tu lances la fonction qui rajoute l'article dans les favoris de l'utilisateur
+// if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
+//   $articleObj->addFavouriteArticle();
+//   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
+//   $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
+// }
+
+
 if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
-  $articleObj->addFavouriteArticle();
   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
-  $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
+  if ($articleObj->verifyArticleFavorite($_SESSION['userId'],$_GET['idfavorite'])) {
+    $titleSweet = "Annonce déjà enregistrée";
+    $textSweet = "Cette annonce est déjà existante dans vos favoris";
+    $iconSweet = "error";
+  }else {
+    $articleObj->addFavouriteArticle();
+    $displayCategoryArticleArray = $articleObj->displayArticleCategory();
+    $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
+    $titleSweet = "Annonce ajoutée à vos favoris !";
+    $textSweet = "Votre annonce a bien été rajoutée dans vos annonces favorites";
+    $iconSweet = "success";
+  }
 }
 
 // Si dans l'annonce tu clics sur pour mettre dans les favoris tu lance la fonction qui rajoute l'article dans les favoris de l'utilisateur
+
 if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
-  $articleObj->addFavouriteArticle();
-  $displayDetailsArticleArray = $articleObj->displayArticleDetails();
+  $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
+  if ($articleObj->verifyArticleFavorite($_SESSION['userId'],$_POST['addFavorite'])) {
+    $titleSweet = "Annonce déjà enregistrée";
+    $textSweet = "Cette annonce est déjà existante dans vos favoris";
+    $iconSweet = "error";
+  }else {
+    $articleObj->addFavouriteArticle();
+    $displayDetailsArticleArray = $articleObj->displayArticleDetails();
+    $titleSweet = "Annonce ajoutée à vos favoris !";
+    $textSweet = "Votre annonce a bien été rajoutée dans vos annonces favorites";
+    $iconSweet = "success";
+  }
+
 }
+
+
+
+
+
+
 
 // Si tu clics sur mesfavoris alors tu lances la fonction permettant d'afficher les favoris de l'utilisateur connecté
 if (isset($_POST['myFavorite']) && isset($_SESSION['email'])) {

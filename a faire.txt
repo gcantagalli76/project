@@ -4,8 +4,6 @@ A faire pour la prochaine fois :
 
 4 - Crypter les mots de pass
 
-5 - faire en sorte que nous ne puissions pas mettre 2 fois le même article dans les favoris
-
 6 - faire en sorte de ne pas pouvoir créer un compte si l'adresse email existe déjà
 
 7 - Faire la partie admin

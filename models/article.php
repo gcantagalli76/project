@@ -62,7 +62,7 @@ class Article extends Database
     public function displayArticleDetails()
     {
         $database = $this->connectDatabase();
-        $articleId = $_POST['idArticleConsult'] ?? $_GET['idarticle'] ?? $_POST['addFavorite'];
+        $articleId = $_GET['idArticleConsult'] ?? $_GET['idarticle'] ?? $_POST['addFavorite'];
         $myQuery = "SELECT A.*, 
                            DATE_FORMAT(`article_purchasedate`, '%d/%m/%Y') as ARTICLE_PURCHASEDATE,
                            B.CONDITION_NAME
@@ -153,7 +153,7 @@ class Article extends Database
         $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
         $myQuery = 'INSERT INTO articlefavorite(article_title,article_price,article_description,article_quantity,article_purchasedate,article_give,category_id,condition_id,user_id,ARTICLE_ID)
-                SELECT article_title,article_price,article_description,article_quantity,article_purchasedate,article_give,category_id,condition_id, :userId as user_id, ARTICLE_ID FROM `article` where ARTICLE_ID = :articleId';
+                    SELECT article_title,article_price,article_description,article_quantity,article_purchasedate,article_give,category_id,condition_id, :userId as user_id, ARTICLE_ID FROM `article` where ARTICLE_ID = :articleId';
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
@@ -173,6 +173,22 @@ class Article extends Database
         $fetch = $queryArticle->fetchAll();
         return $fetch;
     }
+
+     //fonction permettant d'afficher les articles favoris de l'utilisateur connecté
+     public function verifyArticleFavorite($userId,$articleId)
+     {
+         $database = $this->connectDatabase();
+         $myQuery = "SELECT * FROM `articlefavorite` where USER_ID = :userId and ARTICLE_ID = :articleId";
+         $queryArticle = $database->prepare($myQuery);
+         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+         $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
+         $queryArticle->execute();
+         $fetch = $queryArticle->fetch();
+         return $fetch;
+     }
+
+
+
 
     // fonction permettant de supprimer un article
     public function deleteFavoriteArticle()

@@ -97,9 +97,9 @@ if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) { ?>
 
     <script>
         Swal.fire({
-            title: "Annonce ajoutée à vos favoris !",
-            text: "Votre annonce a bien été rajoutée dans vos annonces favorites",
-            icon: "success",
+            title: "<?= $titleSweet ?>",
+            text: "<?= $textSweet ?>",
+            icon: "<?= $iconSweet ?>",
             confirmButtonColor: '#000'
         })
     </script>

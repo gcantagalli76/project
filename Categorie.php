@@ -16,8 +16,8 @@ require './controllers/controller.php';
     <div class="row justify-content-start">
 
       <?php foreach ($displayCategoryArticleArray as $display) { ?>
-        <form class="col-md-2 p-4" method="POST" action="Annonce.php">
-          <button class="card" style="width: 14rem" type="submit" name="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
+        <form class="col-md-2 p-4" method="GET" action="Annonce.php">
+          <button class="card" style="width: 14rem" name="idArticleConsult" id="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
             <img src="data:image/png;base64, <?= $display['picture1'] ?>" alt="picture1" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title"><?= $display['ARTICLE_TITLE'] ?></h5>
@@ -56,9 +56,9 @@ if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) { ?>
 
     <script>
         Swal.fire({
-            title: "Annonce ajoutée à vos favoris !",
-            text: "Votre annonce a bien été rajoutée dans vos annonces favorites",
-            icon: "success",
+          title: "<?= $titleSweet ?>",
+            text: "<?= $textSweet ?>",
+            icon: "<?= $iconSweet ?>",
             confirmButtonColor: '#000'
         })
     </script>
