@@ -85,7 +85,6 @@ require './controllers/controller.php';
 
 
             <div class="col-sm-5 mt-3">
-
               <div class="row">
                 <label class="form-label mt-2 d-flex justify-content-center"> Ajoutez vos photos :</label>
               </div>
@@ -144,27 +143,27 @@ require './controllers/controller.php';
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<?php
+    <?php
 
-//après avoir validé l'annonce tu lances le message de confirmation et au clic sur ok tu renvoi sur la page de mes publications
-if (isset($_POST['validPublication'])) { ?>
+    //après avoir validé l'annonce tu lances le message de confirmation et au clic sur ok tu renvoi sur la page de mes publications
+    if (isset($_POST['validPublication'])) { ?>
 
-    <script>
+      <script>
         Swal.fire({
-            title: "Annonce ajoutée !",
-            text: "Votre annonce a bien été rajoutée à la liste des annonces",
-            icon: "success",
-            confirmButtonColor: '#000'
+          title: "Annonce ajoutée !",
+          text: "Votre annonce a bien été rajoutée à la liste des annonces",
+          icon: "success",
+          confirmButtonColor: '#000'
         }).then(function() {
-            window.location = "mespublications.php";
+          window.location = "mespublications.php";
         });
-    </script>
+      </script>
 
 
 
-<?php } ?>
+    <?php } ?>
 
 </body>
 

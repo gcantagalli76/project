@@ -18,7 +18,7 @@ require './controllers/controller.php';
       <?php foreach ($displayCategoryArticleArray as $display) { ?>
         <form class="col-md-2 p-4" method="GET" action="Annonce.php">
           <button class="card" style="width: 14rem" name="idArticleConsult" id="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
-            <img src="data:image/png;base64, <?= $display['picture1'] ?>" alt="picture1" class="card-img-top">
+            <img src="data:image/png;base64, <?= $display['picture1'] ?>" alt="picture1" class="card-img-top imagePreview">
             <div class="card-body">
               <h5 class="card-title"><?= $display['ARTICLE_TITLE'] ?></h5>
               <p class="card-text"><?= $display['ARTICLE_DESCRIPTION'] ?></p>

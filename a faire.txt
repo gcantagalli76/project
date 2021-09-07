@@ -1,12 +1,10 @@
 A faire pour la prochaine fois :
 
-2 - Il faudra sûrement créer un JS spécial pour cette page car il faut cliquer dans chaque case pour faire apparaitre le bouton valider
+2 - Faire les regex sous php à la place de js
 
-4 - Crypter les mots de pass
+3 - Faire la partie admin
 
-7 - Faire la partie admin
-
-10 - Faire les regex sous php à la place de js
+4 - Faire en sorte que l'utilisateur puisse modifier ses données perso
 
 
 

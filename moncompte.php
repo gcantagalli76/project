@@ -84,6 +84,28 @@ require './controllers/controller.php';
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php
+
+//après avoir cliqué sur le bouton déconnecté tu lances le message de confirmation et au clic sur ok tu renvoi sur la page d'accueil
+if (isset($_POST['disconnect'])) { ?>
+
+  <script>
+    Swal.fire({
+      title: "Deconnection !",
+      text: "Vous avez bien été déconnecté de votre compte personnel",
+      icon: "success",
+      confirmButtonColor: '#000'
+    }).then(function() {
+      window.location = "index.php";
+    });
+  </script>
+
+
+
+<?php } ?>
+
 </body>
 
 </html>

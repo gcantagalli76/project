@@ -6,14 +6,14 @@ class User extends Database
 {
 
     // je créé une fonction qui récupère les champs remplis sur le formulaire et qui les insert dans la bdd via sql après connection à la bdd
-    public function addUser()
+    public function addUser($yourPassword)
     {
         $name = $_POST["yourName"];
         $firstname = $_POST["yourFirstName"];
         $mail = $_POST["yourEmail"];
         $city = $_POST["yourCity"];
         $postalcode = $_POST["yourPostalCode"];
-        $yourpassword = $_POST["yourPassword"];
+        // $yourpassword = $_POST["yourPassword"];
         $database = $this->connectDatabase();
         $myQuery = 'INSERT INTO _user(user_firstname, user_lastname, user_email, user_city, user_zipcode, user_password, status_id) 
             VALUES( :firstname, :lastname, :email, :city, :postalcode, :password, 2)';
@@ -23,7 +23,7 @@ class User extends Database
         $queryUser->bindValue(':email', $mail, PDO::PARAM_STR);
         $queryUser->bindValue(':city', $city, PDO::PARAM_STR);
         $queryUser->bindValue(':postalcode', $postalcode, PDO::PARAM_STR);
-        $queryUser->bindValue(':password', $yourpassword, PDO::PARAM_STR);
+        $queryUser->bindValue(':password', $yourPassword, PDO::PARAM_STR_CHAR);
         $execute = $queryUser->execute();
         return $execute;
     }
@@ -44,12 +44,12 @@ class User extends Database
     public function connectionUser()
     {
         $mail = $_POST["yourEmail"];
-        $yourpassword = $_POST["yourPassword"];
+        // $yourpassword = $_POST["yourPassword"];
         $database = $this->connectDatabase();
-        $myQuery = "SELECT * FROM `_user` where USER_EMAIL = :email and USER_PASSWORD = :password";
+        $myQuery = "SELECT * FROM `_user` where USER_EMAIL = :email";
         $queryUser = $database->prepare($myQuery);
         $queryUser->bindValue(':email', $mail, PDO::PARAM_STR);
-        $queryUser->bindValue(':password', $yourpassword, PDO::PARAM_STR);
+        // $queryUser->bindValue(':password', $yourPassword, PDO::PARAM_STR);
         $queryUser->execute();
         $fetch = $queryUser->fetch();
         return $fetch;

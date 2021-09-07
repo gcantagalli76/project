@@ -20,17 +20,17 @@ if (isset($_POST['myButton']) && $userObj->displayEmail($_POST['yourEmail'])) {
   $textSweet = "Cette adresse email existe déjà, veuillez en entrer une autre";
   $iconSweet = "error";
 } elseif (isset($_POST['myButton'])) {
-  $addUserArray = $userObj->addUser();
+  $yourPassword = password_hash($_POST['yourPassword'], PASSWORD_DEFAULT);
+  $addUserArray = $userObj->addUser($yourPassword);
   $_SESSION['email'] = $_POST["yourEmail"];
   $titleSweet = "Demande validée !";
   $textSweet = "Votre compte a bien été créé";
   $iconSweet = "success";
 }
 
-// si tu clics sur le bouton deconnecter cela supprimera la session et te renverra sur la page d'accueuil
+// si tu clics sur le bouton deconnecter cela supprimera la session
 if (isset($_POST['disconnect'])) {
   session_destroy();
-  header("location: index.php");
 }
 
 // si tu as une session en cours avec un email alors tu peux afficher les données de l'utilisateur sur son compte et créer une session avec son id
@@ -46,7 +46,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['userId']) && isset($_POST['myA
 } else {
   if (isset($_POST['connectButton'])) {
     $connectionUserArray = $userObj->connectionUser();
-    if ($_POST['yourEmail'] == $connectionUserArray['USER_EMAIL'] && $_POST['yourPassword'] == $connectionUserArray['USER_PASSWORD']) {
+    if ($_POST['yourEmail'] == $connectionUserArray['USER_EMAIL'] && password_verify($_POST["yourPassword"], $connectionUserArray['USER_PASSWORD'])) {
       header("Location: moncompte.php");
       $_SESSION['email'] = $_POST["yourEmail"];
       $_SESSION['userId'] = $connectionUserArray['USER_ID'];
@@ -96,7 +96,7 @@ if (!isset($_SESSION['email']) && isset($_POST['newPublication'])) {
 // si il n'y a pas d'email dans la session alors tu renvois l'utilisateur direct sur la page de connection sinon tu lances le reste
 if (!isset($_SESSION['email']) && isset($_POST['myPublications'])) {
   header("Location: connection.php");
-} else if (isset($_SESSION['email'])) {
+} else if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
   // tu lances la fonction permettant d'afficher les produits liés à l'utilisateur connecté
   $displayUserArticleArray = $articleObj->articleUser();
 }

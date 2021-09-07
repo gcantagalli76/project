@@ -30,7 +30,7 @@ require './controllers/controller.php';
     <?php foreach ($display5ArticleArray as $display) { ?>
       <form class="col-md-2 d-flex justify-content-center" method="GET" action="Annonce.php">
         <button class="card" style="width: 14rem" name="idArticleConsult" id="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
-          <img src="data:image/png;base64, <?= $display['picture1'] ?>" class="card-img-top" alt="picture1">
+          <img src="data:image/png;base64, <?= $display['picture1'] ?>" class="card-img-top imagePreview" alt="picture1">
           <div class="card-body">
             <h5 class="card-title"><?= $display['ARTICLE_TITLE'] ?></h5>
             <p class="card-text"><?= $display['ARTICLE_DESCRIPTION'] ?></p>
