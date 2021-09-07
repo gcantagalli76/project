@@ -90,7 +90,7 @@ class Article extends Database
 
 
     // fonction permettant de modifier l'article
-    public function modifyArticle()
+    public function modifyArticle($picture1,$picture2,$picture3)
     {
         $database = $this->connectDatabase();
         $title = $_POST["yourTitle"];
@@ -102,7 +102,8 @@ class Article extends Database
         $description = $_POST["yourDescription"];
         $idarticle = $_POST['idArticleModify'];
         $myQuery = "UPDATE `article` SET ARTICLE_TITLE = :title, ARTICLE_QUANTITY = :quantity, ARTICLE_PURCHASEDATE = :buyDate, ARTICLE_PRICE = :price,
-        ARTICLE_GIVE = 0, ARTICLE_DESCRIPTION = :description, CATEGORY_ID = :category, CONDITION_ID = :state where ARTICLE_ID = :articleId";
+                    ARTICLE_GIVE = 0, ARTICLE_DESCRIPTION = :description, CATEGORY_ID = :category, CONDITION_ID = :state, picture1 = :picture1, 
+                    picture2 = :picture2, picture3 = :picture3 where ARTICLE_ID = :articleId";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':title', $title, PDO::PARAM_STR);
         $queryArticle->bindValue(':quantity', $quantity, PDO::PARAM_INT);
@@ -112,6 +113,9 @@ class Article extends Database
         $queryArticle->bindValue(':category', $category, PDO::PARAM_INT);
         $queryArticle->bindValue(':state', $state, PDO::PARAM_INT);
         $queryArticle->bindValue(':articleId', $idarticle, PDO::PARAM_INT);
+        $queryArticle->bindValue(':picture1', $picture1, PDO::PARAM_STR_CHAR);
+        $queryArticle->bindValue(':picture2', $picture2, PDO::PARAM_STR_CHAR);
+        $queryArticle->bindValue(':picture3', $picture3, PDO::PARAM_STR_CHAR);
         $execute = $queryArticle->execute();
         return $execute;
     }

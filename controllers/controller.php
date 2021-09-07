@@ -112,37 +112,46 @@ if (isset($_POST['idArticleModify'])) {
 // lors du clic pour valider la modif tu lances la fonction qui modifie en base les données de l'article concerné et tu affiche de nouveau l'article
 if (isset($_POST['validModification'])) {
 
-  //changement de l'image1 au format base64 pour import dans la bdd
-  // $img_file = $_FILES['fileToUpload']['tmp_name'];
-  // $type = pathinfo($img_file, PATHINFO_EXTENSION);
-  // // Load file contents into variable
-  // $bin = file_get_contents($img_file);
-  // // Encode contents to Base64
-  // $picture1 = base64_encode($bin);
+  if (empty($_FILES['fileToUpload']['tmp_name'])) {
+    $picture1 = $displayArticleToModifArray[0]['picture1'];
+  } else if (!empty($_FILES['fileToUpload']['tmp_name'])) {
+    //changement de l'image1 au format base64 pour import dans la bdd
+    $img_file = $_FILES['fileToUpload']['tmp_name'];
+    $type = pathinfo($img_file, PATHINFO_EXTENSION);
+    // Load file contents into variable
+    $bin = file_get_contents($img_file);
+    // Encode contents to Base64
+    $picture1 = base64_encode($bin);
+  }
+  if (empty($_FILES['fileToUpload2']['tmp_name'])) {
+    $picture2 = $displayArticleToModifArray[0]['picture2'];
+  } else if (!empty($_FILES['fileToUpload2']['tmp_name'])) {
+    //changement de l'image2 au format base64 pour import dans la bdd
+    $img_file2 = $_FILES['fileToUpload2']['tmp_name'];
+    $type2 = pathinfo($img_file2, PATHINFO_EXTENSION);
+    // Load file contents into variable
+    $bin2 = file_get_contents($img_file2);
+    // Encode contents to Base64
+    $picture2 = base64_encode($bin2);
+  }
+  if (empty($_FILES['fileToUpload3']['tmp_name'])) {
+    $picture3 = $displayArticleToModifArray[0]['picture3'];
+  } else if (!empty($_FILES['fileToUpload3']['tmp_name'])) {
+    //changement de l'image3 au format base64 pour import dans la bdd
+    $img_file3 = $_FILES['fileToUpload3']['tmp_name'];
+    $type3 = pathinfo($img_file3, PATHINFO_EXTENSION);
+    // Load file contents into variable
+    $bin3 = file_get_contents($img_file3);
+    // Encode contents to Base64
+    $picture3 = base64_encode($bin3);
+  }
 
-  // //changement de l'image2 au format base64 pour import dans la bdd
-  // $img_file2 = $_FILES['fileToUpload2']['tmp_name'];
-  // $type2 = pathinfo($img_file2, PATHINFO_EXTENSION);
-  // // Load file contents into variable
-  // $bin2 = file_get_contents($img_file2);
-  // // Encode contents to Base64
-  // $picture2 = base64_encode($bin2);
-
-  // //changement de l'image3 au format base64 pour import dans la bdd
-  // $img_file3 = $_FILES['fileToUpload3']['tmp_name'];
-  // $type3 = pathinfo($img_file3, PATHINFO_EXTENSION);
-  // // Load file contents into variable
-  // $bin3 = file_get_contents($img_file3);
-  // // Encode contents to Base64
-  // $picture3 = base64_encode($bin3);
-
-  $articleObj->modifyArticle();
+  $articleObj->modifyArticle($picture1, $picture2, $picture3);
   $displayArticleToModifArray = $articleObj->displayArticleB4Modif();
 }
 
 // lors du clic pour supprimer un article tu lances la fonction qui supprime en base les données de l'article concerné
 if (isset($_POST['idArticleDelete'])) {
-
   $articleObj->deleteArticle();
   $displayUserArticleArray = $articleObj->articleUser();
   $deleteSuccess = true;
@@ -168,11 +177,11 @@ if (isset($_GET['idArticleConsult']) || isset($_GET['idarticle'])) {
 // Si tu clics sur le coeur pour mettre dans les favoris tu lances la fonction qui rajoute l'article dans les favoris de l'utilisateur
 if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
-  if ($articleObj->verifyArticleFavorite($_SESSION['userId'],$_GET['idfavorite'])) {
+  if ($articleObj->verifyArticleFavorite($_SESSION['userId'], $_GET['idfavorite'])) {
     $titleSweet = "Annonce déjà enregistrée";
     $textSweet = "Cette annonce est déjà existante dans vos favoris";
     $iconSweet = "error";
-  }else {
+  } else {
     $articleObj->addFavouriteArticle();
     $displayCategoryArticleArray = $articleObj->displayArticleCategory();
     $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
@@ -186,25 +195,18 @@ if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
 
 if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
-  if ($articleObj->verifyArticleFavorite($_SESSION['userId'],$_POST['addFavorite'])) {
+  if ($articleObj->verifyArticleFavorite($_SESSION['userId'], $_POST['addFavorite'])) {
     $titleSweet = "Annonce déjà enregistrée";
     $textSweet = "Cette annonce est déjà existante dans vos favoris";
     $iconSweet = "error";
-  }else {
+  } else {
     $articleObj->addFavouriteArticle();
     $displayDetailsArticleArray = $articleObj->displayArticleDetails();
     $titleSweet = "Annonce ajoutée à vos favoris !";
     $textSweet = "Votre annonce a bien été rajoutée dans vos annonces favorites";
     $iconSweet = "success";
   }
-
 }
-
-
-
-
-
-
 
 // Si tu clics sur mesfavoris alors tu lances la fonction permettant d'afficher les favoris de l'utilisateur connecté
 if (isset($_POST['myFavorite']) && isset($_SESSION['email'])) {

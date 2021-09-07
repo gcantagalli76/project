@@ -6,7 +6,7 @@ A faire pour la prochaine fois :
 
 7 - Faire la partie admin
 
-9 - Faire en sorte d'afficher les previews des images sur les modifs des annonces
+10 - Faire les regex sous php à la place de js
 
 
 

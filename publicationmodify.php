@@ -91,7 +91,7 @@ require './controllers/controller.php';
               </div>
               <div class="row justify-content-center">
                 <div class="col-sm-5 imgUp">
-                  <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview"></div>
+                  <div class="imagePreview"><img src="data:image/png;base64, <?= $displayB4Modif['picture1'] ?>" alt="picture1" class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview"></div>
                   <label class="btn btn-primary">
                     Upload<input type="file" class="uploadFile img" value="Upload Photo1" id="fileToUpload" name="fileToUpload" style="width: 0px;height: 0px;overflow: hidden;">
                   </label>
@@ -100,7 +100,7 @@ require './controllers/controller.php';
 
               <div class="row justify-content-center">
                 <div class="col-sm-5 imgUp">
-                  <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview2"></div>
+                  <div class="imagePreview"><img src="data:image/png;base64, <?= $displayB4Modif['picture2'] ?>" alt="picture2" class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview2"></div>
                   <label class="btn btn-primary">
                     Upload<input type="file" class="uploadFile img" value="Upload Photo2" id="fileToUpload2" name="fileToUpload2" style="width: 0px;height: 0px;overflow: hidden;">
                   </label>
@@ -109,7 +109,7 @@ require './controllers/controller.php';
 
               <div class="row justify-content-center">
                 <div class="col-sm-5 imgUp">
-                  <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview3"></div>
+                  <div class="imagePreview"><img src="data:image/png;base64, <?= $displayB4Modif['picture3'] ?>" alt="picture3" class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview3"></div>
                   <label class="btn btn-primary">
                     Upload<input type="file" class="uploadFile img" value="Upload Photo3" id="fileToUpload3" name="fileToUpload3" style="width: 0px;height: 0px;overflow: hidden;">
                   </label>
@@ -132,7 +132,7 @@ require './controllers/controller.php';
 
 
 
-      <script type="text/javascript" src="/assets/js/scriptPubli.js"></script>
+      <script type="text/javascript" src="/assets/js/scriptPubliModify.js"></script>
 
     <?php }
               require 'views/footer.php'; ?>
