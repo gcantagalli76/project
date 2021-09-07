@@ -16,7 +16,7 @@ require './controllers/controller.php';
         <div class="row g-0">
 
           <a class="col-md-2 d-flex align-items-center justify-content-center btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">
-            <img src="/assets/img/peinture.jpg" alt="paint" width="150px" style="max-height: 150px;">
+            <img src="data:image/png;base64, <?= $display['picture1'] ?>" alt="picture1" width="150px" style="max-height: 150px;">
           </a>
 
           <a class="col-md-3 btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">

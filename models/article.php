@@ -121,7 +121,8 @@ class Article extends Database
     {
         $database = $this->connectDatabase();
         $idarticle = $_POST['idArticleDelete'];
-        $myQuery = "DELETE FROM `article` where ARTICLE_ID = :id";
+        $myQuery = "DELETE FROM `article` where ARTICLE_ID = :id;
+                    DELETE FROM `articlefavorite` where ARTICLE_ID = :id";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':id', $idarticle, PDO::PARAM_INT);
         $execute = $queryArticle->execute();
@@ -166,7 +167,12 @@ class Article extends Database
     {
         $database = $this->connectDatabase();
         $userId = $_SESSION["userId"];
-        $myQuery = "SELECT * FROM `articlefavorite` where USER_ID = :userId;";
+        $myQuery = "SELECT A.*,
+                           B.picture1,
+                           B.picture2,
+                           B.picture3
+                    FROM `articlefavorite` as A left join article as B on A.ARTICLE_ID = B.ARTICLE_ID
+                    WHERE A.USER_ID = :userId;";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
         $queryArticle->execute();
@@ -174,7 +180,7 @@ class Article extends Database
         return $fetch;
     }
 
-     //fonction permettant d'afficher les articles favoris de l'utilisateur connecté
+     //fonction permettant d'afficher les articles favoris de l'utilisateur connecté et d'éviter qu'il ne mette 2 fois le même en favoris
      public function verifyArticleFavorite($userId,$articleId)
      {
          $database = $this->connectDatabase();
@@ -186,7 +192,6 @@ class Article extends Database
          $fetch = $queryArticle->fetch();
          return $fetch;
      }
-
 
 
 

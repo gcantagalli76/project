@@ -4,11 +4,9 @@ A faire pour la prochaine fois :
 
 4 - Crypter les mots de pass
 
-6 - faire en sorte de ne pas pouvoir créer un compte si l'adresse email existe déjà
-
 7 - Faire la partie admin
 
-8 - Supprimer de la table des favoris les annonces qui ont été supprimés par les Users
+9 - Faire en sorte d'afficher les previews des images sur les modifs des annonces
 
 
 

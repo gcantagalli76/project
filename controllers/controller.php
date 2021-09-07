@@ -16,10 +16,15 @@ if (!isset($_SESSION)) {
 
 // en cliquant sur le bouton qui valide l'ajout d'un compte, tu lances la fonction qui ajoute un utilisateur et tu enregistres son email en session puis tu renvois sur la page moncompte.php
 if (isset($_POST['myButton']) && $userObj->displayEmail($_POST['yourEmail'])) {
-  var_dump('Adresse email déjà utilisée');
+  $titleSweet = "Adresse email déjà existante";
+  $textSweet = "Cette adresse email existe déjà, veuillez en entrer une autre";
+  $iconSweet = "error";
 } elseif (isset($_POST['myButton'])) {
   $addUserArray = $userObj->addUser();
   $_SESSION['email'] = $_POST["yourEmail"];
+  $titleSweet = "Demande validée !";
+  $textSweet = "Votre compte a bien été créé";
+  $iconSweet = "success";
 }
 
 // si tu clics sur le bouton deconnecter cela supprimera la session et te renverra sur la page d'accueuil
@@ -161,13 +166,6 @@ if (isset($_GET['idArticleConsult']) || isset($_GET['idarticle'])) {
 }
 
 // Si tu clics sur le coeur pour mettre dans les favoris tu lances la fonction qui rajoute l'article dans les favoris de l'utilisateur
-// if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
-//   $articleObj->addFavouriteArticle();
-//   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
-//   $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
-// }
-
-
 if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
   if ($articleObj->verifyArticleFavorite($_SESSION['userId'],$_GET['idfavorite'])) {
