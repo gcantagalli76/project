@@ -13,8 +13,10 @@
     function Verify(params) {
       if (!params.includes(0)) {
         button.disabled = false
+        buttonInformation.hidden = true
       } else {
         button.disabled = true
+        buttonInformation.hidden = false
       }
     }
 

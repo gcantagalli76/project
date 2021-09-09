@@ -6,11 +6,84 @@ require './models/article.php';
 $userObj = new User();
 $articleObj = new Article();
 $deleteSuccess = 0;
+$swalRedirection = 0;
 
 // si il n'y a pas de session d'ouverte tu peux ouvrir une session
 if (!isset($_SESSION)) {
   session_start();
 }
+
+//regex User
+
+$error = 0;
+$regexName = "/^([a-zA-Z ]+)$/";
+$regexEmail = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
+$regexCity = "/^([a-zA-Z ]+)$/";
+$regexPostal = "/^[0-9]{1,10}$/";
+$regexPassword = "/^([a-zA-Z ]+)$/";
+
+
+if (isset($_POST['myButton'])) {
+  if (!preg_match($regexName, $_POST['yourName'])) {
+    $error = 1;
+  }
+  if (!preg_match($regexName, $_POST['yourFirstName'])) {
+    $error = 1;
+  }
+  if (!preg_match($regexEmail, $_POST['yourEmail'])) {
+    $error = 1;
+  }
+  if (!preg_match($regexCity, $_POST['yourCity'])) {
+    $error = 1;
+  }
+  if (!preg_match($regexPostal, $_POST['yourPostalCode'])) {
+    $error = 1;
+  }
+  if (!preg_match($regexPassword, $_POST['yourPassword'])) {
+    $error = 1;
+  }
+  if (!preg_match($regexPassword, $_POST['yourConfirmPassword'])) {
+    $error = 1;
+  }
+}
+
+// Verification que les champs publications sont bien tous remplis que ce soit en publication ou en modification
+
+$emptyPublication = 0;
+
+if (isset($_POST['validPublication']) || isset($_POST['validModification'])) {
+  if (empty($_POST['yourTitle']) || strlen($_POST['yourTitle']) > 40) {
+    $emptyPublication = 1;
+  }
+  if (empty($_POST['yourCategory'])) {
+    $emptyPublication = 1;
+  }
+  if (empty($_POST['yourState'])) {
+    $emptyPublication = 1;
+  }
+  if (empty($_POST['yourQuantity'])) {
+    $emptyPublication = 1;
+  }
+  if (empty($_POST['yourBuyDate'])) {
+    $emptyPublication = 1;
+  }
+  if (empty($_POST['yourPrice']) || strlen($_POST['yourPrice']) > 5) {
+    $emptyPublication = 1;
+  }
+  if (empty($_POST['yourDescription']) || strlen($_POST['yourDescription']) > 170) {
+    $emptyPublication = 1;
+  }
+  if (empty($_FILES['fileToUpload'])) {
+    $emptyPublication = 1;
+  }
+  if (empty($_FILES['fileToUpload2'])) {
+    $emptyPublication = 1;
+  }
+  if (empty($_FILES['fileToUpload3'])) {
+    $emptyPublication = 1;
+  }
+}
+
 
 /////////////////////////////////////////////////////////////////////////////USER//////////////////////////////////////////////////////////////////////
 
@@ -19,13 +92,15 @@ if (isset($_POST['myButton']) && $userObj->displayEmail($_POST['yourEmail'])) {
   $titleSweet = "Adresse email déjà existante";
   $textSweet = "Cette adresse email existe déjà, veuillez en entrer une autre";
   $iconSweet = "error";
-} elseif (isset($_POST['myButton'])) {
+  $redirectionSweet = "creationcpt.php";
+} else if (isset($_POST['myButton']) && $error == 0 && $_POST['yourPassword'] == $_POST['yourConfirmPassword']) {
   $yourPassword = password_hash($_POST['yourPassword'], PASSWORD_DEFAULT);
   $addUserArray = $userObj->addUser($yourPassword);
   $_SESSION['email'] = $_POST["yourEmail"];
   $titleSweet = "Demande validée !";
   $textSweet = "Votre compte a bien été créé";
   $iconSweet = "success";
+  $redirectionSweet = "connection.php";
 }
 
 // si tu clics sur le bouton deconnecter cela supprimera la session
@@ -63,7 +138,7 @@ if (!isset($_SESSION['email']) && isset($_POST['newPublication'])) {
   header("Location: connectforpublication.php");
 } else {
   // si il valide la publication alors tu récupère les différents post et photos et lance la fonction pour rajouter l'article dans la bdd
-  if (isset($_POST['validPublication'])) {
+  if (isset($_POST['validPublication']) && $emptyPublication == 0) {
 
     //changement de l'image1 au format base64 pour import dans la bdd
     $img_file = $_FILES['fileToUpload']['tmp_name'];
@@ -110,7 +185,7 @@ if (isset($_POST['idArticleModify'])) {
 }
 
 // lors du clic pour valider la modif tu lances la fonction qui modifie en base les données de l'article concerné et tu affiche de nouveau l'article
-if (isset($_POST['validModification'])) {
+if (isset($_POST['validModification']) && $emptyPublication == 0) {
 
   if (empty($_FILES['fileToUpload']['tmp_name'])) {
     $picture1 = $displayArticleToModifArray[0]['picture1'];
@@ -145,9 +220,16 @@ if (isset($_POST['validModification'])) {
     // Encode contents to Base64
     $picture3 = base64_encode($bin3);
   }
-
+  $titleSweet = "Annonce modifiée !";
+  $textSweet = "Votre annonce a bien été modifiée";
+  $iconSweet = "success";
+  $swalRedirection = true;
   $articleObj->modifyArticle($picture1, $picture2, $picture3);
   $displayArticleToModifArray = $articleObj->displayArticleB4Modif();
+} elseif (isset($_POST['validModification']) && $emptyPublication > 0) {
+  $titleSweet = "Annonce erronée !";
+  $textSweet = "Veuillez remplir tous les champs ou toutes les photos";
+  $iconSweet = "error";
 }
 
 // lors du clic pour supprimer un article tu lances la fonction qui supprime en base les données de l'article concerné

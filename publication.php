@@ -68,10 +68,10 @@ require './controllers/controller.php';
                   <input type="number" class="form-control box" id="yourPrice" name="yourPrice" min="1" max="10000">
                   <span id="messageInfosTitle"></span>
                 </div>
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                   <label class="form-check-label mt-2 d-flex justify-content-start">Je donne!</label>
                   <input type="checkbox" class="form-check-input mt-2" id="youGive" name="youGive">
-                </div>
+                </div> -->
               </div>
               <div class="row mt-3">
                 <div class="col-sm-10">
@@ -124,6 +124,7 @@ require './controllers/controller.php';
               <div class="col-sm-3 d-flex justify-content-center">
                 <button type="submit" class="btn btnConnect mt-5 mb-3" id="validPublication" name="validPublication">Valider ma publication</button>
               </div>
+              <span id='buttonInformation' style="font-style: italic">Veuillez remplir tous les champs et 3 photos pour valider votre annonce</span>
             </div>
           </div>
         </form>
@@ -148,7 +149,7 @@ require './controllers/controller.php';
     <?php
 
     //après avoir validé l'annonce tu lances le message de confirmation et au clic sur ok tu renvoi sur la page de mes publications
-    if (isset($_POST['validPublication'])) { ?>
+    if (isset($_POST['validPublication']) && $emptyPublication == 0) { ?>
 
       <script>
         Swal.fire({

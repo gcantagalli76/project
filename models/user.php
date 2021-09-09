@@ -44,12 +44,10 @@ class User extends Database
     public function connectionUser()
     {
         $mail = $_POST["yourEmail"];
-        // $yourpassword = $_POST["yourPassword"];
         $database = $this->connectDatabase();
         $myQuery = "SELECT * FROM `_user` where USER_EMAIL = :email";
         $queryUser = $database->prepare($myQuery);
         $queryUser->bindValue(':email', $mail, PDO::PARAM_STR);
-        // $queryUser->bindValue(':password', $yourPassword, PDO::PARAM_STR);
         $queryUser->execute();
         $fetch = $queryUser->fetch();
         return $fetch;
@@ -71,12 +69,12 @@ class User extends Database
     //fonction permettant de créer un nouveau mdp
     public function newPwd($token)
     {
-        $newPwd = $_POST["yourPassword"];
+        $newPwd = password_hash($_POST['yourPassword'], PASSWORD_DEFAULT);
         $database = $this->connectDatabase();
         $myQuery = "UPDATE `_user` SET user_password = :newpwd where token = :token";
         $queryUser = $database->prepare($myQuery);
         $queryUser->bindValue(':token', $token, PDO::PARAM_STR);
-        $queryUser->bindValue(':newpwd', $newPwd, PDO::PARAM_STR);
+        $queryUser->bindValue(':newpwd', $newPwd, PDO::PARAM_STR_CHAR);
         $queryUser->execute();
         return $queryUser;
     }

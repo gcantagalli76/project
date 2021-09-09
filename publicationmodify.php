@@ -1,7 +1,7 @@
 <?php require 'views/header.php';
 
 require './controllers/controller.php';
-
+var_dump($_POST);
 ?>
 
 <body>
@@ -17,24 +17,24 @@ require './controllers/controller.php';
                 <div class="row">
                   <div class="col-sm-10 mt-3">
                     <label class="form-label mt-2 d-flex justify-content-start"> Titre de l'annonce :</label>
-                    <input type="text" class="form-control box" id="yourTitle" name="yourTitle" maxlength="40" value="<?= $displayB4Modif['ARTICLE_TITLE'] ?>">
+                    <input type="text" class="form-control box" id="yourTitle" name="yourTitle" maxlength="40" value="<?= isset($_POST['yourTitle']) ? $_POST['yourTitle'] : $displayB4Modif['ARTICLE_TITLE'] ?>">
                   </div>
                 </div>
                 <div class="row mt-4">
                   <div class="col-sm-5 mt-2">
                     <select class="form-select" aria-label="Default select example" id="yourCategory" name="yourCategory">
                       <option selected disabled>Catégorie :</option>
-                      <option value="1">Carrelage, parquet, sol</option>
-                      <option value="2">Peinture et droguerie</option>
-                      <option value="3">Matériaux de construction</option>
+                      <option value="1" <?= $displayB4Modif['CATEGORY_ID'] == 1 ? 'selected' : '' ?><?= isset($_POST['yourCategory']) && $_POST['yourCategory'] == 1 ? 'selected' : '' ?>>Carrelage, parquet, sol</option>
+                      <option value="2" <?= $displayB4Modif['CATEGORY_ID'] == 2 ? 'selected' : '' ?><?= isset($_POST['yourCategory']) && $_POST['yourCategory'] == 2 ? 'selected' : '' ?>>Peinture et droguerie</option>
+                      <option value="3" <?= $displayB4Modif['CATEGORY_ID'] == 3 ? 'selected' : '' ?><?= isset($_POST['yourCategory']) && $_POST['yourCategory'] == 3 ? 'selected' : '' ?>>Matériaux de construction</option>
                     </select>
                   </div>
                   <div class="col-sm-5 mt-2">
                     <select class="form-select" aria-label="Default select example" id="yourState" name="yourState">
                       <option selected disabled>Etat du produit :</option>
-                      <option value="1">Neuf</option>
-                      <option value="2">Bon état</option>
-                      <option value="3">Etat satisfaisant</option>
+                      <option value="1" <?= $displayB4Modif['CONDITION_ID'] == 1 ? 'selected' : '' ?><?= isset($_POST['yourState']) && $_POST['yourState'] == 1 ? 'selected' : '' ?>>Neuf</option>
+                      <option value="2" <?= $displayB4Modif['CONDITION_ID'] == 2 ? 'selected' : '' ?><?= isset($_POST['yourState']) && $_POST['yourState'] == 2 ? 'selected' : '' ?>>Bon état</option>
+                      <option value="3" <?= $displayB4Modif['CONDITION_ID'] == 3 ? 'selected' : '' ?><?= isset($_POST['yourState']) && $_POST['yourState'] == 3 ? 'selected' : '' ?>>Etat satisfaisant</option>
                     </select>
                   </div>
                 </div>
@@ -43,7 +43,7 @@ require './controllers/controller.php';
                 <div class="row mt-3">
                   <div class="col-sm-10">
                     <label for="customRange3" class="form-label mt-2">Quantité restante comparée au produit neuf</label>
-                    <input type="range" class=form-range mt-2 min="1" max="100" value="<?= $displayB4Modif['ARTICLE_QUANTITY'] ?>" id="yourQuantity" name="yourQuantity">
+                    <input type="range" class=form-range mt-2 min="1" max="100" value="<?= isset($_POST['yourQuantity']) ? $_POST['yourQuantity'] : $displayB4Modif['ARTICLE_QUANTITY'] ?>" id="yourQuantity" name="yourQuantity">
                   </div>
                 </div>
 
@@ -61,23 +61,23 @@ require './controllers/controller.php';
                 <div class="row mt-1">
                   <div class="col-sm-4">
                     <label class="form-label mt-2 d-flex justify-content-start"> Date d'achat :</label>
-                    <input type="date" class="form-control box" id="yourBuyDate" name="yourBuyDate" value="<?= $displayB4Modif['ARTICLE_BUYDATE'] ?>">
+                    <input type="date" class="form-control box" id="yourBuyDate" name="yourBuyDate" value="<?= isset($_POST['yourBuyDate']) ? $_POST['yourBuyDate'] : $displayB4Modif['ARTICLE_BUYDATE'] ?>">
                     <span id="messageInfosTitle"></span>
                   </div>
                   <div class="col-sm-3">
                     <label class="form-label mt-2 d-flex justify-content-start"> Prix de vente :</label>
-                    <input type="number" class="form-control box" id="yourPrice" name="yourPrice" min="1" max="10000" value="<?= $displayB4Modif['ARTICLE_PRICE'] ?>">
+                    <input type="number" class="form-control box" id="yourPrice" name="yourPrice" min="1" max="10000" value="<?= isset($_POST['yourPrice']) ? $_POST['yourPrice'] : $displayB4Modif['ARTICLE_PRICE'] ?>">
                     <span id="messageInfosTitle"></span>
                   </div>
-                  <div class="col-sm-2">
+                  <!-- <div class="col-sm-2">
                     <label class="form-check-label mt-2 d-flex justify-content-start">Je donne!</label>
                     <input type="checkbox" class="form-check-input mt-2" id="youGive" name="youGive" value="<?= $displayB4Modif['ARTICLE_GIVE'] ?>">
-                  </div>
+                  </div>  -->
                 </div>
                 <div class="row mt-3">
                   <div class="col-sm-10">
                     <label for="exampleFormControlTextarea1" class="form-label mt-2 d-flex justify-content-start">Description du produit :</label>
-                    <textarea class="form-control2" id="yourDescription" name="yourDescription" rows="5" maxlength="170"><?= $displayB4Modif['ARTICLE_DESCRIPTION'] ?></textarea>
+                    <textarea class="form-control2" id="yourDescription" name="yourDescription" rows="5" maxlength="170"><?= isset($_POST['yourDescription']) ? $_POST['yourDescription'] : $displayB4Modif['ARTICLE_DESCRIPTION'] ?></textarea>
                     <span id="messageInfosTitle"></span>
                   </div>
                 </div>
@@ -153,13 +153,25 @@ require './controllers/controller.php';
 
       <script>
         Swal.fire({
-          title: "Annonce modifiée !",
-          text: "Votre annonce a bien été modifiée",
-          icon: "success",
+          title: "<?= $titleSweet ?>",
+          text: "<?= $textSweet ?>",
+          icon: "<?= $iconSweet ?>",
           confirmButtonColor: '#000'
         }).then(function() {
-          window.location = "mespublications.php";
-        });
+          if (<?= $swalRedirection ?>) {
+            window.location = "mespublications.php"
+          }
+        })
+
+
+        // if (!=<?= $swalRedirection ?>) {
+        //   Swal.fire({
+        //     title: "<?= $titleSweet ?>",
+        //     text: "<?= $textSweet ?>",
+        //     icon: "<?= $iconSweet ?>",
+        //     confirmButtonColor: '#000'
+        //   })
+        // }
       </script>
 
 

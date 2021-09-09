@@ -1,14 +1,17 @@
-let verifPublication = [0, 0, 0, 0, 0, 0];
+let verifPublication = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 const validPublication = document.getElementById("validPublication");
 
 
 //Partie concernant la publication
 
+
 function VerifyPubli(params) {
   if (!params.includes(0)) {
     validPublication.disabled = false
+    buttonInformation.hidden = true
   } else {
     validPublication.disabled = true
+    buttonInformation.hidden = false
   }
 }
 
@@ -65,22 +68,42 @@ yourPrice.addEventListener("focusout", function () {
   }
 })
 
-youGive.addEventListener("focusout", function () {
-  if (youGive.value != "") {
-    verifPublication[4] = 1
-    VerifyPubli(verifPublication);
-  } else {
-    verifPublication[4] = 0
-    VerifyPubli(verifPublication);
-  }
-})
-
 yourDescription.addEventListener("focusout", function () {
   if (yourDescription.value != "") {
     verifPublication[5] = 1
     VerifyPubli(verifPublication);
   } else {
     verifPublication[5] = 0
+    VerifyPubli(verifPublication);
+  }
+})
+
+fileToUpload.addEventListener("focusout", function () {
+  if (fileToUpload.value != "") {
+    verifPublication[6] = 1
+    VerifyPubli(verifPublication);
+  } else {
+    verifPublication[6] = 0
+    VerifyPubli(verifPublication);
+  }
+})
+
+fileToUpload2.addEventListener("focusout", function () {
+  if (fileToUpload2.value != "") {
+    verifPublication[7] = 1
+    VerifyPubli(verifPublication);
+  } else {
+    verifPublication[7] = 0
+    VerifyPubli(verifPublication);
+  }
+})
+
+fileToUpload3.addEventListener("focusout", function () {
+  if (fileToUpload3.value != "") {
+    verifPublication[8] = 1
+    VerifyPubli(verifPublication);
+  } else {
+    verifPublication[8] = 0
     VerifyPubli(verifPublication);
   }
 })

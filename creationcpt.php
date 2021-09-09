@@ -19,6 +19,7 @@ require './controllers/controller.php';
                         <label class="form-label mt-3 d-flex justify-content-start"> Nom :</label>
                         <input type="text" class="form-control box" name="yourName" id="yourName">
                         <span id="messageInfosName"></span>
+                        <!-- <div class="<?= $className ?? '' ?>"><?= $messageName ?? '' ?></div> -->
                     </div>
                 </div>
 
@@ -27,6 +28,7 @@ require './controllers/controller.php';
                         <label class="form-label mt-2 d-flex justify-content-start"> Prénom :</label>
                         <input type="text" class="form-control box" id="yourFirstName" name="yourFirstName">
                         <span id="messageInfosFirstName"></span>
+                        <!-- <div class="<?= $classFirstName ?? '' ?>"><?= $messageFirstName ?? '' ?></div> -->
                     </div>
                 </div>
 
@@ -66,7 +68,7 @@ require './controllers/controller.php';
                     <div class="col-sm-5 bg-light">
                         <label class="form-label mt-2 d-flex justify-content-start"> Confirmation du mot de passe
                             :</label>
-                        <input type="password" class="form-control box" id="yourConfirmPassword">
+                        <input type="password" class="form-control box" id="yourConfirmPassword" name="yourConfirmPassword">
                         <span id="messageInfosConfirmPassword"></span>
                         <span id="messageInfosNotSamePassword"></span>
                     </div>
@@ -74,10 +76,10 @@ require './controllers/controller.php';
 
                 <div class="row justify-content-center">
                     <div class="col-sm-3d-flex justify-content-center">
-                        <button type="submit" class="btn btnConnect mt-5 mb-3" id='myButton' name="myButton">Valider mes
-                            informations</button>
-                        <span id="messageInfosProb"></span>
+                        <button type="submit" class="btn btnConnect mt-5 mb-3" id='myButton' name="myButton">Valider mes informations</button>
+
                     </div>
+                    <span id='buttonInformation' style="font-style: italic" >Veuillez remplir tous les champs pour valider</span>
                 </div>
 
             </form>
@@ -99,7 +101,7 @@ require './controllers/controller.php';
 <?php
 
 //après avoir validé le formulaire tu lances le message de confirmation et au clic sur ok tu renvoi sur la page de connection
-if (isset($_POST['myButton'])) { ?>
+if (isset($_POST['myButton']) && $error == 0) { ?>
 
     <script>
         Swal.fire({
@@ -108,7 +110,7 @@ if (isset($_POST['myButton'])) { ?>
             icon: "<?= $iconSweet ?>",
             confirmButtonColor: '#000'
         }).then(function() {
-            window.location = "connection.php";
+            window.location = "<?= $redirectionSweet ?>";
         });
     </script>
 
