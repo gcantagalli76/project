@@ -131,6 +131,39 @@ if (isset($_SESSION['email']) && isset($_SESSION['userId']) && isset($_POST['myA
   }
 }
 
+// Quand tu clics sur modifier les données du profil du user tu change le bouton en valider les modif et tu ouvres les input pour que l'utilisateur puisse rentrer
+// des nouvelles données
+if (isset($_POST['modifyButton'])) {
+  $disabled = '';
+  $textButton = 'Valider la modification';
+  $nameButton = 'validModify';
+  $colorButton = 'success';
+  $displayUserArray = $userObj->displayUser($_SESSION['email']);
+}else {
+  $disabled = 'disabled';
+  $textButton = 'Modifier les données personnelles';
+  $nameButton = 'modifyButton';
+  $colorButton = 'primary';
+}
+
+if(isset($_POST['validModify'])){
+  $userObj->modifyUser();
+  $displayUserArray = $userObj->displayUser($_SESSION['email']);
+  $confirmModalUpPatients = 'myModalUpPatients.show()';
+}else {
+  $confirmModalUpPatients = '';
+}
+
+// au clic sur mes publications tu renvois sur la pages mes publications
+if(isset($_POST['myPublications'])){
+  header("Location: mespublications.php");
+}
+
+// au clic sur mes favoris tu renvois sur la pages mes favoris
+if(isset($_POST['myFavorite'])){
+  header("Location: favoris.php");
+}
+
 /////////////////////////////////////////////////////////////////////////////ARTICLE//////////////////////////////////////////////////////////////////////
 
 // si il n'y a pas d'email dans la session alors tu renvois l'utilisateur direct sur la page connectpourpubli sinon tu lances le reste
@@ -291,7 +324,7 @@ if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
 }
 
 // Si tu clics sur mesfavoris alors tu lances la fonction permettant d'afficher les favoris de l'utilisateur connecté
-if (isset($_POST['myFavorite']) && isset($_SESSION['email'])) {
+if (isset($_SESSION['email'])) {
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
 }
 

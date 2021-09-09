@@ -102,6 +102,29 @@ class User extends Database
         return $queryUser;
     }
 
+    //fonction permettant de modifier les données de l'utilisateur à sa demande
+    public function modifyUser() {
+        $database = $this->connectDatabase();
+        $lastName = $_POST["lastName"];
+        $firstName = $_POST["firstName"];
+        $mail = $_POST["mail"];
+        $city = $_POST["city"];
+        $zipCode = $_POST["zipCode"];
+        $userId = $_SESSION["userId"];
+        //on récupère les données remplies sur le compte utilisateur pour les insérer dans la table user et modifier les données de l'utilisateur connecté
+        $myQuery ="UPDATE `_user` SET user_firstname = :firstname, user_lastname = :lastname, user_email = :email, user_city = :city, user_zipcode = :zipcode where id = :userId'";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':firstname', $firstName, PDO::PARAM_STR);
+        $queryUser->bindValue(':lastname', $lastName, PDO::PARAM_STR);
+        $queryUser->bindValue(':email', $mail, PDO::PARAM_STR);
+        $queryUser->bindValue(':city', $city, PDO::PARAM_STR);
+        $queryUser->bindValue(':zipcode', $zipCode, PDO::PARAM_STR);
+        $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $execute = $queryUser->execute();
+        return $execute;
+
+    }
+
 
 
 }
