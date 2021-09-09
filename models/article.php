@@ -40,7 +40,12 @@ class Article extends Database
     {
         $database = $this->connectDatabase();
         $userId = $_SESSION["userId"];
-        $myQuery = "SELECT A.* FROM `article` as A left join _user as B on A.USER_ID = B.USER_ID where A.USER_ID = :userId;";
+        $myQuery = "SELECT A.*,
+                           C.CATEGORY_NAME 
+                    FROM `article` as A 
+                    left join _user as B on A.USER_ID = B.USER_ID 
+                    left join category as C on A.CATEGORY_ID = C.CATEGORY_ID
+                    where A.USER_ID = :userId;";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
         $queryArticle->execute();

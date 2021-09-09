@@ -21,7 +21,7 @@ require './controllers/controller.php';
             <div class="card-body">
               <h4 id="<?= $articles['ARTICLE_ID'] ?>-article" class="card-title"><?php echo $articles['ARTICLE_TITLE'] ?></h4>
               <p class="card-text"><?php echo $articles['ARTICLE_PRICE'] ?>€</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <p class="card-text"><small class="text-muted">CATEGORIE: <?= $articles['CATEGORY_NAME'] ?></small></p>
             </div>
           </div>
           <div class="col-md-5">

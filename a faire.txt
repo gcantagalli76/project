@@ -1,7 +1,5 @@
 A faire pour la prochaine fois :
 
-2 - faire une sécurité php pour la modification des annonces
-
 3 - Faire la partie admin qui doit valider chaques annonce
 
 4 - Faire en sorte que l'utilisateur puisse modifier ses données perso

@@ -1,7 +1,7 @@
 <?php require 'views/header.php';
 
 require './controllers/controller.php';
-var_dump($_POST);
+
 ?>
 
 <body>
@@ -24,17 +24,17 @@ var_dump($_POST);
                   <div class="col-sm-5 mt-2">
                     <select class="form-select" aria-label="Default select example" id="yourCategory" name="yourCategory">
                       <option selected disabled>Catégorie :</option>
-                      <option value="1" <?= $displayB4Modif['CATEGORY_ID'] == 1 ? 'selected' : '' ?><?= isset($_POST['yourCategory']) && $_POST['yourCategory'] == 1 ? 'selected' : '' ?>>Carrelage, parquet, sol</option>
-                      <option value="2" <?= $displayB4Modif['CATEGORY_ID'] == 2 ? 'selected' : '' ?><?= isset($_POST['yourCategory']) && $_POST['yourCategory'] == 2 ? 'selected' : '' ?>>Peinture et droguerie</option>
-                      <option value="3" <?= $displayB4Modif['CATEGORY_ID'] == 3 ? 'selected' : '' ?><?= isset($_POST['yourCategory']) && $_POST['yourCategory'] == 3 ? 'selected' : '' ?>>Matériaux de construction</option>
+                      <option value="1" <?= ($displayB4Modif['CATEGORY_ID'] == 1) || ( isset($_POST['yourCategory']) && $_POST['yourCategory'] == 1) ? 'selected' : '' ?>>Carrelage, parquet, sol</option>
+                      <option value="2" <?= ($displayB4Modif['CATEGORY_ID'] == 2) || ( isset($_POST['yourCategory']) && $_POST['yourCategory'] == 2) ? 'selected' : '' ?>>Peinture et droguerie</option>
+                      <option value="3" <?= ($displayB4Modif['CATEGORY_ID'] == 3) || ( isset($_POST['yourCategory']) && $_POST['yourCategory'] == 3) ? 'selected' : '' ?>>Matériaux de construction</option>
                     </select>
                   </div>
                   <div class="col-sm-5 mt-2">
                     <select class="form-select" aria-label="Default select example" id="yourState" name="yourState">
                       <option selected disabled>Etat du produit :</option>
-                      <option value="1" <?= $displayB4Modif['CONDITION_ID'] == 1 ? 'selected' : '' ?><?= isset($_POST['yourState']) && $_POST['yourState'] == 1 ? 'selected' : '' ?>>Neuf</option>
-                      <option value="2" <?= $displayB4Modif['CONDITION_ID'] == 2 ? 'selected' : '' ?><?= isset($_POST['yourState']) && $_POST['yourState'] == 2 ? 'selected' : '' ?>>Bon état</option>
-                      <option value="3" <?= $displayB4Modif['CONDITION_ID'] == 3 ? 'selected' : '' ?><?= isset($_POST['yourState']) && $_POST['yourState'] == 3 ? 'selected' : '' ?>>Etat satisfaisant</option>
+                      <option value="1" <?= ($displayB4Modif['CONDITION_ID'] == 1) || (isset($_POST['yourState']) && $_POST['yourState'] == 1) ? 'selected' : '' ?>>Neuf</option>
+                      <option value="2" <?= ($displayB4Modif['CONDITION_ID'] == 2) || (isset($_POST['yourState']) && $_POST['yourState'] == 2) ? 'selected' : '' ?>>Bon état</option>
+                      <option value="3" <?= ($displayB4Modif['CONDITION_ID'] == 3) || (isset($_POST['yourState']) && $_POST['yourState'] == 3) ? 'selected' : '' ?>>Etat satisfaisant</option>
                     </select>
                   </div>
                 </div>
