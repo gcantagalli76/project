@@ -206,8 +206,11 @@ if (isset($_POST['myPublications'])) {
 }
 
 // au clic sur mes favoris tu renvois sur la pages mes favoris
-if (isset($_POST['myFavorite'])) {
+if (isset($_POST['myFavorite']) && isset($_SESSION['userId'])) {
   header("Location: favoris.php");
+}elseif (isset($_POST['myFavorite']) && !isset($_SESSION['userId'])) {
+  $_SESSION['connectFor'] = 'pour consulter vos favoris';
+  header("Location: connectfor.php");
 }
 
 // au clic sur changer mon mot de passe tu renvois sur la pages changemypwd
@@ -234,12 +237,19 @@ if (isset($_POST['changeMyPwd']) && $emptyModifPwd == 0) {
   }
 }
 
+// au clic sur le bouton pour supprimer le compte utilisateur tu lances la fonction qui supprime le compte
+if (isset($_POST['deleteUser'])) {
+  $userObj->deleteUser();
+  session_destroy();
+}
+
 
 /////////////////////////////////////////////////////////////////////////////ARTICLE//////////////////////////////////////////////////////////////////////
 
 // si il n'y a pas d'email dans la session alors tu renvois l'utilisateur direct sur la page connectpourpubli sinon tu lances le reste
-if (!isset($_SESSION['email']) && isset($_POST['newPublication'])) {
-  header("Location: connectforpublication.php");
+if ((!isset($_SESSION['userId'])) && isset($_POST['newPublication'])) {
+  $_SESSION['connectFor'] = 'pour publier une annonce';
+  header("Location: connectfor.php");
 } else {
   // si il valide la publication alors tu récupère les différents post et photos et lance la fonction pour rajouter l'article dans la bdd
   if (isset($_POST['validPublication']) && $emptyPublication == 0) {
@@ -395,7 +405,7 @@ if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
 }
 
 // Si tu clics sur mesfavoris alors tu lances la fonction permettant d'afficher les favoris de l'utilisateur connecté
-if (isset($_SESSION['email'])) {
+if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
 }
 

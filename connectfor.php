@@ -1,4 +1,8 @@
-<?php require 'views/header.php'; ?>
+<?php require 'views/header.php'; 
+
+require './controllers/controller.php';
+
+?>
 
 <body>
 
@@ -8,7 +12,7 @@
 
       <div class="row justify-content-center">
         <div class="col-sm-7 bg-light border shadowblock">
-          <h1>Connectez-vous ou créez votre compte pour publier une annonce</h1>
+          <h1>Connectez-vous ou créez votre compte <?= $_SESSION['connectFor'] ?? '' ?></h1>
 
           <button type="button" onclick="window.location.href = 'connection.php'" class="btn btnConnect mt-5" name="connectButton">Se connecter</button>
 

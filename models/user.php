@@ -103,7 +103,8 @@ class User extends Database
     }
 
     //fonction permettant de modifier les données de l'utilisateur à sa demande
-    public function modifyUser() {
+    public function modifyUser()
+    {
         $database = $this->connectDatabase();
         $lastName = $_POST["lastName"];
         $firstName = $_POST["firstName"];
@@ -112,7 +113,7 @@ class User extends Database
         $zipCode = $_POST["zipCode"];
         $userId = $_SESSION["userId"];
         //on récupère les données remplies sur le compte utilisateur pour les insérer dans la table user et modifier les données de l'utilisateur connecté
-        $myQuery ="UPDATE `_user` SET user_firstname = :firstname, user_lastname = :lastname, user_email = :email, user_city = :city, user_zipcode = :zipcode where USER_ID = :userId";
+        $myQuery = "UPDATE `_user` SET user_firstname = :firstname, user_lastname = :lastname, user_email = :email, user_city = :city, user_zipcode = :zipcode where USER_ID = :userId";
         $queryUser = $database->prepare($myQuery);
         $queryUser->bindValue(':firstname', $firstName, PDO::PARAM_STR);
         $queryUser->bindValue(':lastname', $lastName, PDO::PARAM_STR);
@@ -125,7 +126,8 @@ class User extends Database
     }
 
     //fonction permettant de vérifier que le pwd avant changement est bien celui de l'utilisateur connecté
-    public function verifyPwd(){
+    public function verifyPwd()
+    {
         $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
         $myQuery = "SELECT USER_PASSWORD FROM `_user` where USER_ID = :userId";
@@ -151,6 +153,15 @@ class User extends Database
     }
 
 
-
-
+    //fonction permettant de supprimer le compte à la demande de l'utilisateur depuis son compte
+    public function deleteUser()
+    {
+        $userId = $_SESSION["userId"];
+        $database = $this->connectDatabase();
+        $myQuery = "DELETE from `article` where USER_ID = :userId; DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $queryUser->execute();
+        return $queryUser;
+    }
 }

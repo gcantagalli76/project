@@ -60,11 +60,11 @@ require './controllers/controller.php';
 
       <div class="row justify-content-center mt-5">
 
-        <div class="col-sm-2">
+        <div class="col-sm-1">
           <button type="submit" class="btn btn-primary btn-lg" name="myPublications">Mes publications <br> <i class="bi bi-newspaper"></i></button>
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-1">
           <button type="submit" class="btn btn-primary btn-lg" name="myFavorite">Mes favoris <br> <i class="bi bi-heart"></i> </button>
         </div>
 
@@ -81,6 +81,10 @@ require './controllers/controller.php';
         </div>
 
         <div class="col-sm-2">
+          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer mon compte <br> <i class="bi bi-person-x"></i> </button>
+        </div>
+
+        <div class="col-sm-2">
           <button type="submit" class="btn btn-primary btn-lg" id="disconnect" name="disconnect">Se deconnecter <br> <i class="bi bi-box-arrow-right"></i></button>
         </div>
       </div>
@@ -88,6 +92,31 @@ require './controllers/controller.php';
 
   </div>
 
+  <!-- -------------- -->
+  <!--  UNIQUE MODALE -->
+  <!-- -------------- -->
+  <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Suppression de votre compte</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p>Êtes vous sûre de vouloir supprimer votre compte utilisateur ???</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <form action="" method="POST">
+            <button id="deleteUser" name="deleteUser" type="submit" class="btn btn-danger">Supprimer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- -------------- -->
+  <!--  UNIQUE MODALE -->
+  <!-- -------------- -->
 
 
   <?php require 'views/footer.php'; ?>
@@ -127,6 +156,23 @@ require './controllers/controller.php';
         icon: "<?= $iconSweet ?>",
         confirmButtonColor: '#000'
       })
+    </script>
+
+  <?php } ?>
+
+  <?php
+  //après avoir cliqué sur le bouton suppression du User tu lances le message de confirmation et au clic sur ok tu renvoi sur la page d'accueil
+  if (isset($_POST['deleteUser'])) { ?>
+
+    <script>
+      Swal.fire({
+        title: "Suppression de votre compte !",
+        text: "Votre compte utilisateur a bien été supprimé !",
+        icon: "success",
+        confirmButtonColor: '#000'
+      }).then(function() {
+        window.location = "index.php";
+      });
     </script>
 
   <?php } ?>
