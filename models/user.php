@@ -112,7 +112,7 @@ class User extends Database
         $zipCode = $_POST["zipCode"];
         $userId = $_SESSION["userId"];
         //on récupère les données remplies sur le compte utilisateur pour les insérer dans la table user et modifier les données de l'utilisateur connecté
-        $myQuery ="UPDATE `_user` SET user_firstname = :firstname, user_lastname = :lastname, user_email = :email, user_city = :city, user_zipcode = :zipcode where id = :userId'";
+        $myQuery ="UPDATE `_user` SET user_firstname = :firstname, user_lastname = :lastname, user_email = :email, user_city = :city, user_zipcode = :zipcode where USER_ID = :userId";
         $queryUser = $database->prepare($myQuery);
         $queryUser->bindValue(':firstname', $firstName, PDO::PARAM_STR);
         $queryUser->bindValue(':lastname', $lastName, PDO::PARAM_STR);
@@ -122,8 +122,34 @@ class User extends Database
         $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
         $execute = $queryUser->execute();
         return $execute;
-
     }
+
+    //fonction permettant de vérifier que le pwd avant changement est bien celui de l'utilisateur connecté
+    public function verifyPwd(){
+        $userId = $_SESSION["userId"];
+        $database = $this->connectDatabase();
+        $myQuery = "SELECT USER_PASSWORD FROM `_user` where USER_ID = :userId";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $queryUser->execute();
+        $fetch = $queryUser->fetch();
+        return $fetch;
+    }
+
+    //fonction permettant de créer un nouveau mdp à la demande de l'utilisateur depuis son compte
+    public function changeMyPwd()
+    {
+        $userId = $_SESSION["userId"];
+        $newPwd = password_hash($_POST['yourNewPassword'], PASSWORD_DEFAULT);
+        $database = $this->connectDatabase();
+        $myQuery = "UPDATE `_user` SET user_password = :newpwd where USER_ID = :userId";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':newpwd', $newPwd, PDO::PARAM_STR_CHAR);
+        $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $queryUser->execute();
+        return $queryUser;
+    }
+
 
 
 

@@ -24,9 +24,9 @@ require './controllers/controller.php';
                   <div class="col-sm-5 mt-2">
                     <select class="form-select" aria-label="Default select example" id="yourCategory" name="yourCategory">
                       <option selected disabled>Catégorie :</option>
-                      <option value="1" <?= ($displayB4Modif['CATEGORY_ID'] == 1) || ( isset($_POST['yourCategory']) && $_POST['yourCategory'] == 1) ? 'selected' : '' ?>>Carrelage, parquet, sol</option>
-                      <option value="2" <?= ($displayB4Modif['CATEGORY_ID'] == 2) || ( isset($_POST['yourCategory']) && $_POST['yourCategory'] == 2) ? 'selected' : '' ?>>Peinture et droguerie</option>
-                      <option value="3" <?= ($displayB4Modif['CATEGORY_ID'] == 3) || ( isset($_POST['yourCategory']) && $_POST['yourCategory'] == 3) ? 'selected' : '' ?>>Matériaux de construction</option>
+                      <option value="1" <?= ($displayB4Modif['CATEGORY_ID'] == 1) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 1) ? 'selected' : '' ?>>Carrelage, parquet, sol</option>
+                      <option value="2" <?= ($displayB4Modif['CATEGORY_ID'] == 2) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 2) ? 'selected' : '' ?>>Peinture et droguerie</option>
+                      <option value="3" <?= ($displayB4Modif['CATEGORY_ID'] == 3) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 3) ? 'selected' : '' ?>>Matériaux de construction</option>
                     </select>
                   </div>
                   <div class="col-sm-5 mt-2">
@@ -162,19 +162,7 @@ require './controllers/controller.php';
             window.location = "mespublications.php"
           }
         })
-
-
-        // if (!=<?= $swalRedirection ?>) {
-        //   Swal.fire({
-        //     title: "<?= $titleSweet ?>",
-        //     text: "<?= $textSweet ?>",
-        //     icon: "<?= $iconSweet ?>",
-        //     confirmButtonColor: '#000'
-        //   })
-        // }
       </script>
-
-
 
     <?php } ?>
 

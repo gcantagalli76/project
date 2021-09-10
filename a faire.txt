@@ -2,7 +2,7 @@ A faire pour la prochaine fois :
 
 3 - Faire la partie admin qui doit valider chaques annonce
 
-4 - Faire en sorte que l'utilisateur puisse modifier ses données perso
+4 - Faire en sorte que l'utilisateur puisse supprimer son compte
 
 
 

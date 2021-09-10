@@ -84,6 +84,47 @@ if (isset($_POST['validPublication']) || isset($_POST['validModification'])) {
   }
 }
 
+// Verification que les champs modification de mon compte sont bien tous remplis
+
+$emptyModifUser = 0;
+
+if (isset($_POST['validModify'])) {
+  if (empty($_POST['lastName']) || strlen($_POST['lastName']) > 20) {
+    $emptyModifUser = 1;
+  }
+  if (empty($_POST['firstName']) || strlen($_POST['firstName']) > 20) {
+    $emptyModifUser = 1;
+  }
+  if (empty($_POST['mail']) || strlen($_POST['mail']) > 30) {
+    $emptyModifUser = 1;
+  }
+  if (empty($_POST['city']) || strlen($_POST['city']) > 20) {
+    $emptyModifUser = 1;
+  }
+  if (empty($_POST['zipCode']) || strlen($_POST['zipCode']) > 6) {
+    $emptyModifUser = 1;
+  }
+}
+
+// Verification que les champs modification de pwd sont bien tous remplis et respectent les regex et autres contraintes
+
+$emptyModifPwd = 0;
+
+if (isset($_POST['changeMyPwd'])) {
+  if (empty($_POST['yourExPassword']) || !preg_match($regexPassword, $_POST['yourExPassword'])) {
+    $emptyModifPwd = 1;
+  }
+  if (empty($_POST['yourNewPassword']) || !preg_match($regexPassword, $_POST['yourNewPassword'])) {
+    $emptyModifPwd = 1;
+  }
+  if (empty($_POST['yourConfirmNewPassword']) || !preg_match($regexPassword, $_POST['yourConfirmNewPassword'])) {
+    $emptyModifPwd = 1;
+  }
+  if ($_POST['yourNewPassword'] != $_POST['yourConfirmNewPassword']) {
+    $emptyModifPwd = 1;
+  }
+}
+
 
 /////////////////////////////////////////////////////////////////////////////USER//////////////////////////////////////////////////////////////////////
 
@@ -114,7 +155,7 @@ if (isset($_SESSION['email'])) {
 }
 
 // Si tu clics dans mon compte et que tu as une sessions email d'enregistrer alors tu rentres direct sur ton compte
-// Sinon si tu clic sur le bouton connection on vérifie que ton mail et mdp est bien egal à ce qu'il y a en bdd on t'envoi sur ton compte et on enregistre un cookie email pour ne pas te reconnecter à chaque fois
+// Sinon si tu clic sur le bouton connection on vérifie que ton mail et mdp est bien egal à ce qu'il y a en bdd on t'envoi sur ton compte et on enregistre une session email pour ne pas te reconnecter à chaque fois
 // Sinon on affiche un message d'erreur pour indiquer que le mdp ou l'email n'est pas valide
 if (isset($_SESSION['email']) && isset($_SESSION['userId']) && isset($_POST['myAcount'])) {
   header("Location: moncompte.php");
@@ -131,38 +172,68 @@ if (isset($_SESSION['email']) && isset($_SESSION['userId']) && isset($_POST['myA
   }
 }
 
-// Quand tu clics sur modifier les données du profil du user tu change le bouton en valider les modif et tu ouvres les input pour que l'utilisateur puisse rentrer
+// Quand tu clics sur modifier les données du profil du user tu changes le bouton en valider les modif et tu ouvres les input pour que l'utilisateur puisse rentrer
 // des nouvelles données
 if (isset($_POST['modifyButton'])) {
   $disabled = '';
   $textButton = 'Valider la modification';
   $nameButton = 'validModify';
-  $colorButton = 'success';
+  $colorButton = 'btn-success';
   $displayUserArray = $userObj->displayUser($_SESSION['email']);
-}else {
+} else {
   $disabled = 'disabled';
-  $textButton = 'Modifier les données personnelles';
+  $textButton = 'Modifier mes données personnelles';
   $nameButton = 'modifyButton';
-  $colorButton = 'primary';
+  $colorButton = 'btn-primary';
 }
 
-if(isset($_POST['validModify'])){
+// quand il clic sur la validation des modifs tu lances la fonction qui change les données utilisateurs avec les infos remplis dans les input et tu affiches une sweet de confirmation
+if (isset($_POST['validModify']) && $emptyModifUser == 0) {
   $userObj->modifyUser();
   $displayUserArray = $userObj->displayUser($_SESSION['email']);
-  $confirmModalUpPatients = 'myModalUpPatients.show()';
-}else {
-  $confirmModalUpPatients = '';
+  $titleSweet = "Données modifiées !";
+  $textSweet = "Vos données personnelles ont bien été modifiées";
+  $iconSweet = "success";
+} elseif (isset($_POST['validModify']) && $emptyModifUser > 0) {
+  $titleSweet = "Données incomplètes !";
+  $textSweet = "Veuillez remplir tous les champs";
+  $iconSweet = "error";
 }
 
 // au clic sur mes publications tu renvois sur la pages mes publications
-if(isset($_POST['myPublications'])){
+if (isset($_POST['myPublications'])) {
   header("Location: mespublications.php");
 }
 
 // au clic sur mes favoris tu renvois sur la pages mes favoris
-if(isset($_POST['myFavorite'])){
+if (isset($_POST['myFavorite'])) {
   header("Location: favoris.php");
 }
+
+// au clic sur changer mon mot de passe tu renvois sur la pages changemypwd
+if (isset($_POST['changePwd'])) {
+  header("Location: changemypwd.php");
+}
+
+// Si tu clic sur changer mon mot de passe et si ton ex mot de pass correspond bien à ce que nous avons en bdd
+// alors tu lances la fonction qui prend ton new mdp et le change en bdd
+if (isset($_POST['changeMyPwd']) && $emptyModifPwd == 0) {
+  $verifyPwdUser = $userObj->verifyPwd();
+  if (password_verify($_POST["yourExPassword"], $verifyPwdUser['USER_PASSWORD'])) {
+    $titleSweet = "Mot de passe modifié !";
+    $textSweet = "Votre mot de passe a bien été modifié, veuillez vous reconnecter";
+    $iconSweet = "success";
+    $redirectionSweet = 'connection.php';
+    $userObj->changeMyPwd();
+    session_destroy();
+  } else {
+    $titleSweet = "Ancien mot de passe invalide !";
+    $textSweet = "L'ancien mot de passe que vous avez rentré n'est pas le bon";
+    $iconSweet = "error";
+    $redirectionSweet = 'changemypwd.php';
+  }
+}
+
 
 /////////////////////////////////////////////////////////////////////////////ARTICLE//////////////////////////////////////////////////////////////////////
 
