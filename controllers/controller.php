@@ -154,18 +154,26 @@ if (isset($_SESSION['email'])) {
   $displayUserArray = $userObj->displayUser($_SESSION['email']);
 }
 
-// Si tu clics dans mon compte et que tu as une sessions email d'enregistrer alors tu rentres direct sur ton compte
+// Si tu clics dans mon compte et que tu as une sessions email d'enregistrée alors tu rentres direct sur ton compte
 // Sinon si tu clic sur le bouton connection on vérifie que ton mail et mdp est bien egal à ce qu'il y a en bdd on t'envoi sur ton compte et on enregistre une session email pour ne pas te reconnecter à chaque fois
 // Sinon on affiche un message d'erreur pour indiquer que le mdp ou l'email n'est pas valide
-if (isset($_SESSION['email']) && isset($_SESSION['userId']) && isset($_POST['myAcount'])) {
+if (isset($_SESSION['email']) && isset($_SESSION['userId']) && $_SESSION['statusId'] == 2 && isset($_POST['myAcount'])) {
   header("Location: moncompte.php");
+} elseif (isset($_SESSION['email']) && isset($_SESSION['userId']) && $_SESSION['statusId'] == 1 && isset($_POST['myAcount'])) {
+  header("Location: myadmincount.php");
 } else {
   if (isset($_POST['connectButton'])) {
     $connectionUserArray = $userObj->connectionUser();
-    if ($_POST['yourEmail'] == $connectionUserArray['USER_EMAIL'] && password_verify($_POST["yourPassword"], $connectionUserArray['USER_PASSWORD'])) {
+    if ($_POST['yourEmail'] == $connectionUserArray['USER_EMAIL'] && password_verify($_POST["yourPassword"], $connectionUserArray['USER_PASSWORD']) && $connectionUserArray['STATUS_ID'] == 2) {
       header("Location: moncompte.php");
       $_SESSION['email'] = $_POST["yourEmail"];
       $_SESSION['userId'] = $connectionUserArray['USER_ID'];
+      $_SESSION['statusId'] = $connectionUserArray['STATUS_ID'];
+    } else if ($_POST['yourEmail'] == $connectionUserArray['USER_EMAIL'] && password_verify($_POST["yourPassword"], $connectionUserArray['USER_PASSWORD']) && $connectionUserArray['STATUS_ID'] == 1) {
+      header("Location: myadmincount.php");
+      $_SESSION['email'] = $_POST["yourEmail"];
+      $_SESSION['userId'] = $connectionUserArray['USER_ID'];
+      $_SESSION['statusId'] = $connectionUserArray['STATUS_ID'];
     } else {
       $errorConnect = 'Adresse email ou mot de passe invalide';
     }
@@ -205,10 +213,15 @@ if (isset($_POST['myPublications'])) {
   header("Location: mespublications.php");
 }
 
+// au clic sur publication à valider tu renvois sur la pages des publications à valider par l'admin
+if (isset($_POST['publiToValid'])) {
+  header("Location: publitovalid.php");
+}
+
 // au clic sur mes favoris tu renvois sur la pages mes favoris
 if (isset($_POST['myFavorite']) && isset($_SESSION['userId'])) {
   header("Location: favoris.php");
-}elseif (isset($_POST['myFavorite']) && !isset($_SESSION['userId'])) {
+} elseif (isset($_POST['myFavorite']) && !isset($_SESSION['userId'])) {
   $_SESSION['connectFor'] = 'pour consulter vos favoris';
   header("Location: connectfor.php");
 }
@@ -290,6 +303,14 @@ if (!isset($_SESSION['email']) && isset($_POST['myPublications'])) {
   $displayUserArticleArray = $articleObj->articleUser();
 }
 
+// si il n'y a pas d'email dans la session alors tu renvois l'admin direct sur la page de connection sinon tu lances le reste
+if (!isset($_SESSION['email']) && isset($_POST['publiToValid'])) {
+  header("Location: connection.php");
+} else if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
+  // tu lances la fonction permettant d'afficher les produits à valider par l'admin
+  $displayAdminArticleArray = $articleObj->displayArticleToValid();
+}
+
 // nous mettons la fonction dans une variable pour ensuite afficher les 5 derniers articles sur la page d'accueil
 $display5ArticleArray = $articleObj->display5Article();
 
@@ -334,8 +355,8 @@ if (isset($_POST['validModification']) && $emptyPublication == 0) {
     // Encode contents to Base64
     $picture3 = base64_encode($bin3);
   }
-  $titleSweet = "Annonce modifiée !";
-  $textSweet = "Votre annonce a bien été modifiée";
+  $titleSweet = "Modifications prises en compte!";
+  $textSweet = "Votre modification d'annonce a bien été prise en compte, elle sera validée sous 24h avant sa publication";
   $iconSweet = "success";
   $swalRedirection = true;
   $articleObj->modifyArticle($picture1, $picture2, $picture3);
@@ -415,3 +436,27 @@ if (isset($_POST['idArticleFavoriteDelete'])) {
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
   $deleteSuccess = true;
 }
+
+// lors du clic pour valider un article par l'admin, tu lances la fonction qui passe cette article en validé en bdd
+if (isset($_POST['validArticleBtn'])) {
+  $articleObj->validArticle();
+}
+
+
+
+// Si l'admin clics pour valider l'article, tu lances la fonction qui vérifie qu'il n'est pas déjà valider et sinon tu lances la fonction qui le valide
+// if (isset($_POST['validArticleBtn'])) {
+//   // $displayCategoryArticleArray = $articleObj->displayArticleCategory();
+//   if ($articleObj->verifyArticleValid($_SESSION['userId'], $_GET['idfavorite'])) {
+//     $titleSweet = "Annonce déjà enregistrée";
+//     $textSweet = "Cette annonce est déjà existante dans vos favoris";
+//     $iconSweet = "error";
+//   } else {
+//     $articleObj->validArticle();
+//     // $displayCategoryArticleArray = $articleObj->displayArticleCategory();
+//     // $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
+//     $titleSweet = "Annonce ajoutée à vos favoris !";
+//     $textSweet = "Votre annonce a bien été rajoutée dans vos annonces favorites";
+//     $iconSweet = "success";
+//   }
+// }

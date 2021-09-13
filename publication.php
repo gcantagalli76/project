@@ -154,7 +154,7 @@ require './controllers/controller.php';
       <script>
         Swal.fire({
           title: "Annonce ajoutée !",
-          text: "Votre annonce a bien été rajoutée à la liste des annonces",
+          text: "Votre annonce a bien été enregistrée, elle sera validée sous 24h avant sa publication",
           icon: "success",
           confirmButtonColor: '#000'
         }).then(function() {

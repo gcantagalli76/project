@@ -18,69 +18,122 @@ require './controllers/controller.php';
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <?php foreach ($displayDetailsArticleArray as $articles) { ?>
-        <div class="carousel-inner p-2">
-          <div class="carousel-item active">
-            <img src="data:image/png;base64, <?= $articles['picture1'] ?>" alt="picture1" class="d-block w-100">
+          <div class="carousel-inner p-2">
+            <div class="carousel-item active">
+              <img src="data:image/png;base64, <?= $articles['picture1'] ?>" alt="picture1" class="d-block w-100">
+            </div>
+            <div class="carousel-item p-2">
+              <img src="data:image/png;base64, <?= $articles['picture2'] ?>" alt="picture2" class="d-block w-100">
+            </div>
+            <div class="carousel-item p-2">
+              <img src="data:image/png;base64, <?= $articles['picture3'] ?>" alt="picture3" class="d-block w-100">
+            </div>
           </div>
-          <div class="carousel-item p-2">
-            <img src="data:image/png;base64, <?= $articles['picture2'] ?>" alt="picture2" class="d-block w-100">
-          </div>
-          <div class="carousel-item p-2">
-            <img src="data:image/png;base64, <?= $articles['picture3'] ?>" alt="picture3" class="d-block w-100">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
       </div>
     </div>
 
 
     <div class="col-6">
-      
-        <h3 class="text-center mt-1"><?= $articles['ARTICLE_TITLE'] ?></h3>
-        <div class="mt-5"><?= $articles['ARTICLE_DESCRIPTION'] ?></div>
 
-        <div class="row mt-5">
-          <div class="col-4 text-center">
-            <div>Prix</div>
-            <div><?= $articles['ARTICLE_PRICE'] ?></div>
-          </div>
+      <h3 id="<?= $articles['ARTICLE_ID'] ?>-article" class="text-center mt-1"><?= $articles['ARTICLE_TITLE'] ?></h3>
+      <div class="mt-5"><?= $articles['ARTICLE_DESCRIPTION'] ?></div>
 
-          <div class="col-4 text-center">
-            <div>Etat</div>
-            <div><?= $articles['CONDITION_NAME'] ?></div>
-          </div>
-
-          <div class="col-4 text-center">
-            <div>Date d'achat</div>
-            <div><?= $articles['ARTICLE_PURCHASEDATE'] ?></div>
-          </div>
+      <div class="row mt-5">
+        <div class="col-4 text-center">
+          <div>Prix</div>
+          <div><?= $articles['ARTICLE_PRICE'] ?></div>
         </div>
 
-        <div class="row mt-5">
+        <div class="col-4 text-center">
+          <div>Etat</div>
+          <div><?= $articles['CONDITION_NAME'] ?></div>
+        </div>
+
+        <div class="col-4 text-center">
+          <div>Date d'achat</div>
+          <div><?= $articles['ARTICLE_PURCHASEDATE'] ?></div>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <form class="col-6 text-center" method="post">
+          <button type="submit" class="btn text-white bg-primary mt-3 mb-3" name="addFavorite" value="<?= $articles['ARTICLE_ID'] ?>"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
+        </form>
+
+        <div class="col-6 text-center">
+          <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
+        </div>
+
+      </div>
+
+      <?php if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1 && isset($_GET['idarticle'])) { ?>
+        <div class="row mt-2 ">
           <form class="col-6 text-center" method="post">
-            <button type="submit" class="btn text-white bg-primary mt-3 mb-3" name="addFavorite" value="<?=$articles['ARTICLE_ID']?>"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
-      </form>
+            <button type="submit" class="btn text-white bg-primary" name="validArticleBtn" value="<?= $articles['ARTICLE_ID'] ?>"><i class="bi bi-check-circle"></i> Valider l'annonce</button>
+          </form>
+
 
           <div class="col-6 text-center">
-            <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
+            <div class="btn bi bi-trash ms-2 deletebtn text-white bg-primary" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
           </div>
 
+        </div>
+      <?php } ?>
+
+      <?php if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1 && isset($_GET['idArticleConsult'])) { ?>
+        <div class="col-6 text-center">
+          <div class="btn bi bi-trash ms-2 deletebtn text-white bg-primary" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
         </div>
 
     </div>
 
+
+  <?php } ?>
+
+
+  <!-- -------------- -->
+  <!--  UNIQUE MODALE -->
+  <!-- -------------- -->
+  <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Suppression d'une annonce</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p>Êtes vous sûre de vouloir supprimer l'annonce <b><span id="articleNameDelete"></span></b></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          <form action="" method="POST">
+            <button id="idArticleDelete" name="idArticleDelete" type="submit" class="btn btn-danger">Supprimer</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
+  <!-- -------------- -->
+  <!--  UNIQUE MODALE -->
+  <!-- -------------- -->
+
+  </div>
+
+</div>
 </div>
 
+
+
 <?php }
-      require 'views/footer.php'; ?>
+        require 'views/footer.php'; ?>
 
 </div>
 
@@ -95,29 +148,72 @@ require './controllers/controller.php';
 //après avoir validé le coeur tu confirmes que l'annonce a bien été ajoutée aux favoris si l'utilisateur à bien une sessions d'ouverte
 if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) { ?>
 
-    <script>
-        Swal.fire({
-            title: "<?= $titleSweet ?>",
-            text: "<?= $textSweet ?>",
-            icon: "<?= $iconSweet ?>",
-            confirmButtonColor: '#000'
-        })
-    </script>
-
-<?php } elseif (isset($_POST['addFavorite']) && !isset($_SESSION['email'])) {?>
   <script>
-  Swal.fire({
-            title: "Veuillez vous connecter !",
-            text: "Vous devez vous connecter ou créer un compte pour rajouter un article dans vos favoris",
-            icon: 'error',
-            confirmButtonColor: '#000'
-        }).then(function() {
-            window.location = "connection.php";
-        });
-</script>
+    Swal.fire({
+      title: "<?= $titleSweet ?>",
+      text: "<?= $textSweet ?>",
+      icon: "<?= $iconSweet ?>",
+      confirmButtonColor: '#000'
+    })
+  </script>
+
+<?php } elseif (isset($_POST['addFavorite']) && !isset($_SESSION['email'])) { ?>
+  <script>
+    Swal.fire({
+      title: "Veuillez vous connecter !",
+      text: "Vous devez vous connecter ou créer un compte pour rajouter un article dans vos favoris",
+      icon: 'error',
+      confirmButtonColor: '#000'
+    }).then(function() {
+      window.location = "connection.php";
+    });
+  </script>
 <?php } ?>
 
-  
+<script>
+  // Mise en place de la swal pour indiquer que l'annonce a été supprimée
+  if (<?= $deleteSuccess ?>) {
+    Swal.fire({
+      icon: 'success',
+      text: 'Cette annonce a bien été supprimée !',
+      confirmButtonColor: '#000'
+    }).then(function() {
+      window.location = "publitovalid.php";
+    });
+  };
+
+  // mise en place d'un array regroupant tous les boutons de la classe .deletebtn
+  const trashButtonsArray = document.querySelectorAll('.deletebtn')
+
+  // on ajoute un écouteur d'événement sur chaque bouton au click
+  trashButtonsArray.forEach(element => {
+    element.addEventListener('click', function() {
+      // on recupere la valeur du data pour l'inserer dans la value du button correspondant
+      document.getElementById('idArticleDelete').value = this.dataset.articleId
+      // on recupere la valeur des id contenant les nom et prenoms pour l'insérer dans la div
+      document.getElementById('articleNameDelete').innerHTML = document.getElementById(this.dataset.articleId + '-article').innerText;
+    })
+  });
+</script>
+
+<?php
+
+//après avoir validé la publication par l'admin tu lances le message de confirmation et au clic sur ok tu renvoi sur la page des articles à valider
+if (isset($_POST['validArticleBtn'])) { ?>
+
+  <script>
+    Swal.fire({
+      title: "Article validé",
+      text: "Cet article va être publié sur le site suite à votre validation",
+      icon: "success",
+      confirmButtonColor: '#000'
+    }).then(function() {
+      window.location = "publitovalid.php";
+    });
+  </script>
+
+<?php } ?>
+
 </body>
 
 </html>

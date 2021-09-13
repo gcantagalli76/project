@@ -33,7 +33,7 @@ require './controllers/controller.php';
 
           <div class="col-md-3">
             <div class="card-body">
-
+            <div class="d-flex justify-content-center text-<?= $articles['valid'] == 1 ? 'success' : 'danger' ?>"><?= $articles['valid'] == 1 ? 'Article publié' : 'Article en attente de validation' ?></div>
               <div class="d-flex align-items-center p-3 justify-content-center">
                 <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer</div>
               </div>

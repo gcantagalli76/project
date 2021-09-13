@@ -17,8 +17,8 @@ class Article extends Database
         $description = $_POST["yourDescription"];
         $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
-        $myQuery = 'INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id,picture1,picture2,picture3)
-            VALUES( :title, :quantity, :buyDate, :price, 0, :description, :category, :state, :userId,:picture1,:picture2,:picture3)';
+        $myQuery = 'INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id,picture1,picture2,picture3,valid)
+            VALUES( :title, :quantity, :buyDate, :price, 0, :description, :category, :state, :userId,:picture1,:picture2,:picture3,0)';
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':title', $title, PDO::PARAM_STR);
         $queryArticle->bindValue(':quantity', $quantity, PDO::PARAM_INT);
@@ -45,7 +45,8 @@ class Article extends Database
                     FROM `article` as A 
                     left join _user as B on A.USER_ID = B.USER_ID 
                     left join category as C on A.CATEGORY_ID = C.CATEGORY_ID
-                    where A.USER_ID = :userId;";
+                    where A.USER_ID = :userId
+                    order by A.valid;";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
         $queryArticle->execute();
@@ -57,7 +58,11 @@ class Article extends Database
     public function display5Article()
     {
         $database = $this->connectDatabase();
-        $myQuery = "SELECT A.*, B.USER_CITY as ARTICLE_CITY  FROM `article` as A left join _user as B on A.USER_ID = B.USER_ID limit 5";
+        $myQuery = "SELECT A.*, 
+                           B.USER_CITY as ARTICLE_CITY  
+                           FROM `article` as A left join _user as B on A.USER_ID = B.USER_ID 
+                           where A.valid = 1 
+                           limit 5";
         $queryArticle = $database->query($myQuery);
         $fetch = $queryArticle->fetchAll();
         return $fetch;
@@ -108,7 +113,7 @@ class Article extends Database
         $idarticle = $_POST['idArticleModify'];
         $myQuery = "UPDATE `article` SET ARTICLE_TITLE = :title, ARTICLE_QUANTITY = :quantity, ARTICLE_PURCHASEDATE = :buyDate, ARTICLE_PRICE = :price,
                     ARTICLE_GIVE = 0, ARTICLE_DESCRIPTION = :description, CATEGORY_ID = :category, CONDITION_ID = :state, picture1 = :picture1, 
-                    picture2 = :picture2, picture3 = :picture3 where ARTICLE_ID = :articleId";
+                    picture2 = :picture2, picture3 = :picture3, valid = 0 where ARTICLE_ID = :articleId";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':title', $title, PDO::PARAM_STR);
         $queryArticle->bindValue(':quantity', $quantity, PDO::PARAM_INT);
@@ -148,7 +153,7 @@ class Article extends Database
                            C.USER_CITY as ARTICLE_CITY 
                     FROM `article` as A left join `category` as B on A.CATEGORY_ID = B.CATEGORY_ID 
                                         left join _user as C on A.USER_ID = C.USER_ID
-                    WHERE A.CATEGORY_ID = :idcategory";
+                    WHERE A.CATEGORY_ID = :idcategory and A.valid = 1 ";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':idcategory', $idcategory, PDO::PARAM_INT);
         $queryArticle->execute();
@@ -179,8 +184,10 @@ class Article extends Database
         $myQuery = "SELECT A.*,
                            B.picture1,
                            B.picture2,
-                           B.picture3
+                           B.picture3,
+                           C.CATEGORY_NAME
                     FROM `articlefavorite` as A left join article as B on A.ARTICLE_ID = B.ARTICLE_ID
+                                                left join category as C on B.CATEGORY_ID = C.CATEGORY_ID
                     WHERE A.USER_ID = :userId;";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
@@ -202,6 +209,18 @@ class Article extends Database
          return $fetch;
      }
 
+      //fonction permettant de vérifier que l'article n'a pas déjà été validé par l'admin
+      public function verifyArticleValid($articleId)
+      {
+          $database = $this->connectDatabase();
+          $myQuery = "SELECT * FROM `article` where ARTICLE_ID = :articleId and valid = 1";
+          $queryArticle = $database->prepare($myQuery);
+          $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
+          $queryArticle->execute();
+          $fetch = $queryArticle->fetch();
+          return $fetch;
+      }
+
 
 
     // fonction permettant de supprimer un article
@@ -217,4 +236,33 @@ class Article extends Database
         $execute = $queryArticle->execute();
         return $execute;
     }
+
+
+    // fonction permettant d'affchier les publications à valider par l'admin
+    public function displayArticleToValid()
+    {
+        $database = $this->connectDatabase();
+        $myQuery = "SELECT A.*,
+                           C.CATEGORY_NAME  
+                           FROM `article` as A left join category as C on A.CATEGORY_ID = C.CATEGORY_ID
+                           where valid = 0";
+        $queryArticle = $database->query($myQuery);
+        $queryArticle->execute();
+        $fetch = $queryArticle->fetchAll();
+         return $fetch;
+    }
+
+    // fonction permettant de valider l'article par l'admin
+    public function validArticle()
+    {
+        $database = $this->connectDatabase();
+        $idarticle = $_POST['validArticleBtn'];
+        $myQuery = "UPDATE `article` SET valid = 1 where ARTICLE_ID = :articleId";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':articleId', $idarticle, PDO::PARAM_INT);
+        $execute = $queryArticle->execute();
+        return $execute;
+    }
+
+
 }
