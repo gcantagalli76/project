@@ -157,10 +157,10 @@
   margin-bottom: 15px;
 }
 
-.twoLines{
-  height:49px;
-  line-height:22px;
-  overflow:hidden;
+.twoLines {
+  height: 49px;
+  line-height: 22px;
+  overflow: hidden;
 }
 
 .del {
@@ -187,4 +187,14 @@
   margin-top: 0px;
   cursor: pointer;
   font-size: 15px;
+}
+
+
+.carrousselHeight {
+  height: 30rem;
+}
+
+img.carrousselPicture {
+  height: 30rem;
+  width: auto;
 }

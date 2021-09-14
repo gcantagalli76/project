@@ -75,8 +75,11 @@ class Article extends Database
         $articleId = $_GET['idArticleConsult'] ?? $_GET['idarticle'] ?? $_POST['addFavorite'];
         $myQuery = "SELECT A.*, 
                            DATE_FORMAT(`article_purchasedate`, '%d/%m/%Y') as ARTICLE_PURCHASEDATE,
-                           B.CONDITION_NAME
-                    FROM `article` as A left join _condition as B on A.CONDITION_ID = B.CONDITION_ID where ARTICLE_ID = :articleId";
+                           C.CONDITION_NAME,
+                           U.USER_CITY
+                    FROM `article` as A left join _condition as C on A.CONDITION_ID = C.CONDITION_ID 
+                                        left join _user as U on A.user_id = U.user_id
+                    where A.ARTICLE_ID = :articleId";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
         $queryArticle->execute();

@@ -16,27 +16,28 @@ require './controllers/controller.php';
     <div class="row justify-content-start">
 
       <?php foreach ($displayCategoryArticleArray as $display) { ?>
-        <form class="col-md-2 p-4" method="GET" action="Annonce.php">
-          <button class="card" style="width: 14rem" name="idArticleConsult" id="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
-            <img src="data:image/png;base64, <?= $display['picture1'] ?>" alt="picture1" class="card-img-top imagePreview">
-            <div class="card-body">
-              <h5 class="card-title"><?= $display['ARTICLE_TITLE'] ?></h5>
-              <p class="card-text"><?= $display['ARTICLE_DESCRIPTION'] ?></p>
-              <div class="row">
-                <div class="col-md-3">
-                  <a style="font-weight : bold"><?= $display['ARTICLE_PRICE'] ?>€</a>
-                </div>
-                <div class="col-md-5">
-                  <img src="/assets/img/geo-alt.svg" alt="heart" width="20px">
-                  <a><?= $display['ARTICLE_CITY'] ?></a>
-                </div>
-                <div class="col-md-4">
-                  <a class="btn bi bi-heart" type="submit" alt="heart" width="20px" href="Categorie.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>&amp;category_id=<?php echo $display['CATEGORY_ID'] ?>"> </a>
-                </div>
+        <form class="col-md-2 d-flex justify-content-center" method="GET" action="Annonce.php">
+        <button class="card" style="width: 14rem;" name="idArticleConsult" id="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
+          <img src="data:image/png;base64, <?= $display['picture1'] ?>" class="card-img-top imagePreview" alt="picture1">
+          <div class="card-body">
+            <h5 class="card-title twoLines"><?= $display['ARTICLE_TITLE'] ?></h5>
+            <div class="row d-flex align-items-center">
+              <div class="col-md-6">
+                <b><?= $display['ARTICLE_PRICE'] ?>€</b>
+              </div>
+              <div class="col-md-6">
+                <a class="btn bi bi-heart" type="submit"  alt="heart" href="Categorie.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>&amp;category_id=<?php echo $display['CATEGORY_ID'] ?>"> </a>
               </div>
             </div>
-          </button>
-        </form>
+            <div class="row mt-2">
+              <div class="col-md-12">
+                <img src="./assets/img/geo-alt.svg" alt="geo" width="20px">
+                <a><?= $display['ARTICLE_CITY'] ?></a>
+              </div>
+            </div>
+          </div>
+        </button>
+      </form>
 
 
 

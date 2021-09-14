@@ -9,7 +9,7 @@ require './controllers/controller.php';
 
   <div class="row d-flex justify-content-center Annonce">
 
-    <div class="col-5">
+    <div class="col-md-5">
 
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -19,14 +19,14 @@ require './controllers/controller.php';
         </div>
         <?php foreach ($displayDetailsArticleArray as $articles) { ?>
           <div class="carousel-inner p-2">
-            <div class="carousel-item active">
-              <img src="data:image/png;base64, <?= $articles['picture1'] ?>" alt="picture1" class="d-block w-100">
+            <div class="carousel-item active carrousselHeight">
+              <img src="data:image/png;base64, <?= $articles['picture1'] ?>" alt="picture1" class="d-block w-100 carrousselPicture">
             </div>
-            <div class="carousel-item p-2">
-              <img src="data:image/png;base64, <?= $articles['picture2'] ?>" alt="picture2" class="d-block w-100">
+            <div class="carousel-item p-2 carrousselHeight">
+              <img src="data:image/png;base64, <?= $articles['picture2'] ?>" alt="picture2" class="d-block w-100 carrousselPicture">
             </div>
-            <div class="carousel-item p-2">
-              <img src="data:image/png;base64, <?= $articles['picture3'] ?>" alt="picture3" class="d-block w-100">
+            <div class="carousel-item p-2 carrousselHeight">
+              <img src="data:image/png;base64, <?= $articles['picture3'] ?>" alt="picture3" class="d-block w-100 carrousselPicture">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -41,56 +41,50 @@ require './controllers/controller.php';
     </div>
 
 
-    <div class="col-6">
+    <div class="col-md-6">
 
-      <h3 id="<?= $articles['ARTICLE_ID'] ?>-article" class="text-center mt-1"><?= $articles['ARTICLE_TITLE'] ?></h3>
-      <div class="mt-5"><?= $articles['ARTICLE_DESCRIPTION'] ?></div>
+      <h2 id="<?= $articles['ARTICLE_ID'] ?>-article" class="text-center mt-3"><?= $articles['ARTICLE_TITLE'] ?></h2>
+      <div class="border-bottom p-2">
+        <div class="mt-4">Acheté le <?= $articles['ARTICLE_PURCHASEDATE'] ?> - <?= $articles['CONDITION_NAME'] ?></div>
+        <h4><?= $articles['ARTICLE_PRICE'] ?>€</h4>
+        <img src="./assets/img/geo-alt.svg" alt="geo" width="20px">
+        <a><?= $articles['USER_CITY'] ?></a>
+      </div>
 
-      <div class="row mt-5">
-        <div class="col-4 text-center">
-          <div>Prix</div>
-          <div><?= $articles['ARTICLE_PRICE'] ?></div>
-        </div>
-
-        <div class="col-4 text-center">
-          <div>Etat</div>
-          <div><?= $articles['CONDITION_NAME'] ?></div>
-        </div>
-
-        <div class="col-4 text-center">
-          <div>Date d'achat</div>
-          <div><?= $articles['ARTICLE_PURCHASEDATE'] ?></div>
-        </div>
+      <div class="border-bottom">
+      <h6 class="mt-2">Description</h6>
+      <div class="mt-3"><?= $articles['ARTICLE_DESCRIPTION'] ?></div>
+      <div class="mt-4 mb-2">Quantitée restante comparée au produit neuf : <?= $articles['ARTICLE_QUANTITY'] ?>%</div>
       </div>
 
       <div class="row mt-5">
-        <form class="col-6 text-center" method="post">
-          <button type="submit" class="btn text-white bg-primary mt-3 mb-3" name="addFavorite" value="<?= $articles['ARTICLE_ID'] ?>"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
+        <form class="col-md-6 text-center" method="post">
+          <button type="submit" class="btn btnConnect mt-3 mb-3" name="addFavorite" value="<?= $articles['ARTICLE_ID'] ?>"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
         </form>
 
-        <div class="col-6 text-center">
-          <button type="submit" class="btn text-white bg-primary mt-3 mb-3"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
+        <div class="col-md-6 text-center">
+          <button type="submit" class="btn btnConnect mt-3 mb-3"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
         </div>
 
       </div>
 
       <?php if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1 && isset($_GET['idarticle'])) { ?>
         <div class="row mt-2 ">
-          <form class="col-6 text-center" method="post">
-            <button type="submit" class="btn text-white bg-primary" name="validArticleBtn" value="<?= $articles['ARTICLE_ID'] ?>"><i class="bi bi-check-circle"></i> Valider l'annonce</button>
+          <form class="col-md-6 text-center" method="post">
+            <button type="submit" class="btn btnConnect" name="validArticleBtn" value="<?= $articles['ARTICLE_ID'] ?>"><i class="bi bi-check-circle"></i> Valider l'annonce</button>
           </form>
 
 
-          <div class="col-6 text-center">
-            <div class="btn bi bi-trash ms-2 deletebtn text-white bg-primary" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
+          <div class="col-md-6 text-center">
+            <div class="btn bi bi-trash ms-2 deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
           </div>
 
         </div>
       <?php } ?>
 
       <?php if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1 && isset($_GET['idArticleConsult'])) { ?>
-        <div class="col-6 text-center">
-          <div class="btn bi bi-trash ms-2 deletebtn text-white bg-primary" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
+        <div class="col-md-6 text-center">
+          <div class="btn bi bi-trash ms-2 deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
         </div>
 
     </div>

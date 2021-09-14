@@ -64,7 +64,7 @@ require './controllers/controller.php';
           <div class="card-body">
             <h3 class="bi bi-newspaper d-flex justify-content-start"></h3>
             <h4 class="card-title d-flex justify-content-start">Mes publications</h4>
-            <h5 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Gérer mes publications</h5>
+            <h6 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Gérer mes publications</h6>
           </div>
         </button>
 
@@ -72,7 +72,7 @@ require './controllers/controller.php';
           <div class="card-body">
             <h3 class="bi bi-heart d-flex justify-content-start"></h3>
             <h4 class="card-title d-flex justify-content-start">Mes favoris</h4>
-            <h5 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Gérer mes annonces favorites</h5>
+            <h6 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Gérer mes annonces favorites</h6>
           </div>
         </button>
 
@@ -80,7 +80,7 @@ require './controllers/controller.php';
           <div class="card-body">
             <h3 class="bi bi-envelope d-flex justify-content-start"></h3>
             <h4 class="card-title d-flex justify-content-start">Mes messages</h4>
-            <h5 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Mes messages liés aux annonces</h5>
+            <h6 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Mes messages liés aux annonces</h6>
           </div>
         </button>
 
