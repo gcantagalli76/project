@@ -143,6 +143,7 @@
   background-repeat: no-repeat;
   display: inline-block;
   box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
 }
 
 .btn-primary {
@@ -154,6 +155,12 @@
 
 .imgUp {
   margin-bottom: 15px;
+}
+
+.twoLines{
+  height:49px;
+  line-height:22px;
+  overflow:hidden;
 }
 
 .del {

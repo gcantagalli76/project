@@ -264,5 +264,4 @@ class Article extends Database
         return $execute;
     }
 
-
 }
