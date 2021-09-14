@@ -12,23 +12,23 @@ require './controllers/controller.php';
 
     <form action="" method="post">
 
-      <div class="col-sm-10 bg-light shadowblock">
-        <h1 class="text-center">Mes informations personnelles</h1>
+      <div class="col-sm-10 border shadowblock">
         <?php foreach ($displayUserArray as $user) {
           if ($_SESSION['userId'] == $user['USER_ID']) { ?>
+            <h1 class="text-center">Bonjour <?= $user['USER_FIRSTNAME'] ?></h1>
             <div class="row justify-content-around">
 
-              <div class="col-sm-3 bg-light">
+              <div class="col-sm-3">
                 <label class="form-label mt-2 d-flex justify-content-start"> Nom :</label>
                 <input <?= $disabled ?> type="text" class="form-control box" id="lastName" name="lastName" maxlength="20" value="<?= $user['USER_LASTNAME'] ?>">
               </div>
 
-              <div class="col-sm-3 bg-light">
+              <div class="col-sm-3">
                 <label class="form-label mt-2 d-flex justify-content-start"> Prénom :</label>
                 <input <?= $disabled ?> type="text" class="form-control box" id="firstName" name="firstName" maxlength="20" value="<?= $user['USER_FIRSTNAME'] ?>">
               </div>
 
-              <div class="col-sm-3 bg-light">
+              <div class="col-sm-3">
                 <label class="form-label mt-2 d-flex justify-content-start"> Adresse email :</label>
                 <input <?= $disabled ?> type="text" class="form-control box" id="mail" name="mail" maxlength="30" value="<?= $user['USER_EMAIL'] ?>">
               </div>
@@ -38,17 +38,17 @@ require './controllers/controller.php';
 
             <div class="row justify-content-around mb-3">
 
-              <div class="col-sm-3 bg-light">
+              <div class="col-sm-3">
                 <label class="form-label mt-2 d-flex justify-content-start"> Ville :</label>
                 <input <?= $disabled ?> type="text" class="form-control box" id="city" name="city" maxlength="20" value="<?= $user['USER_CITY'] ?>">
               </div>
 
-              <div class="col-sm-3 bg-light">
+              <div class="col-sm-3">
                 <label class="form-label mt-2 d-flex justify-content-start"> Code postale :</label>
                 <input <?= $disabled ?> type="text" class="form-control box" id="zipCode" name="zipCode" maxlength="6" value="<?= $user['USER_ZIPCODE'] ?>">
               </div>
 
-              <div class="col-sm-3 bg-light">
+              <div class="col-sm-3">
                 <label class="form-label mt-2 d-flex justify-content-start"> Statut :</label>
                 <div><?= $user['status_name'] ?></div>
               </div>
@@ -58,35 +58,61 @@ require './controllers/controller.php';
 
       </div>
 
-      <div class="row justify-content-center mt-5">
+      <div class="row justify-content-center">
 
-        <div class="col-sm-1">
-          <button type="submit" class="btn btn-primary btn-lg" name="myPublications">Mes publications <br> <i class="bi bi-newspaper"></i></button>
+        <button class="card col-sm-3 shadowbutton" type="submit" name="myPublications">
+          <div class="card-body">
+            <h3 class="bi bi-newspaper d-flex justify-content-start"></h3>
+            <h4 class="card-title d-flex justify-content-start">Mes publications</h4>
+            <h5 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Gérer mes publications</h5>
+          </div>
+        </button>
+
+        <button class="card col-sm-3 shadowbutton" type="submit" name="myFavorite">
+          <div class="card-body">
+            <h3 class="bi bi-heart d-flex justify-content-start"></h3>
+            <h4 class="card-title d-flex justify-content-start">Mes favoris</h4>
+            <h5 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Gérer mes annonces favorites</h5>
+          </div>
+        </button>
+
+        <button class="card col-sm-3 shadowbutton" type="submit" name="myMessages">
+          <div class="card-body">
+            <h3 class="bi bi-envelope d-flex justify-content-start"></h3>
+            <h4 class="card-title d-flex justify-content-start">Mes messages</h4>
+            <h5 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Mes messages liés aux annonces</h5>
+          </div>
+        </button>
+
+        <button class="card col-sm-3 bg-<?= $colorButton ?> shadowbutton" type="submit" name="<?= $nameButton ?>">
+          <div class="card-body">
+            <h3 class="bi bi-file-earmark-person d-flex justify-content-start"></h3>
+            <h4 class="card-title d-flex justify-content-start"><?= $textButton ?></h4>
+          </div>
+        </button>
+
+        <button class="card col-sm-3 shadowbutton" type="submit" name="changePwd">
+          <div class="card-body">
+            <h3 class="bi bi-key d-flex justify-content-start"></h3>
+            <h4 class="card-title d-flex justify-content-start">Changer mon mot de passe</h4>
+          </div>
+        </button>
+
+
+        <button class="card col-sm-3 shadowbutton" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          <div class="card-body">
+            <h3 class="bi bi-person-x d-flex justify-content-start"></h3>
+            <h4 class="card-title d-flex justify-content-start">Supprimer mon compte</h4>
+          </div>
+        </button>
+
+
+        <div>
+          <button class="btn bg-white border-0" type="submit" name="disconnect"><b>Me déconnecter <i class="bi bi-box-arrow-right"></i></b></button>
         </div>
 
-        <div class="col-sm-1">
-          <button type="submit" class="btn btn-primary btn-lg" name="myFavorite">Mes favoris <br> <i class="bi bi-heart"></i> </button>
-        </div>
 
-        <div class="col-sm-2">
-          <button type="submit" class="btn btn-lg <?= $colorButton ?>" name="<?= $nameButton ?>"><?= $textButton ?><br> <i class="bi bi-file-earmark-person"></i> </button>
-        </div>
 
-        <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary btn-lg" name="changePwd">Changer de mot de passe <br> <i class="bi bi-key"></i> </button>
-        </div>
-
-        <div class="col-sm-2">
-          <button type="button" class="btn btn-primary btn-lg">Mes messages <br> <i class="bi bi-envelope"></i></button>
-        </div>
-
-        <div class="col-sm-2">
-          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer mon compte <br> <i class="bi bi-person-x"></i> </button>
-        </div>
-
-        <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary btn-lg" id="disconnect" name="disconnect">Se deconnecter <br> <i class="bi bi-box-arrow-right"></i></button>
-        </div>
       </div>
     </form>
 

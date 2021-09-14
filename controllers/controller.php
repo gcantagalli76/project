@@ -186,13 +186,13 @@ if (isset($_POST['modifyButton'])) {
   $disabled = '';
   $textButton = 'Valider la modification';
   $nameButton = 'validModify';
-  $colorButton = 'btn-success';
+  $colorButton = 'success';
   $displayUserArray = $userObj->displayUser($_SESSION['email']);
 } else {
   $disabled = 'disabled';
-  $textButton = 'Modifier mes données personnelles';
+  $textButton = 'Modifier mon profil';
   $nameButton = 'modifyButton';
-  $colorButton = 'btn-primary';
+  $colorButton = 'white';
 }
 
 // quand il clic sur la validation des modifs tu lances la fonction qui change les données utilisateurs avec les infos remplis dans les input et tu affiches une sweet de confirmation
