@@ -180,21 +180,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['userId']) && $_SESSION['status
   }
 }
 
-// Quand tu clics sur modifier les données du profil du user tu changes le bouton en valider les modif et tu ouvres les input pour que l'utilisateur puisse rentrer
-// des nouvelles données
-if (isset($_POST['modifyButton'])) {
-  $disabled = '';
-  $textButton = 'Valider la modification';
-  $nameButton = 'validModify';
-  $colorButton = 'success';
-  $displayUserArray = $userObj->displayUser($_SESSION['email']);
-} else {
-  $disabled = 'disabled';
-  $textButton = 'Modifier mon profil';
-  $nameButton = 'modifyButton';
-  $colorButton = 'white';
-}
-
 // quand il clic sur la validation des modifs tu lances la fonction qui change les données utilisateurs avec les infos remplis dans les input et tu affiches une sweet de confirmation
 if (isset($_POST['validModify']) && $emptyModifUser == 0) {
   $userObj->modifyUser();
@@ -202,10 +187,12 @@ if (isset($_POST['validModify']) && $emptyModifUser == 0) {
   $titleSweet = "Données modifiées !";
   $textSweet = "Vos données personnelles ont bien été modifiées";
   $iconSweet = "success";
+  $redirectionSweet = 'moncompte.php';
 } elseif (isset($_POST['validModify']) && $emptyModifUser > 0) {
   $titleSweet = "Données incomplètes !";
   $textSweet = "Veuillez remplir tous les champs";
   $iconSweet = "error";
+  $redirectionSweet = 'myprofil.php';
 }
 
 // au clic sur mes publications tu renvois sur la pages mes publications
@@ -216,6 +203,11 @@ if (isset($_POST['myPublications'])) {
 // au clic sur publication à valider tu renvois sur la pages des publications à valider par l'admin
 if (isset($_POST['publiToValid'])) {
   header("Location: publitovalid.php");
+}
+
+// au clic sur modifier mon profil tu vas sur la page myprofil.php
+if (isset($_POST['changeYourInformation'])) {
+  header("Location: myprofil.php");
 }
 
 // au clic sur mes favoris tu renvois sur la pages mes favoris
@@ -409,7 +401,6 @@ if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
 }
 
 // Si dans l'annonce tu clics sur pour mettre dans les favoris tu lance la fonction qui rajoute l'article dans les favoris de l'utilisateur
-
 if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
   if ($articleObj->verifyArticleFavorite($_SESSION['userId'], $_POST['addFavorite'])) {

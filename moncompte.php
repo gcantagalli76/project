@@ -8,63 +8,23 @@ require './controllers/controller.php';
 <body>
 
 
-  <div class="container-fluid centerPage text-center">
+  <div class="container-fluid text-center mt-5">
 
     <form action="" method="post">
 
-      <div class="col-sm-10 border shadowblock">
-        <?php foreach ($displayUserArray as $user) {
-          if ($_SESSION['userId'] == $user['USER_ID']) { ?>
-            <h1 class="text-center">Bonjour <?= $user['USER_FIRSTNAME'] ?></h1>
-            <div class="row justify-content-around">
-
-              <div class="col-sm-3">
-                <label class="form-label mt-2 d-flex justify-content-start"> Nom :</label>
-                <input <?= $disabled ?> type="text" class="form-control box" id="lastName" name="lastName" maxlength="20" value="<?= $user['USER_LASTNAME'] ?>">
-              </div>
-
-              <div class="col-sm-3">
-                <label class="form-label mt-2 d-flex justify-content-start"> Prénom :</label>
-                <input <?= $disabled ?> type="text" class="form-control box" id="firstName" name="firstName" maxlength="20" value="<?= $user['USER_FIRSTNAME'] ?>">
-              </div>
-
-              <div class="col-sm-3">
-                <label class="form-label mt-2 d-flex justify-content-start"> Adresse email :</label>
-                <input <?= $disabled ?> type="text" class="form-control box" id="mail" name="mail" maxlength="30" value="<?= $user['USER_EMAIL'] ?>">
-              </div>
-
-            </div>
+      <?php foreach ($displayUserArray as $user) {
+        if ($_SESSION['userId'] == $user['USER_ID']) { ?>
+          <h1 class="text-center">Bonjour <?= $user['USER_FIRSTNAME'] ?></h1>
+      <?php }
+      } ?>
 
 
-            <div class="row justify-content-around mb-3">
-
-              <div class="col-sm-3">
-                <label class="form-label mt-2 d-flex justify-content-start"> Ville :</label>
-                <input <?= $disabled ?> type="text" class="form-control box" id="city" name="city" maxlength="20" value="<?= $user['USER_CITY'] ?>">
-              </div>
-
-              <div class="col-sm-3">
-                <label class="form-label mt-2 d-flex justify-content-start"> Code postale :</label>
-                <input <?= $disabled ?> type="text" class="form-control box" id="zipCode" name="zipCode" maxlength="6" value="<?= $user['USER_ZIPCODE'] ?>">
-              </div>
-
-              <div class="col-sm-3">
-                <label class="form-label mt-2 d-flex justify-content-start"> Statut :</label>
-                <div><?= $user['status_name'] ?></div>
-              </div>
-          <?php }
-        } ?>
-            </div>
-
-      </div>
-
-      <div class="row justify-content-center">
+      <div class="row justify-content-center mt-4">
 
         <button class="card col-sm-3 shadowbutton" type="submit" name="myPublications">
           <div class="card-body">
             <h3 class="bi bi-newspaper d-flex justify-content-start"></h3>
             <h4 class="card-title d-flex justify-content-start">Mes publications</h4>
-            <h6 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Gérer mes publications</h6>
           </div>
         </button>
 
@@ -72,7 +32,6 @@ require './controllers/controller.php';
           <div class="card-body">
             <h3 class="bi bi-heart d-flex justify-content-start"></h3>
             <h4 class="card-title d-flex justify-content-start">Mes favoris</h4>
-            <h6 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Gérer mes annonces favorites</h6>
           </div>
         </button>
 
@@ -80,14 +39,13 @@ require './controllers/controller.php';
           <div class="card-body">
             <h3 class="bi bi-envelope d-flex justify-content-start"></h3>
             <h4 class="card-title d-flex justify-content-start">Mes messages</h4>
-            <h6 class="card-subtitle mb-2 text-muted d-flex justify-content-start">Mes messages liés aux annonces</h6>
           </div>
         </button>
 
-        <button class="card col-sm-3 bg-<?= $colorButton ?> shadowbutton" type="submit" name="<?= $nameButton ?>">
+        <button class="card col-sm-3 shadowbutton" type="submit" name="changeYourInformation">
           <div class="card-body">
             <h3 class="bi bi-file-earmark-person d-flex justify-content-start"></h3>
-            <h4 class="card-title d-flex justify-content-start"><?= $textButton ?></h4>
+            <h4 class="card-title d-flex justify-content-start">Modifier mon profil</h4>
           </div>
         </button>
 
@@ -172,7 +130,7 @@ require './controllers/controller.php';
 
 
   <?php
-  //après avoir validé le coeur tu confirmes que l'annonce a bien été ajoutée aux favoris si l'utilisateur à bien une sessions d'ouverte
+  //après avoir validé les modif tu confirme que c'est ok
   if (isset($_POST['validModify'])) { ?>
 
     <script>

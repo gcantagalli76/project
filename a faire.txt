@@ -1,6 +1,6 @@
 A faire pour la prochaine fois :
 
-1 - Faire le désign
+1 - L'admin doit pouvoir supprimer les comptes utilisateurs
 
 
 
