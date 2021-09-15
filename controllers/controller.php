@@ -228,12 +228,13 @@ if (isset($_POST['changeYourInformation'])) {
 // au clic sur gestion de comptes utilisateurs tu vas sur la page usergestion.php
 if (isset($_POST['userGestion'])) {
   header("Location: usergestion.php");
+  $displayAllUser = $userObj->displayUser();
 }
 
 // si il n'y a pas d'email dans la session alors tu renvois l'utilisateur direct sur la page de connection sinon tu lances le reste
-if ($_SESSION['statusId'] != 1) {
+if (isset($_SESSION['statusId']) &&  $_SESSION['statusId'] != 1) {
   header("Location: connection.php");
-} else if ($_SESSION['statusId'] == 1) {
+} else if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1) {
   // tu lances la fonction permettant d'afficher les produits liés à l'utilisateur connecté
   $displayAllUser = $userObj->displayUser();
 }
@@ -276,6 +277,12 @@ if (isset($_POST['deleteUser'])) {
   session_destroy();
 }
 
+// lors du clic pour supprimer un utilisateur depuis le compte admin tu lances la fonction qui supprime en base les données de l'utilisateur pointé
+if (isset($_POST['idUserDelete'])) {
+  $userObj->deleteUserByAdmin();
+  $displayAllUser = $userObj->displayUser();
+  $deleteSuccess = true;
+}
 
 /////////////////////////////////////////////////////////////////////////////ARTICLE//////////////////////////////////////////////////////////////////////
 

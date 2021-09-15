@@ -165,4 +165,18 @@ class User extends Database
         $queryUser->execute();
         return $queryUser;
     }
+
+//fonction permettant de supprimer le compte à la demande de l'admin
+public function deleteUserByAdmin()
+{
+    $userId = $_POST['idUserDelete'];
+    $database = $this->connectDatabase();
+    $myQuery = "DELETE from `article` where USER_ID = :userId; DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
+    $queryUser = $database->prepare($myQuery);
+    $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
+    $queryUser->execute();
+    return $queryUser;
+}
+
+
 }

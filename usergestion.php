@@ -17,7 +17,7 @@ require './controllers/controller.php';
 
           <div class="col-md-5 p-3">
             <div class="card-body">
-              <h4 class="card-title"><?= $user['USER_FIRSTNAME'] ?> <?= $user['USER_LASTNAME'] ?></h4>
+              <h4 class="card-title" id="<?= $user['USER_ID'] ?>-user" class="card-title"><?= $user['USER_FIRSTNAME'] ?> <?= $user['USER_LASTNAME'] ?></h4>
               <p class="card-text"><?= $user['USER_EMAIL'] ?></p>
               <p class="card-text"><small class="text-muted">Ville: <?= $user['USER_CITY'] ?></small></p>
             </div>
@@ -26,7 +26,7 @@ require './controllers/controller.php';
           <div class="col-md-5">
             <div class="card-body">
               <div class="d-flex align-items-center p-3 justify-content-center">
-                <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $user['USER_ID'] ?>"> Supprimer</div>
+                <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-user-id="<?= $user['USER_ID'] ?>"> Supprimer</div>
               </div>
               <form class="d-flex align-items-center p-3 justify-content-center" action="" method="post">
                 <button type="submit" class="btn bi bi-check-circle  ms-2" name="validArticleBtn" value="<?php echo $user['USER_ID'] ?>"> Valider</button>
@@ -45,16 +45,16 @@ require './controllers/controller.php';
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-danger">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Suppression d'une annonce</h5>
+          <h5 class="modal-title text-white" id="exampleModalLabel">Suppression d'un utilisateur</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center">
-          <p>Êtes vous sûre de vouloir supprimer l'annonce <b><span id="articleNameDelete"></span></b></p>
+          <p>Êtes vous sûre de vouloir supprimer l'utilisateur <b><span id="userNameDelete"></span></b></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
           <form action="" method="POST">
-            <button id="idArticleDelete" name="idArticleDelete" type="submit" class="btn btn-danger">Supprimer</button>
+            <button id="idUserDelete" name="idUserDelete" type="submit" class="btn btn-danger">Supprimer</button>
           </form>
         </div>
       </div>
@@ -79,7 +79,7 @@ require './controllers/controller.php';
   if (<?= $deleteSuccess ?>) {
     Swal.fire({
       icon: 'success',
-      text: 'Votre annonce a bien été supprimée !',
+      text: 'Votre utilisateur a bien été supprimée !',
       confirmButtonColor: '#000'
     })
   };
@@ -91,30 +91,12 @@ require './controllers/controller.php';
   trashButtonsArray.forEach(element => {
     element.addEventListener('click', function() {
       // on recupere la valeur du data pour l'inserer dans la value du button correspondant
-      document.getElementById('idArticleDelete').value = this.dataset.articleId
+      document.getElementById('idUserDelete').value = this.dataset.userId
       // on recupere la valeur des id contenant les nom et prenoms pour l'insérer dans la div
-      document.getElementById('articleNameDelete').innerHTML = document.getElementById(this.dataset.articleId + '-article').innerText;
+      document.getElementById('userNameDelete').innerHTML = document.getElementById(this.dataset.userId + '-user').innerText;
     })
   });
 </script>
-
-<?php
-
-//après avoir validé la publication par l'admin tu lances le message de confirmation et au clic sur ok tu renvoi sur la page des articles à valider
-if (isset($_POST['validArticleBtn'])) { ?>
-
-  <script>
-    Swal.fire({
-      title: "Article validé",
-      text: "Cet article va être publié sur le site suite à votre validation",
-      icon: "success",
-      confirmButtonColor: '#000'
-    }).then(function() {
-      window.location = "publitovalid.php";
-    });
-  </script>
-
-<?php } ?>
 
 </body>
 
