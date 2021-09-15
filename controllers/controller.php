@@ -89,19 +89,19 @@ if (isset($_POST['validPublication']) || isset($_POST['validModification'])) {
 $emptyModifUser = 0;
 
 if (isset($_POST['validModify'])) {
-  if (empty($_POST['lastName']) || strlen($_POST['lastName']) > 20) {
+  if (empty($_POST['lastName']) || strlen($_POST['lastName']) > 20 || !preg_match($regexName, $_POST['lastName'])) {
     $emptyModifUser = 1;
   }
-  if (empty($_POST['firstName']) || strlen($_POST['firstName']) > 20) {
+  if (empty($_POST['firstName']) || strlen($_POST['firstName']) > 20 || !preg_match($regexName, $_POST['firstName'])) {
     $emptyModifUser = 1;
   }
-  if (empty($_POST['mail']) || strlen($_POST['mail']) > 30) {
+  if (empty($_POST['mail']) || strlen($_POST['mail']) > 30 || !preg_match($regexEmail, $_POST['mail'])) {
     $emptyModifUser = 1;
   }
-  if (empty($_POST['city']) || strlen($_POST['city']) > 20) {
+  if (empty($_POST['city']) || strlen($_POST['city']) > 20 || !preg_match($regexCity, $_POST['city'])) {
     $emptyModifUser = 1;
   }
-  if (empty($_POST['zipCode']) || strlen($_POST['zipCode']) > 6) {
+  if (empty($_POST['zipCode']) || strlen($_POST['zipCode']) > 6 || !preg_match($regexPostal, $_POST['zipCode'])) {
     $emptyModifUser = 1;
   }
 }
@@ -181,18 +181,33 @@ if (isset($_SESSION['email']) && isset($_SESSION['userId']) && $_SESSION['status
 }
 
 // quand il clic sur la validation des modifs tu lances la fonction qui change les données utilisateurs avec les infos remplis dans les input et tu affiches une sweet de confirmation
-if (isset($_POST['validModify']) && $emptyModifUser == 0) {
-  $userObj->modifyUser();
-  $displayUserArray = $userObj->displayUser($_SESSION['email']);
-  $titleSweet = "Données modifiées !";
-  $textSweet = "Vos données personnelles ont bien été modifiées";
-  $iconSweet = "success";
-  $redirectionSweet = 'moncompte.php';
-} elseif (isset($_POST['validModify']) && $emptyModifUser > 0) {
-  $titleSweet = "Données incomplètes !";
-  $textSweet = "Veuillez remplir tous les champs";
-  $iconSweet = "error";
-  $redirectionSweet = 'myprofil.php';
+if (isset($_POST['validModifyPwd']) && $emptyModifUser == 0) {
+  $verifyPwdUser = $userObj->verifyPwd();
+  if (password_verify($_POST["password"], $verifyPwdUser['USER_PASSWORD']) && $_SESSION['statusId'] == 2) {
+    $userObj->modifyUser();
+    $displayUserArray = $userObj->displayUser($_SESSION['email']);
+    $titleSweet = "Données modifiées !";
+    $textSweet = "Vos données personnelles ont bien été modifiées";
+    $iconSweet = "success";
+    $redirectionSweet = '.then(function() {
+    window.location = "moncompte.php";
+});';
+  }
+  else if (password_verify($_POST["password"], $verifyPwdUser['USER_PASSWORD']) && $_SESSION['statusId'] == 1) {
+    $userObj->modifyUser();
+    $displayUserArray = $userObj->displayUser($_SESSION['email']);
+    $titleSweet = "Données modifiées !";
+    $textSweet = "Vos données personnelles ont bien été modifiées";
+    $iconSweet = "success";
+    $redirectionSweet = '.then(function() {
+    window.location = "myadmincount.php";
+});';
+  } else {
+    $titleSweet = "Mot de passe invalide !";
+    $textSweet = "Le mot de passe que vous avez rentré n'est pas le bon";
+    $iconSweet = "error";
+    $redirectionSweet = '';
+  }
 }
 
 // au clic sur mes publications tu renvois sur la pages mes publications
@@ -208,6 +223,19 @@ if (isset($_POST['publiToValid'])) {
 // au clic sur modifier mon profil tu vas sur la page myprofil.php
 if (isset($_POST['changeYourInformation'])) {
   header("Location: myprofil.php");
+}
+
+// au clic sur gestion de comptes utilisateurs tu vas sur la page usergestion.php
+if (isset($_POST['userGestion'])) {
+  header("Location: usergestion.php");
+}
+
+// si il n'y a pas d'email dans la session alors tu renvois l'utilisateur direct sur la page de connection sinon tu lances le reste
+if ($_SESSION['statusId'] != 1) {
+  header("Location: connection.php");
+} else if ($_SESSION['statusId'] == 1) {
+  // tu lances la fonction permettant d'afficher les produits liés à l'utilisateur connecté
+  $displayAllUser = $userObj->displayUser();
 }
 
 // au clic sur mes favoris tu renvois sur la pages mes favoris

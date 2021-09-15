@@ -43,7 +43,7 @@ require './controllers/controller.php';
           </div>
         </button>
 
-        <button class="card col-sm-3 shadowbutton" type="submit" name="publiToValid">
+        <button class="card col-sm-3 shadowbutton" type="submit" name="userGestion">
           <div class="card-body">
             <h3 class="bi bi-people d-flex justify-content-start"></h3>
             <h4 class="card-title d-flex justify-content-start">Gestion comptes utilisateurs</h4>

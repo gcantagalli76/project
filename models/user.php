@@ -39,6 +39,7 @@ class User extends Database
         $fetch = $queryUser->fetchAll();
         return $fetch;
     }
+    
 
     //fonction permettant de vérifier dans la bdd si l'utilisateur qui se connecte a bien un compte de créé en base
     public function connectionUser()

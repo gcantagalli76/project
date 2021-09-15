@@ -19,7 +19,6 @@ require './controllers/controller.php';
                         <label class="form-label mt-3 d-flex justify-content-start"> Nom :</label>
                         <input type="text" class="form-control box" name="yourName" id="yourName">
                         <span id="messageInfosName"></span>
-                        <!-- <div class="<?= $className ?? '' ?>"><?= $messageName ?? '' ?></div> -->
                     </div>
                 </div>
 
@@ -28,7 +27,6 @@ require './controllers/controller.php';
                         <label class="form-label mt-2 d-flex justify-content-start"> Prénom :</label>
                         <input type="text" class="form-control box" id="yourFirstName" name="yourFirstName">
                         <span id="messageInfosFirstName"></span>
-                        <!-- <div class="<?= $classFirstName ?? '' ?>"><?= $messageFirstName ?? '' ?></div> -->
                     </div>
                 </div>
 
