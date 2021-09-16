@@ -236,6 +236,12 @@ if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1) {
   $displayAllUser = $userObj->displayUser();
 }
 
+// si tu clics sur le bouton valider le changement de statut tu lances la fonction qui change le statut de l'utilisateur et celle qui affiche tous les utilisateurs
+if (isset($_POST['validChangeStatut'])) {
+  $userObj->modifyUserStatut();
+  $displayAllUser = $userObj->displayUser();
+}
+
 // au clic sur mes favoris tu renvois sur la pages mes favoris
 if (isset($_POST['myFavorite']) && isset($_SESSION['userId'])) {
   header("Location: favoris.php");

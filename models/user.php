@@ -178,5 +178,19 @@ public function deleteUserByAdmin()
     return $queryUser;
 }
 
+// fonction permettant de modifier l'article
+public function modifyUserStatut()
+{
+    $userStatut = $_POST['userStatut'];
+    $userId = $_POST['validChangeStatut'];
+    $database = $this->connectDatabase();
+    $myQuery = "UPDATE `_user` SET STATUS_ID = :userStatut where USER_ID = :userId";
+    $queryArticle = $database->prepare($myQuery);
+    $queryArticle->bindValue(':userStatut', $userStatut, PDO::PARAM_INT);
+    $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+    $execute = $queryArticle->execute();
+    return $execute;
+}
+
 
 }

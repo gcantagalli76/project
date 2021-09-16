@@ -23,29 +23,22 @@ require './controllers/controller.php';
             </div>
           </div>
 
-          <div class="col-md-3 card-body">
-          <select class="form-select" aria-label="" id="userStatut" name="userStatut">
-            <option selected disabled>Satut de l'utilisateur :</option>
-            <option value="1" <?= ($user['STATUS_ID'] == 1) || (isset($_POST['userStatut']) && $_POST['userStatut'] == 1) ? 'selected' : '' ?>>Admin</option>
-            <option value="2" <?= ($user['STATUS_ID'] == 2) || (isset($_POST['userStatut']) && $_POST['userStatut'] == 2) ? 'selected' : '' ?>>Utilisateur</option>
-          </select>
-          <button type="submit" class="btn btnStatut mt-2" name="validChangeStatut">Valider le changement de statut</button>
-          </div>
-          <div class="col-md-4">
+          <form class="col-md-3 card-body" method="post">
+            <h6 class=" d-flex justify-content-center">Statut utilisateur</h6>
+            <select class="form-select mt-3" aria-label="" id="userStatut" name="userStatut">
+              <option selected disabled>Satut de l'utilisateur :</option>
+              <option value="1" <?= ($user['STATUS_ID'] == 1) || (isset($_POST['userStatut']) && $_POST['userStatut'] == 1) ? 'selected' : '' ?>>Admin</option>
+              <option value="2" <?= ($user['STATUS_ID'] == 2) || (isset($_POST['userStatut']) && $_POST['userStatut'] == 2) ? 'selected' : '' ?>>Utilisateur</option>
+            </select>
+            <button type="submit" class="btn btnStatut mt-2" name="validChangeStatut" value="<?php echo $user['USER_ID'] ?>">Valider le changement de statut</button>
+          </form>
+          <div class="col-md-4 mt-2">
             <div class="card-body">
               <div class="d-flex align-items-center p-3 justify-content-center">
                 <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-user-id="<?= $user['USER_ID'] ?>"> Supprimer le compte utilisateur</div>
               </div>
             </div>
           </div>
-          <!-- <form class="d-flex align-items-center p-3 justify-content-center" action="" method="post">
-                <button type="submit" class="btn bi bi-check-circle  ms-2" name="validArticleBtn" value="<?php echo $user['USER_ID'] ?>"> Valider</button>
-              </form> -->
-              
-
-
-
-
         </div>
       </div>
 
@@ -88,7 +81,7 @@ require './controllers/controller.php';
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-  // Mise en place de la swal pour indiquer que l'annonce a été supprimée
+  // Mise en place de la swal pour indiquer que l'utilisateur a été supprimée
   if (<?= $deleteSuccess ?>) {
     Swal.fire({
       icon: 'success',
@@ -110,6 +103,23 @@ require './controllers/controller.php';
     })
   });
 </script>
+
+<?php
+
+//après avoir modifié le statut de l'utilisateur tu lances le message de confirmation 
+
+if (isset($_POST['validChangeStatut'])) { ?>
+
+  <script>
+    Swal.fire({
+      title: "Changement effectué",
+      text: "Le changement de statut a bien été réalisé",
+      icon: "success",
+      confirmButtonColor: '#000'
+    });
+  </script>
+
+<?php } ?>
 
 </body>
 
