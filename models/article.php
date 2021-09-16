@@ -267,4 +267,21 @@ class Article extends Database
         return $execute;
     }
 
+    // fonction permettant d'envoyer un message au vendeur
+    public function sendMessage()
+    {
+        $database = $this->connectDatabase();
+        $idarticle = $_POST['articleId'];
+        $textMessage = $_POST['textMessage'];
+        $userId = $_SESSION["userId"];
+        $myQuery = 'INSERT INTO CONVERSATION(conversation_text,article_id,user_send_id)
+                    VALUES(:textMessage, :articleId, :userId)';
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':articleId', $idarticle, PDO::PARAM_INT);
+        $queryArticle->bindValue(':textMessage', $textMessage, PDO::PARAM_STR_CHAR);
+        $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $execute = $queryArticle->execute();
+        return $execute;
+    }
+
 }

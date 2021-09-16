@@ -57,7 +57,6 @@ require './controllers/controller.php';
 
                 <div class="row justify-content-center">
                     <div class="col-sm-3d-flex justify-content-center">
-                        <!-- <button type="submit" class="btn btnConnect mt-5 mb-3" id='validModify' name="validModify">Valider les modifications</button> -->
                         <button type="submit" name="validModify" class="btn btnConnect mt-5 mb-3">Valider les modifications</button>
             </form>
 

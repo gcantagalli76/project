@@ -52,9 +52,9 @@ require './controllers/controller.php';
       </div>
 
       <div class="border-bottom">
-      <h6 class="mt-2">Description</h6>
-      <div class="mt-3"><?= $articles['ARTICLE_DESCRIPTION'] ?></div>
-      <div class="mt-4 mb-2">Quantitée restante comparée au produit neuf : <?= $articles['ARTICLE_QUANTITY'] ?>%</div>
+        <h6 class="mt-2">Description</h6>
+        <div class="mt-3"><?= $articles['ARTICLE_DESCRIPTION'] ?></div>
+        <div class="mt-4 mb-2">Quantitée restante comparée au produit neuf : <?= $articles['ARTICLE_QUANTITY'] ?>%</div>
       </div>
 
       <div class="row mt-5">
@@ -63,7 +63,7 @@ require './controllers/controller.php';
         </form>
 
         <div class="col-md-6 text-center">
-          <button type="submit" class="btn btnConnect mt-3 mb-3"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
+          <button type="submit" class="btn btnConnect mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
         </div>
 
       </div>
@@ -94,7 +94,7 @@ require './controllers/controller.php';
 
 
   <!-- -------------- -->
-  <!--  UNIQUE MODALE -->
+  <!--  MODALE DELETE -->
   <!-- -------------- -->
   <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -116,7 +116,42 @@ require './controllers/controller.php';
     </div>
   </div>
   <!-- -------------- -->
-  <!--  UNIQUE MODALE -->
+  <!--  MODALE DELETE -->
+  <!-- -------------- -->
+
+
+
+  <!-- -------------- -->
+  <!-- MODALE MESSAGE -->
+  <!-- -------------- -->
+
+  <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" method="POST">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Votre message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <input class="form-control2" id="message-text" name="textMessage">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button id="sendMessage" name="sendMessage" type="submit" class="btn btnConnect">Envoyer votre message</button>
+          <input type="hidden" name="articleId" value="<?= $articles['ARTICLE_ID'] ?>">
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+
+  <!-- -------------- -->
+  <!-- MODALE MESSAGE -->
   <!-- -------------- -->
 
   </div>
@@ -203,6 +238,22 @@ if (isset($_POST['validArticleBtn'])) { ?>
       confirmButtonColor: '#000'
     }).then(function() {
       window.location = "publitovalid.php";
+    });
+  </script>
+
+<?php } ?>
+
+<?php
+
+//après avoir validé l'envoi du message tu indiques à l'utilisateur que le message a bien été envoyé
+if (isset($_POST['sendMessage'])) { ?>
+
+  <script>
+    Swal.fire({
+      title: "Message envoyé",
+      text: "Votre message a bien été envoyé au vendeur de cet article",
+      icon: "success",
+      confirmButtonColor: '#000'
     });
   </script>
 

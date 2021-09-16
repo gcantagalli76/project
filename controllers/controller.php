@@ -471,6 +471,16 @@ if (isset($_POST['validArticleBtn'])) {
   $articleObj->validArticle();
 }
 
+// si tu clics sur le bouton valider l'envoi du message au vendeur, tu lances la fonction qui enregistre le message dans la bdd
+if (isset($_POST['sendMessage'])) {
+  $articleObj->sendMessage();
+  $displayDetailsArticleArray = $articleObj->displayArticleDetails();
+}
+
+
+
+
+
 
 
 // Si l'admin clics pour valider l'article, tu lances la fonction qui vérifie qu'il n'est pas déjà valider et sinon tu lances la fonction qui le valide
