@@ -12,7 +12,7 @@ require './controllers/controller.php';
 
   <div class="container-fluid">
     <?php foreach ($displayAllUser as $user) { ?>
-      <div class="card mb-3 favorite" style="width: 50%;">
+      <div class="card mb-3 favorite" style="width: 55%;">
         <div class="row g-0">
 
           <div class="col-md-5 p-3">
@@ -23,16 +23,29 @@ require './controllers/controller.php';
             </div>
           </div>
 
-          <div class="col-md-5">
+          <div class="col-md-3 card-body">
+          <select class="form-select" aria-label="" id="userStatut" name="userStatut">
+            <option selected disabled>Satut de l'utilisateur :</option>
+            <option value="1" <?= ($user['STATUS_ID'] == 1) || (isset($_POST['userStatut']) && $_POST['userStatut'] == 1) ? 'selected' : '' ?>>Admin</option>
+            <option value="2" <?= ($user['STATUS_ID'] == 2) || (isset($_POST['userStatut']) && $_POST['userStatut'] == 2) ? 'selected' : '' ?>>Utilisateur</option>
+          </select>
+          <button type="submit" class="btn btnStatut mt-2" name="validChangeStatut">Valider le changement de statut</button>
+          </div>
+          <div class="col-md-4">
             <div class="card-body">
               <div class="d-flex align-items-center p-3 justify-content-center">
-                <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-user-id="<?= $user['USER_ID'] ?>"> Supprimer</div>
+                <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-user-id="<?= $user['USER_ID'] ?>"> Supprimer le compte utilisateur</div>
               </div>
-              <form class="d-flex align-items-center p-3 justify-content-center" action="" method="post">
-                <button type="submit" class="btn bi bi-check-circle  ms-2" name="validArticleBtn" value="<?php echo $user['USER_ID'] ?>"> Valider</button>
-              </form>
             </div>
           </div>
+          <!-- <form class="d-flex align-items-center p-3 justify-content-center" action="" method="post">
+                <button type="submit" class="btn bi bi-check-circle  ms-2" name="validArticleBtn" value="<?php echo $user['USER_ID'] ?>"> Valider</button>
+              </form> -->
+              
+
+
+
+
         </div>
       </div>
 

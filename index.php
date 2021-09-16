@@ -59,7 +59,7 @@ require './controllers/controller.php';
   <div class="row mb-5">
     <div class="col-md-12 centerPage">
       <h2 class="mb-0">Nos idées récup</h2><br>
-      <h5>Même avec peu de produit on peut quand même faire plein de chose !</h5>
+      <h5>Même avec peu de produit, on peut quand même faire plein de choses !</h5>
     </div>
   </div>
 
@@ -82,7 +82,7 @@ require './controllers/controller.php';
         </a>
         <div class="card-body">
           <h5 class="card-title">Meuble TV</h5>
-          <p class="card-text">Pour un rendu original et chaleureu, récupérez vos planches de parquet en trop et faite en un meuble tv</p>
+          <p class="card-text">Pour un rendu original et chaleureux, récupérez vos planches de parquet en trop et faite en un meuble tv</p>
         </div>
       </div>
     </div>

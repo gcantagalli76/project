@@ -231,11 +231,8 @@ if (isset($_POST['userGestion'])) {
   $displayAllUser = $userObj->displayUser();
 }
 
-// si il n'y a pas d'email dans la session alors tu renvois l'utilisateur direct sur la page de connection sinon tu lances le reste
-if (isset($_SESSION['statusId']) &&  $_SESSION['statusId'] != 1) {
-  header("Location: connection.php");
-} else if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1) {
-  // tu lances la fonction permettant d'afficher les produits liés à l'utilisateur connecté
+// si tu es l'admin tu peux lancer la fonction permettant d'afficher tous les comptes utilisateurs
+if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1) {
   $displayAllUser = $userObj->displayUser();
 }
 
