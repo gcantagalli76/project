@@ -1,6 +1,6 @@
 A faire pour la prochaine fois :
 
-1 - L'admin doit pouvoir changer le statut sur les comptes utilisateurs
+1 - Gérer l'envoi d'un message sur une annonce
 
 
 
