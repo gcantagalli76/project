@@ -2,6 +2,9 @@ A faire pour la prochaine fois :
 
 1 - Gérer l'envoi d'un message sur une annonce
 
+Si le token n'existe plus vu qu'il est supprimé et que tu retourne sur le lien envoyé par email alors tu
+renvoi un message d'erreur qui renvoi sur la page de connection
+
 
 
 

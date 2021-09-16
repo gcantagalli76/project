@@ -284,4 +284,25 @@ class Article extends Database
         return $execute;
     }
 
+    // fonction permettant d'afficher tous les messages reçu par l'utilisateur
+    public function displayUserMessages()
+    {
+        $database = $this->connectDatabase();
+        $userId = $_SESSION["userId"];
+        $myQuery = "SELECT C.*,
+                           U.USER_FIRSTNAME as firstName,
+                           U.USER_LASTNAME as lastName,
+                           A.ARTICLE_TITLE,
+                           A.picture1
+                    FROM `conversation` as C left join _user as U on C.USER_SEND_ID = U.USER_ID 
+                                             left join article as A on A.ARTICLE_ID = C.ARTICLE_ID
+                    where U.USER_ID = :userId
+                    order by c.send_date";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $queryArticle->execute();
+        $fetch = $queryArticle->fetchAll();
+         return $fetch;
+    }
+
 }

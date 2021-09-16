@@ -1,213 +1,54 @@
-<?php require 'views/header.php'; ?>
+<?php require 'views/header.php';
+
+require './controllers/controller.php'; ?>
 
 <body>
 
 
   <h1 class="text-center p-5">Mes messages</h1>
 
-
   <div class="container-fluid">
+    <?php foreach ($displayUserMessages as $messages) { ?>
+      <div class="card mb-3 favorite" style="width: 95%;">
+        <div class="row g-0">
+          <div class="col-md-2 d-flex align-items-center justify-content-center">
+            <img src="data:image/png;base64, <?= $messages['picture1'] ?>" alt="picture1" width="150px" style="max-height: 150px;">
+          </div>
+          <div class="col-md-2">
+            <div class="card-body">
+              <h4> <?= $messages['lastName'] ?> <?= $messages['ARTICLE_TITLE'] ?></h4>
+                <p class="card-text"><? $messages['SEND_DATE']  ?></p>
+                <p class="card-text"><small class="text-muted">CATEGORIE: </small></p>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="card-body">
+              <h6 class="card-title">Descriptif :</h6>
+              <p class="card-text"><? $messages['CONVERSATION_TEXT'] ?></p>
+            </div>
+          </div>
 
+          <div class="col-md-3">
+            <div class="card-body">
+              <div class="d-flex align-items-center p-3 justify-content-center">
+                <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<? $messages['CONVERSATION_ID'] ?>"> Supprimer</div>
+              </div>
 
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/peinture.jpg" alt="paint" width="150px" style="max-height: 150px;">
-      </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-        <div>Pseudo Expediteur</div>
-      </div>
-      <div class="col-6">
-        <div>Dernier message : It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
-      </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-envelope"></i>
-          <div class="ms-2">Nouveau message</div>
-        </div>
-      </div>
-    </div>
+              <form class="d-flex align-items-center p-3 justify-content-center" action="publicationmodify.php" method="post">
+                <button type="submit" class="btn bi bi-pencil ms-2" name="idArticleModify" value="<? $messages['CONVERSATION_ID'] ?>"> Répondre</button>
+              </form>
 
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/paint.JPG" alt="paint" width="150px" style="max-height: 150px;">
-      </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-        <div>Pseudo Expediteur</div>
-      </div>
-      <div class="col-6">
-        <div>Dernier message : It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
-      </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-envelope"></i>
-          <div class="ms-2">Nouveau message</div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/carrelagelm.jpg" alt="paint" width="150px" style="max-height: 150px;">
-      </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-        <div>Pseudo Expediteur</div>
-      </div>
-      <div class="col-6">
-        <div>Dernier message : It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
-      </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-envelope"></i>
-          <div class="ms-2">Nouveau message</div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/tetelit.jpg" alt="paint" width="150px" style="max-height: 150px;">
-      </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-        <div>Pseudo Expediteur</div>
-      </div>
-      <div class="col-6">
-        <div>Dernier message : It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
-      </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-envelope"></i>
-          <div class="ms-2">Nouveau message</div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/meubletv.jpg" alt="paint" width="150px" style="max-height: 150px;">
-      </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-        <div>Pseudo Expediteur</div>
-      </div>
-      <div class="col-6">
-        <div>Dernier message : It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
-      </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-envelope"></i>
-          <div class="ms-2">Nouveau message</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/wc3.jpg" alt="paint" width="150px" style="max-height: 150px;">
-      </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-        <div>Pseudo Expediteur</div>
-      </div>
-      <div class="col-6">
-        <div>Dernier message : It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
-      </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-envelope"></i>
-          <div class="ms-2">Nouveau message</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row align-items-center favorite" style="height: 170px;">
-      <div class="col-2 text-center">
-        <img src="/assets/img/wc2.jpg" alt="paint" width="150px" style="max-height: 150px;">
-      </div>
-      <div class="col-2">
-        <h3>Titre de l'article</h3>
-        <div>Prix</div>
-        <div>Date de publication</div>
-        <div>Pseudo Expediteur</div>
-      </div>
-      <div class="col-6">
-        <div>Dernier message : It is a long established fact that a reader will be distracted by the readable
-          content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
-          normal.</div>
-      </div>
-      <div class="col-2">
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-trash"></i>
-          <div class="ms-2">Supprimer</div>
-        </div>
-        <div class="d-flex align-items-center p-3">
-          <i class="bi bi-envelope"></i>
-          <div class="ms-2">Nouveau message</div>
-        </div>
-      </div>
-    </div>
-
+    <?php } ?>
   </div>
 
 
-  <div class="container-fluid centerPage text-center">
+  <?php require 'views/footer.php'; ?>
 
-    <?php require 'views/footer.php'; ?>
 
-  </div>
 
 
 

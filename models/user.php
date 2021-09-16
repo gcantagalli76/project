@@ -159,7 +159,7 @@ class User extends Database
     {
         $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
-        $myQuery = "DELETE from `article` where USER_ID = :userId; DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
+        $myQuery = "DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
         $queryUser = $database->prepare($myQuery);
         $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
         $queryUser->execute();
@@ -171,7 +171,7 @@ public function deleteUserByAdmin()
 {
     $userId = $_POST['idUserDelete'];
     $database = $this->connectDatabase();
-    $myQuery = "DELETE from `article` where USER_ID = :userId; DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
+    $myQuery = "DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
     $queryUser = $database->prepare($myQuery);
     $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
     $queryUser->execute();

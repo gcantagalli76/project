@@ -255,6 +255,11 @@ if (isset($_POST['changePwd'])) {
   header("Location: changemypwd.php");
 }
 
+// au clic sur mes messages tu renvois sur la pages messages.php
+if (isset($_POST['myMessages'])) {
+  header("Location: messages.php");
+}
+
 // Si tu clic sur changer mon mot de passe et si ton ex mot de pass correspond bien à ce que nous avons en bdd
 // alors tu lances la fonction qui prend ton new mdp et le change en bdd
 if (isset($_POST['changeMyPwd']) && $emptyModifPwd == 0) {
@@ -475,6 +480,11 @@ if (isset($_POST['validArticleBtn'])) {
 if (isset($_POST['sendMessage'])) {
   $articleObj->sendMessage();
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
+}
+
+// si tu clics sur le boutonmes messages, tu lances la fonction qui affiche les messages de l'utilisateur connecté
+if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
+  $displayUserMessages = $articleObj->displayUserMessages();
 }
 
 
