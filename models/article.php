@@ -76,7 +76,8 @@ class Article extends Database
         $myQuery = "SELECT A.*, 
                            DATE_FORMAT(`article_purchasedate`, '%d/%m/%Y') as ARTICLE_PURCHASEDATE,
                            C.CONDITION_NAME,
-                           U.USER_CITY
+                           U.USER_CITY,
+                           U.USER_FIRSTNAME
                     FROM `article` as A left join _condition as C on A.CONDITION_ID = C.CONDITION_ID 
                                         left join _user as U on A.user_id = U.user_id
                     where A.ARTICLE_ID = :articleId";
@@ -293,16 +294,29 @@ class Article extends Database
                            U.USER_FIRSTNAME as firstName,
                            U.USER_LASTNAME as lastName,
                            A.ARTICLE_TITLE,
-                           A.picture1
+                           A.picture1,
+                           DATE_FORMAT(C.SEND_DATE, '%d/%m/%Y') as SEND_DATE2
                     FROM `conversation` as C left join _user as U on C.USER_SEND_ID = U.USER_ID 
                                              left join article as A on A.ARTICLE_ID = C.ARTICLE_ID
-                    where U.USER_ID = :userId
+                    where A.USER_ID = :userId
                     order by c.send_date";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
         $queryArticle->execute();
         $fetch = $queryArticle->fetchAll();
          return $fetch;
+    }
+
+    // fonction permettant de supprimer un message reçu par l'utilisateur
+    public function deleteUserMessages()
+    {
+        $database = $this->connectDatabase();
+        $conversationId = $_POST["conversationId"];
+        $myQuery = "DELETE FROM `conversation` where CONVERSATION_ID = :conversationId;";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':conversationId', $conversationId, PDO::PARAM_INT);
+        $execute = $queryArticle->execute();
+        return $execute;
     }
 
 }

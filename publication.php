@@ -8,7 +8,7 @@ require './controllers/controller.php';
 
   <div class="container-fluid centerPage text-center">
     <div class="row justify-content-center">
-      <div class="col-sm-10 bg-light border shadowblock">
+      <div class="col-sm-10 border shadowblock">
         <h1 class="text-center">Votre annonce</h1>
         <form action="" method="post" enctype="multipart/form-data">
           <div class="row justify-content-around">
@@ -41,21 +41,13 @@ require './controllers/controller.php';
 
               <div class="row mt-3">
                 <div class="col-sm-10">
-                  <label for="customRange3" class="form-label mt-2">Quantité restante comparée au produit neuf</label>
+                  <label for="customRange3" class="form-label mt-2">Quantité restante comparée au produit neuf : </label>
+                  <span id="resultRange" class="fw-bold" name="yourQuantity"></span>
+                  <span class="fw-bold">%</span>
                   <input type="range" class=form-range mt-2 min="1" max="100" value="50" id="yourQuantity" name="yourQuantity">
                 </div>
               </div>
 
-              <div class="row mt-3">
-                <div class="col-sm-10">
-                  <span id="resultRange" class="fw-bold" name="yourQuantity"></span>
-                  <span class="fw-bold">%</span>
-                </div>
-              </div>
-
-
-
-              <!-- form-range  custom-range-->
 
               <div class="row mt-1">
                 <div class="col-sm-4">
@@ -68,10 +60,6 @@ require './controllers/controller.php';
                   <input type="number" class="form-control box" id="yourPrice" name="yourPrice" min="1" max="10000">
                   <span id="messageInfosTitle"></span>
                 </div>
-                <!-- <div class="col-sm-2">
-                  <label class="form-check-label mt-2 d-flex justify-content-start">Je donne!</label>
-                  <input type="checkbox" class="form-check-input mt-2" id="youGive" name="youGive">
-                </div> -->
               </div>
               <div class="row mt-3">
                 <div class="col-sm-10">

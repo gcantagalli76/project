@@ -1,5 +1,5 @@
 
-<div class="container-fluid centerPage text-center">
+<footer class="container-fluid centerPage text-center">
 <div class="row footer-size align-items-center">
       <div class="col-md-3">
         <a class="nav-link active text-white">Nous contacter</a>
@@ -15,4 +15,4 @@
         <img src="./assets/img/twitter.svg" alt="heart" width="25px">
       </div>
     </div>
-    </div>
+    </footer>

@@ -1,12 +1,11 @@
 A faire pour la prochaine fois :
 
-1 - Gérer l'envoi d'un message sur une annonce
-
-Si le token n'existe plus vu qu'il est supprimé et que tu retourne sur le lien envoyé par email alors tu
+1 - Si le token n'existe plus vu qu'il est supprimé et que tu retourne sur le lien envoyé par email alors tu
 renvoi un message d'erreur qui renvoi sur la page de connection
 
+2 - Mettre des boutons pour retourner à la page précécente
 
-
+3 - Corriger ton code en mettant des form sur chaque bouton pour éviter d'avoir un controller dégueu
 
 
 

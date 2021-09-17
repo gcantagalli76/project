@@ -13,19 +13,19 @@ require './controllers/controller.php';
     <form action="" method="post">
 
 
-        <?php foreach ($displayUserArray as $user) {
-          if ($_SESSION['userId'] == $user['USER_ID']) { ?>
-            <h1 class="text-center">Bonjour <?= $user['USER_FIRSTNAME'] ?></h1>
-          <?php }
-        } ?>
-       
+      <?php foreach ($displayUserArray as $user) {
+        if ($_SESSION['userId'] == $user['USER_ID']) { ?>
+          <h1 class="text-center">Bonjour <?= $user['USER_FIRSTNAME'] ?></h1>
+      <?php }
+      } ?>
+
 
       <div class="row justify-content-center mt-4">
 
-        <button class="card col-sm-3 shadowbutton" type="submit" name="publiToValid">
+        <button class="card col-sm-3 shadowbutton" type="submit" name="myPublications">
           <div class="card-body">
             <h3 class="bi bi-newspaper d-flex justify-content-start"></h3>
-            <h4 class="card-title d-flex justify-content-start">Publications à valider</h4>
+            <h4 class="card-title d-flex justify-content-start">Mes publications</h4>
           </div>
         </button>
 
@@ -43,13 +43,6 @@ require './controllers/controller.php';
           </div>
         </button>
 
-        <button class="card col-sm-3 shadowbutton" type="submit" name="userGestion">
-          <div class="card-body">
-            <h3 class="bi bi-people d-flex justify-content-start"></h3>
-            <h4 class="card-title d-flex justify-content-start">Gestion comptes utilisateurs</h4>
-          </div>
-        </button>
-
         <button class="card col-sm-3 shadowbutton" type="submit" name="changeYourInformation">
           <div class="card-body">
             <h3 class="bi bi-file-earmark-person d-flex justify-content-start"></h3>
@@ -64,7 +57,6 @@ require './controllers/controller.php';
           </div>
         </button>
 
-
         <button class="card col-sm-3 shadowbutton" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
           <div class="card-body">
             <h3 class="bi bi-person-x d-flex justify-content-start"></h3>
@@ -72,6 +64,19 @@ require './controllers/controller.php';
           </div>
         </button>
 
+        <button class="card col-sm-3 shadowbutton" type="submit" name="publiToValid">
+          <div class="card-body">
+            <h3 class="bi bi-newspaper d-flex justify-content-start"></h3>
+            <h4 class="card-title d-flex justify-content-start">Publications à valider</h4>
+          </div>
+        </button>
+
+        <button class="card col-sm-3 shadowbutton" type="submit" name="userGestion">
+          <div class="card-body">
+            <h3 class="bi bi-people d-flex justify-content-start"></h3>
+            <h4 class="card-title d-flex justify-content-start">Gestion comptes utilisateurs</h4>
+          </div>
+        </button>
 
         <div>
           <button class="btn bg-white border-0" type="submit" name="disconnect"><b>Me déconnecter <i class="bi bi-box-arrow-right"></i></b></button>

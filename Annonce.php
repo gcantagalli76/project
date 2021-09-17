@@ -47,6 +47,7 @@ require './controllers/controller.php';
       <div class="border-bottom p-2">
         <div class="mt-4">Acheté le <?= $articles['ARTICLE_PURCHASEDATE'] ?> - <?= $articles['CONDITION_NAME'] ?></div>
         <h4><?= $articles['ARTICLE_PRICE'] ?>€</h4>
+        <div class="mb-1">Publié par : <?= $articles['USER_FIRSTNAME'] ?></div>
         <img src="./assets/img/geo-alt.svg" alt="geo" width="20px">
         <a><?= $articles['USER_CITY'] ?></a>
       </div>
@@ -76,21 +77,23 @@ require './controllers/controller.php';
 
 
           <div class="col-md-6 text-center">
-            <div class="btn bi bi-trash ms-2 deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
+            <div class="btn bi bi-trash deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
           </div>
-
-        </div>
+          </div>
+        
       <?php } ?>
 
       <?php if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1 && isset($_GET['idArticleConsult'])) { ?>
+        <div class="row mt-2 ">
         <div class="col-md-6 text-center">
-          <div class="btn bi bi-trash ms-2 deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
+          <div class="btn bi bi-trash deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
         </div>
-
-    </div>
-
+        </div>
+        
 
   <?php } ?>
+
+  </div>
 
 
   <!-- -------------- -->
@@ -136,7 +139,7 @@ require './controllers/controller.php';
 
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Message:</label>
-            <input class="form-control2" id="message-text" name="textMessage">
+            <textarea class="form-control" id="message-text" name="textMessage" style="height: 10em;"></textarea>
           </div>
 
         </div>

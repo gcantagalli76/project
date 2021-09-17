@@ -482,9 +482,16 @@ if (isset($_POST['sendMessage'])) {
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
 }
 
-// si tu clics sur le boutonmes messages, tu lances la fonction qui affiche les messages de l'utilisateur connecté
+// si tu clics sur le bouton mes messages, tu lances la fonction qui affiche les messages de l'utilisateur connecté
 if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
   $displayUserMessages = $articleObj->displayUserMessages();
+}
+
+// si tu clics sur le bouton supprimer un message, tu lances la fonction qui supprimer le message dans la bdd
+if (isset($_POST['messageDelete'])) {
+  $articleObj->deleteUserMessages();
+  $displayUserMessages = $articleObj->displayUserMessages();
+  $deleteSuccess = true;
 }
 
 

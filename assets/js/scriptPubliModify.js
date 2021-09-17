@@ -28,3 +28,12 @@
         imgPreview3.setAttribute('src', oFREvent.target.result);
       };
     })
+
+    var slider = document.getElementById("yourQuantity");
+var output = document.getElementById("resultRange");
+output.innerHTML = slider.value;
+
+
+slider.oninput = function () {
+  output.innerHTML = this.value;
+}
