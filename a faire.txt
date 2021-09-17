@@ -7,6 +7,8 @@ renvoi un message d'erreur qui renvoi sur la page de connection
 
 3 - Corriger ton code en mettant des form sur chaque bouton pour éviter d'avoir un controller dégueu
 
+4 - Quand mes favoris ou mes publications sont vides mettre un message pour dire que nous n'avons rien
+
 
 
 

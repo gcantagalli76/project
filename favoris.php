@@ -42,10 +42,19 @@ require './controllers/controller.php';
                 <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $display['ARTICLE_ID'] ?>"> Supprimer</div>
               </div>
 
-              <div class="d-flex align-items-center p-3 justify-content-center">
+              <!-- <div class="d-flex align-items-center p-3 justify-content-center">
+                <i class="bi bi-envelope"></i>
+                <div class="ms-2">Envoyer un message</div>
+              </div> -->
+
+              <div class="d-flex align-items-center p-3 justify-content-center btn" data-bs-toggle="modal" data-bs-target="#messageModal">
                 <i class="bi bi-envelope"></i>
                 <div class="ms-2">Envoyer un message</div>
               </div>
+
+              <!-- <div class="col-md-6 text-center">
+                <button type="submit" class="btn btnConnect mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
+              </div> -->
 
             </div>
           </div>
@@ -81,6 +90,39 @@ require './controllers/controller.php';
   <!--  UNIQUE MODALE -->
   <!-- -------------- -->
 
+  <!-- -------------- -->
+  <!-- MODALE MESSAGE -->
+  <!-- -------------- -->
+
+  <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" method="POST">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Votre message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text" name="textMessage" style="height: 10em;"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button id="sendMessage" name="sendMessageInFavorite" type="submit" class="btn btnConnect">Envoyer votre message</button>
+          <input type="hidden" name="articleId" value="<?= $display['ARTICLE_ID'] ?>">
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+
+  <!-- -------------- -->
+  <!-- MODALE MESSAGE -->
+  <!-- -------------- -->
+
 <?php }
     require 'views/footer.php'; ?>
 
@@ -114,6 +156,22 @@ require './controllers/controller.php';
     })
   });
 </script>
+
+<?php
+
+//après avoir validé l'envoi du message tu indiques à l'utilisateur que le message a bien été envoyé
+if (isset($_POST['sendMessageInFavorite'])) { ?>
+
+  <script>
+    Swal.fire({
+      title: "Message envoyé",
+      text: "Votre message a bien été envoyé au vendeur de cet article",
+      icon: "success",
+      confirmButtonColor: '#000'
+    });
+  </script>
+
+<?php } ?>
 
 </body>
 

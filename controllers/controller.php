@@ -482,6 +482,12 @@ if (isset($_POST['sendMessage'])) {
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
 }
 
+// si tu clics sur le bouton valider l'envoi du message au vendeur depuis tes favoris, tu lances la fonction qui enregistre le message dans la bdd
+if (isset($_POST['sendMessageInFavorite'])) {
+  $articleObj->sendMessage();
+  $displayDetailsArticleArray = $articleObj->displayArticleFavorite();
+}
+
 // si tu clics sur le bouton mes messages, tu lances la fonction qui affiche les messages de l'utilisateur connecté
 if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
   $displayUserMessages = $articleObj->displayUserMessages();

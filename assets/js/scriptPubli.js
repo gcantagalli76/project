@@ -108,7 +108,7 @@ fileToUpload3.addEventListener("focusout", function () {
   }
 })
 
-
+//fonction permettant de récupérer la valeur sur la barre de quantité et de la renvoyer en chiffre
 var slider = document.getElementById("yourQuantity");
 var output = document.getElementById("resultRange");
 output.innerHTML = slider.value;
