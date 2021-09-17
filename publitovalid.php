@@ -7,7 +7,12 @@ require './controllers/controller.php';
 
 <body>
 
-  <h1 class="text-center p-5">Publications à valider</h1>
+
+  <?php if (empty($displayAdminArticleArray)) { ?>
+    <h1 class="text-center p-5">Vous n'avez pas de publications à valider</h1>
+  <?php } else { ?>
+    <h1 class="text-center p-5">Publications à valider</h1>
+  <?php } ?>
 
 
   <div class="container-fluid">

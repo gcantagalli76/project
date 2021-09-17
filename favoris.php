@@ -6,8 +6,12 @@ require './controllers/controller.php';
 
 <body>
 
+  <?php if (empty($displayFavoriteArticleArray)) { ?>
+    <h1 class="text-center p-5">Vos favoris sont vides</h1>
+  <?php } else { ?>
+    <h1 class="text-center p-5">Mes favoris</h1>
+  <?php } ?>
 
-  <h1 class="text-center p-5">Mes favoris</h1>
 
 
   <div class="container-fluid">

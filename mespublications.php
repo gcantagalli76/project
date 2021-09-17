@@ -7,7 +7,11 @@ require './controllers/controller.php';
 
 <body>
 
-  <h1 class="text-center p-5">Mes publications</h1>
+  <?php if (empty($displayUserArticleArray)) { ?>
+    <h1 class="text-center p-5">Vos publications sont vides</h1>
+  <?php } else { ?>
+    <h1 class="text-center p-5">Mes publications</h1>
+  <?php } ?>
 
 
   <div class="container-fluid">
