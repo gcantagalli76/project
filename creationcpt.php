@@ -2,7 +2,19 @@
 
 require './controllers/controller.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
+
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_secret = '6LdWb3wcAAAAABa5myVJze51bGXtk0basocwQcCg';
+    $recaptcha_response = $_POST['recaptcha_response'];
+  
+    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+    $recaptcha = json_decode($recaptcha);
+  }
+
 ?>
+
+
 
 <div class="container-fluid centerPage text-center">
 
@@ -12,7 +24,7 @@ require './controllers/controller.php';
             <div class="d-flex justify-content-start">Créez votre compte rapidement et retrouvez toutes les informations
                 sur vos annonces postées et vos favoris</div>
 
-            <form action="" method="post">
+            <form action="" method="post" id="createcount">
 
                 <div class="row justify-content-center">
                     <div class="col-sm-5 bg-light">
@@ -77,9 +89,9 @@ require './controllers/controller.php';
                         <button type="submit" class="btn btnConnect mt-5 mb-3" id='myButton' name="myButton">Valider mes informations</button>
 
                     </div>
-                    <span id='buttonInformation' style="font-style: italic" >Veuillez remplir tous les champs pour valider</span>
+                    <span id='buttonInformation' style="font-style: italic">Veuillez remplir tous les champs pour valider</span>
                 </div>
-
+                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
             </form>
 
         </div>
@@ -103,13 +115,14 @@ if (isset($_POST['myButton']) && $error == 0) { ?>
 
     <script>
         Swal.fire({
-            title: "<?= $titleSweet ?>",
-            text: "<?= $textSweet ?>",
-            icon: "<?= $iconSweet ?>",
-            confirmButtonColor: '#000'
-        }).then(function() {
-            window.location = "<?= $redirectionSweet ?>";
-        });
+                title: "<?= $titleSweet ?>",
+                text: "<?= $textSweet ?>",
+                icon: "<?= $iconSweet ?>",
+                confirmButtonColor: '#000'
+            })
+            .then(function() {
+                window.location = "<?= $redirectionSweet ?>";
+            });
     </script>
 
 <?php } ?>

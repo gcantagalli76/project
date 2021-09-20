@@ -24,35 +24,69 @@ $regexPassword = "/^([a-zA-Z ]+)$/";
 
 
 if (isset($_POST['myButton'])) {
-  if (!preg_match($regexName, $_POST['yourName'])) {
+  $yourName = htmlspecialchars($_POST['yourName']);
+  $yourFirstName = htmlspecialchars($_POST['yourFirstName']);
+  $yourEmail = htmlspecialchars($_POST['yourEmail']);
+  $yourCity = htmlspecialchars($_POST['yourCity']);
+  $yourPostalCode = htmlspecialchars($_POST['yourPostalCode']);
+  $yourPassword = htmlspecialchars($_POST['yourPassword']);
+  $yourConfirmPassword = htmlspecialchars($_POST['yourConfirmPassword']);
+  if (!preg_match($regexName, $yourName)) {
     $error = 1;
   }
-  if (!preg_match($regexName, $_POST['yourFirstName'])) {
+  if (!preg_match($regexName, $yourFirstName)) {
     $error = 1;
   }
-  if (!preg_match($regexEmail, $_POST['yourEmail'])) {
+  if (!preg_match($regexEmail, $yourEmail)) {
     $error = 1;
   }
-  if (!preg_match($regexCity, $_POST['yourCity'])) {
+  if (!preg_match($regexCity, $yourCity)) {
     $error = 1;
   }
-  if (!preg_match($regexPostal, $_POST['yourPostalCode'])) {
+  if (!preg_match($regexPostal, $yourPostalCode)) {
     $error = 1;
   }
-  if (!preg_match($regexPassword, $_POST['yourPassword'])) {
+  if (!preg_match($regexPassword, $yourPassword)) {
     $error = 1;
   }
-  if (!preg_match($regexPassword, $_POST['yourConfirmPassword'])) {
+  if (!preg_match($regexPassword, $yourConfirmPassword)) {
     $error = 1;
+  }
+}
+
+//Sécurité scaptcha
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
+
+  $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+  $recaptcha_secret = '6LdWb3wcAAAAABa5myVJze51bGXtk0basocwQcCg';
+  $recaptcha_response = $_POST['recaptcha_response'];
+
+  $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+  $recaptcha = json_decode($recaptcha);
+
+  if ($recaptcha->score < 0.5) {
+    $error = 1;
+    $titleSweet = "Vous êtes un robot";
+    $textSweet = "Sortez d'ici !";
+    $iconSweet = "error";
+    $redirectionSweet = "index.php";
   }
 }
 
 // Verification que les champs publications sont bien tous remplis que ce soit en publication ou en modification
 
 $emptyPublication = 0;
+$regexPrice = "/^[0-9]{1,10}$/";
+
 
 if (isset($_POST['validPublication']) || isset($_POST['validModification'])) {
-  if (empty($_POST['yourTitle']) || strlen($_POST['yourTitle']) > 40) {
+  $yourTitle = htmlspecialchars($_POST['yourTitle']);
+  $yourPrice = htmlspecialchars($_POST['yourPrice']);
+  $yourDescription = htmlspecialchars($_POST['yourDescription']);
+  if (empty($yourTitle) || strlen($yourTitle) > 40) {
     $emptyPublication = 1;
   }
   if (empty($_POST['yourCategory'])) {
@@ -67,10 +101,10 @@ if (isset($_POST['validPublication']) || isset($_POST['validModification'])) {
   if (empty($_POST['yourBuyDate'])) {
     $emptyPublication = 1;
   }
-  if (empty($_POST['yourPrice']) || strlen($_POST['yourPrice']) > 5) {
+  if (empty($yourPrice) || strlen($yourPrice) > 5 || !preg_match($regexPrice, $yourPrice)) {
     $emptyPublication = 1;
   }
-  if (empty($_POST['yourDescription']) || strlen($_POST['yourDescription']) > 170) {
+  if (empty($yourDescription) || strlen($yourDescription) > 170) {
     $emptyPublication = 1;
   }
   if (empty($_FILES['fileToUpload'])) {
@@ -89,19 +123,24 @@ if (isset($_POST['validPublication']) || isset($_POST['validModification'])) {
 $emptyModifUser = 0;
 
 if (isset($_POST['validModify'])) {
-  if (empty($_POST['lastName']) || strlen($_POST['lastName']) > 20 || !preg_match($regexName, $_POST['lastName'])) {
+  $lastName = htmlspecialchars($_POST['lastName']);
+  $firstName = htmlspecialchars($_POST['firstName']);
+  $mail = htmlspecialchars($_POST['mail']);
+  $city = htmlspecialchars($_POST['city']);
+  $zipCode = htmlspecialchars($_POST['zipCode']);
+  if (empty($lastName) || strlen($lastName) > 20 || !preg_match($regexName, $lastName)) {
     $emptyModifUser = 1;
   }
-  if (empty($_POST['firstName']) || strlen($_POST['firstName']) > 20 || !preg_match($regexName, $_POST['firstName'])) {
+  if (empty($firstName) || strlen($firstName) > 20 || !preg_match($regexName, $firstName)) {
     $emptyModifUser = 1;
   }
-  if (empty($_POST['mail']) || strlen($_POST['mail']) > 30 || !preg_match($regexEmail, $_POST['mail'])) {
+  if (empty($mail) || strlen($mail) > 30 || !preg_match($regexEmail, $mail)) {
     $emptyModifUser = 1;
   }
-  if (empty($_POST['city']) || strlen($_POST['city']) > 20 || !preg_match($regexCity, $_POST['city'])) {
+  if (empty($city) || strlen($city) > 20 || !preg_match($regexCity, $city)) {
     $emptyModifUser = 1;
   }
-  if (empty($_POST['zipCode']) || strlen($_POST['zipCode']) > 6 || !preg_match($regexPostal, $_POST['zipCode'])) {
+  if (empty($zipCode) || strlen($zipCode) > 6 || !preg_match($regexPostal, $zipCode)) {
     $emptyModifUser = 1;
   }
 }
@@ -111,16 +150,19 @@ if (isset($_POST['validModify'])) {
 $emptyModifPwd = 0;
 
 if (isset($_POST['changeMyPwd'])) {
-  if (empty($_POST['yourExPassword']) || !preg_match($regexPassword, $_POST['yourExPassword'])) {
+  $yourExPassword = htmlspecialchars($_POST['yourExPassword']);
+  $yourNewPassword = htmlspecialchars($_POST['yourNewPassword']);
+  $yourConfirmNewPassword = htmlspecialchars($_POST['yourConfirmNewPassword']);
+  if (empty($yourExPassword) || !preg_match($regexPassword, $yourExPassword)) {
     $emptyModifPwd = 1;
   }
-  if (empty($_POST['yourNewPassword']) || !preg_match($regexPassword, $_POST['yourNewPassword'])) {
+  if (empty($yourNewPassword) || !preg_match($regexPassword, $yourNewPassword)) {
     $emptyModifPwd = 1;
   }
-  if (empty($_POST['yourConfirmNewPassword']) || !preg_match($regexPassword, $_POST['yourConfirmNewPassword'])) {
+  if (empty($yourConfirmNewPassword) || !preg_match($regexPassword, $yourConfirmNewPassword)) {
     $emptyModifPwd = 1;
   }
-  if ($_POST['yourNewPassword'] != $_POST['yourConfirmNewPassword']) {
+  if ($yourNewPassword != $yourConfirmNewPassword) {
     $emptyModifPwd = 1;
   }
 }
@@ -129,7 +171,7 @@ if (isset($_POST['changeMyPwd'])) {
 /////////////////////////////////////////////////////////////////////////////USER//////////////////////////////////////////////////////////////////////
 
 // en cliquant sur le bouton qui valide l'ajout d'un compte, tu lances la fonction qui ajoute un utilisateur et tu enregistres son email en session puis tu renvois sur la page moncompte.php
-if (isset($_POST['myButton']) && $userObj->displayEmail($_POST['yourEmail'])) {
+if (isset($_POST['myButton']) && $userObj->displayEmail(htmlspecialchars($_POST["yourEmail"]))) {
   $titleSweet = "Adresse email déjà existante";
   $textSweet = "Cette adresse email existe déjà, veuillez en entrer une autre";
   $iconSweet = "error";
@@ -137,7 +179,7 @@ if (isset($_POST['myButton']) && $userObj->displayEmail($_POST['yourEmail'])) {
 } else if (isset($_POST['myButton']) && $error == 0 && $_POST['yourPassword'] == $_POST['yourConfirmPassword']) {
   $yourPassword = password_hash($_POST['yourPassword'], PASSWORD_DEFAULT);
   $addUserArray = $userObj->addUser($yourPassword);
-  $_SESSION['email'] = $_POST["yourEmail"];
+  $_SESSION['email'] = htmlspecialchars($_POST["yourEmail"]);
   $titleSweet = "Demande validée !";
   $textSweet = "Votre compte a bien été créé";
   $iconSweet = "success";
@@ -151,7 +193,7 @@ if (isset($_POST['disconnect'])) {
 
 // si tu as une session en cours avec un email alors tu peux afficher les données de l'utilisateur sur son compte et créer une session avec son id
 if (isset($_SESSION['email'])) {
-  $displayUserArray = $userObj->displayUser($_SESSION['email']);
+  $displayUserArray = $userObj->displayUser(htmlspecialchars($_SESSION['email']));
 }
 
 // Si tu clics dans mon compte et que tu as une sessions email d'enregistrée alors tu rentres direct sur ton compte
@@ -166,12 +208,12 @@ if (isset($_SESSION['email']) && isset($_SESSION['userId']) && $_SESSION['status
     $connectionUserArray = $userObj->connectionUser();
     if ($_POST['yourEmail'] == $connectionUserArray['USER_EMAIL'] && password_verify($_POST["yourPassword"], $connectionUserArray['USER_PASSWORD']) && $connectionUserArray['STATUS_ID'] == 2) {
       header("Location: moncompte.php");
-      $_SESSION['email'] = $_POST["yourEmail"];
+      $_SESSION['email'] = htmlspecialchars($_POST["yourEmail"]);
       $_SESSION['userId'] = $connectionUserArray['USER_ID'];
       $_SESSION['statusId'] = $connectionUserArray['STATUS_ID'];
     } else if ($_POST['yourEmail'] == $connectionUserArray['USER_EMAIL'] && password_verify($_POST["yourPassword"], $connectionUserArray['USER_PASSWORD']) && $connectionUserArray['STATUS_ID'] == 1) {
       header("Location: myadmincount.php");
-      $_SESSION['email'] = $_POST["yourEmail"];
+      $_SESSION['email'] = htmlspecialchars($_POST["yourEmail"]);
       $_SESSION['userId'] = $connectionUserArray['USER_ID'];
       $_SESSION['statusId'] = $connectionUserArray['STATUS_ID'];
     } else {
@@ -192,8 +234,7 @@ if (isset($_POST['validModifyPwd']) && $emptyModifUser == 0) {
     $redirectionSweet = '.then(function() {
     window.location = "moncompte.php";
 });';
-  }
-  else if (password_verify($_POST["password"], $verifyPwdUser['USER_PASSWORD']) && $_SESSION['statusId'] == 1) {
+  } else if (password_verify($_POST["password"], $verifyPwdUser['USER_PASSWORD']) && $_SESSION['statusId'] == 1) {
     $userObj->modifyUser();
     $displayUserArray = $userObj->displayUser($_SESSION['email']);
     $titleSweet = "Données modifiées !";

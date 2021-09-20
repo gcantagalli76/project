@@ -8,13 +8,13 @@ class Article extends Database
     // je créé une fonction qui récupère les champs remplis sur le formulaire et qui les insert dans la bdd via sql après connection à la bdd
     public function addArticle($picture1, $picture2, $picture3)
     {
-        $title = $_POST["yourTitle"];
-        $category = $_POST["yourCategory"];
+        $title = htmlspecialchars($_POST["yourTitle"]);
+        $category = htmlspecialchars($_POST["yourCategory"]);
         $state = $_POST["yourState"];
         $quantity = $_POST["yourQuantity"];
         $buyDate = $_POST["yourBuyDate"];
-        $price = $_POST["yourPrice"];
-        $description = $_POST["yourDescription"];
+        $price = htmlspecialchars($_POST["yourPrice"]);
+        $description = htmlspecialchars($_POST["yourDescription"]);
         $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
         $myQuery = 'INSERT INTO article(article_title,article_quantity,article_purchasedate,article_price,article_give,article_description,category_id,condition_id,user_id,picture1,picture2,picture3,valid)
@@ -107,13 +107,13 @@ class Article extends Database
     public function modifyArticle($picture1,$picture2,$picture3)
     {
         $database = $this->connectDatabase();
-        $title = $_POST["yourTitle"];
+        $title = htmlspecialchars($_POST["yourTitle"]);
         $category = $_POST["yourCategory"];
         $state = $_POST["yourState"];
         $quantity = $_POST["yourQuantity"];
         $buyDate = $_POST["yourBuyDate"];
-        $price = $_POST["yourPrice"];
-        $description = $_POST["yourDescription"];
+        $price = htmlspecialchars($_POST["yourPrice"]);
+        $description = htmlspecialchars($_POST["yourDescription"]);
         $idarticle = $_POST['idArticleModify'];
         $myQuery = "UPDATE `article` SET ARTICLE_TITLE = :title, ARTICLE_QUANTITY = :quantity, ARTICLE_PURCHASEDATE = :buyDate, ARTICLE_PRICE = :price,
                     ARTICLE_GIVE = 0, ARTICLE_DESCRIPTION = :description, CATEGORY_ID = :category, CONDITION_ID = :state, picture1 = :picture1, 
@@ -273,7 +273,7 @@ class Article extends Database
     {
         $database = $this->connectDatabase();
         $idarticle = $_POST['articleId'];
-        $textMessage = $_POST['textMessage'];
+        $textMessage = htmlspecialchars($_POST['textMessage']);
         $userId = $_SESSION["userId"];
         $myQuery = 'INSERT INTO CONVERSATION(conversation_text,article_id,user_send_id)
                     VALUES(:textMessage, :articleId, :userId)';

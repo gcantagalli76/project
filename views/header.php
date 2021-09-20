@@ -9,6 +9,18 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="./assets/css/style.css">
   <title>Bricoleur du Dimanche</title>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LdWb3wcAAAAAH20lIKO6PfbrDFQF6HibZNcSX2R">
+  </script>
+  <script>
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LdWb3wcAAAAAH20lIKO6PfbrDFQF6HibZNcSX2R', {
+        action: 'label'
+      }).then(function(token) {
+        var recaptchaResponse = document.getElementById('recaptchaResponse');
+        recaptchaResponse.value = token;
+      });
+    });
+  </script>
 </head>
 
 <body>

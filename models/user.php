@@ -8,11 +8,11 @@ class User extends Database
     // je créé une fonction qui récupère les champs remplis sur le formulaire et qui les insert dans la bdd via sql après connection à la bdd
     public function addUser($yourPassword)
     {
-        $name = $_POST["yourName"];
-        $firstname = $_POST["yourFirstName"];
-        $mail = $_POST["yourEmail"];
-        $city = $_POST["yourCity"];
-        $postalcode = $_POST["yourPostalCode"];
+        $name = htmlspecialchars($_POST["yourName"]);
+        $firstname = htmlspecialchars($_POST["yourFirstName"]);
+        $mail = htmlspecialchars($_POST["yourEmail"]);
+        $city = htmlspecialchars($_POST["yourCity"]);
+        $postalcode = htmlspecialchars($_POST["yourPostalCode"]);
         // $yourpassword = $_POST["yourPassword"];
         $database = $this->connectDatabase();
         $myQuery = 'INSERT INTO _user(user_firstname, user_lastname, user_email, user_city, user_zipcode, user_password, status_id) 
@@ -44,7 +44,7 @@ class User extends Database
     //fonction permettant de vérifier dans la bdd si l'utilisateur qui se connecte a bien un compte de créé en base
     public function connectionUser()
     {
-        $mail = $_POST["yourEmail"];
+        $mail = htmlspecialchars($_POST["yourEmail"]);
         $database = $this->connectDatabase();
         $myQuery = "SELECT * FROM `_user` where USER_EMAIL = :email";
         $queryUser = $database->prepare($myQuery);
@@ -57,7 +57,7 @@ class User extends Database
     //fonction permettant de rajouter un token dans la table user lorsqu'il a oublié son mdp
     public function addToken($token)
     {
-        $mail = $_POST["yourEmail"];
+        $mail = htmlspecialchars($_POST["yourEmail"]);
         $database = $this->connectDatabase();
         $myQuery = "UPDATE `_user` SET token = :token where USER_EMAIL = :email";
         $queryUser = $database->prepare($myQuery);
@@ -107,11 +107,11 @@ class User extends Database
     public function modifyUser()
     {
         $database = $this->connectDatabase();
-        $lastName = $_POST["lastName"];
-        $firstName = $_POST["firstName"];
-        $mail = $_POST["mail"];
-        $city = $_POST["city"];
-        $zipCode = $_POST["zipCode"];
+        $lastName = htmlspecialchars($_POST["lastName"]);
+        $firstName = htmlspecialchars($_POST["firstName"]);
+        $mail = htmlspecialchars($_POST["mail"]);
+        $city = htmlspecialchars($_POST["city"]);
+        $zipCode = htmlspecialchars($_POST["zipCode"]);
         $userId = $_SESSION["userId"];
         //on récupère les données remplies sur le compte utilisateur pour les insérer dans la table user et modifier les données de l'utilisateur connecté
         $myQuery = "UPDATE `_user` SET user_firstname = :firstname, user_lastname = :lastname, user_email = :email, user_city = :city, user_zipcode = :zipcode where USER_ID = :userId";
