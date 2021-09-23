@@ -139,8 +139,9 @@ class Article extends Database
     {
         $database = $this->connectDatabase();
         $idarticle = $_POST['idArticleDelete'];
-        $myQuery = "DELETE FROM `article` where ARTICLE_ID = :id;
-                    DELETE FROM `articlefavorite` where ARTICLE_ID = :id";
+        $myQuery = "DELETE FROM `conversation` where ARTICLE_ID = :id;
+                    DELETE FROM `article` where ARTICLE_ID = :id;
+                    DELETE FROM `articlefavorite` where ARTICLE_ID = :id;";
         $queryArticle = $database->prepare($myQuery);
         $queryArticle->bindValue(':id', $idarticle, PDO::PARAM_INT);
         $execute = $queryArticle->execute();

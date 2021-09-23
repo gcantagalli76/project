@@ -4,16 +4,19 @@ require './models/database.php';
 
 class User extends Database
 {
-
-    // je créé une fonction qui récupère les champs remplis sur le formulaire et qui les insert dans la bdd via sql après connection à la bdd
-    public function addUser($yourPassword)
+    /**
+     * Function to add the new user in database after recovery user informations
+     *
+     * @param string $yourPassword
+     * @return void
+     */
+    public function addUser(string $yourPassword): void
     {
         $name = htmlspecialchars($_POST["yourName"]);
         $firstname = htmlspecialchars($_POST["yourFirstName"]);
         $mail = htmlspecialchars($_POST["yourEmail"]);
         $city = htmlspecialchars($_POST["yourCity"]);
         $postalcode = htmlspecialchars($_POST["yourPostalCode"]);
-        // $yourpassword = $_POST["yourPassword"];
         $database = $this->connectDatabase();
         $myQuery = 'INSERT INTO _user(user_firstname, user_lastname, user_email, user_city, user_zipcode, user_password, status_id) 
             VALUES( :firstname, :lastname, :email, :city, :postalcode, :password, 2)';
@@ -24,12 +27,16 @@ class User extends Database
         $queryUser->bindValue(':city', $city, PDO::PARAM_STR);
         $queryUser->bindValue(':postalcode', $postalcode, PDO::PARAM_STR);
         $queryUser->bindValue(':password', $yourPassword, PDO::PARAM_STR_CHAR);
-        $execute = $queryUser->execute();
-        return $execute;
+        $queryUser->execute();
     }
 
-    //fonction permettant d'afficher sur la page mon compte les infos perso relatives à l'utilisateur connecté
-    public function displayUser()
+
+    /**
+     * Function to display information about the user
+     *
+     * @return array
+     */
+    public function displayUser(): array
     {
         $database = $this->connectDatabase();
         $myQuery = "SELECT A.*,
@@ -39,9 +46,12 @@ class User extends Database
         $fetch = $queryUser->fetchAll();
         return $fetch;
     }
-    
 
-    //fonction permettant de vérifier dans la bdd si l'utilisateur qui se connecte a bien un compte de créé en base
+    /**
+     * fonction permettant de vérifier dans la bdd si l'utilisateur qui se connecte a bien un compte de créé en base
+     *
+     * 
+     */
     public function connectionUser()
     {
         $mail = htmlspecialchars($_POST["yourEmail"]);
@@ -80,8 +90,13 @@ class User extends Database
         return $queryUser;
     }
 
-    //fonction permettant de ressortir toutes les adresses emails des utilisateurs en bdd
-    public function displayEmail($email)
+      /**
+       * Function to display all the email addresses of the users
+       *
+       * @param string $email
+       * 
+       */
+    public function displayEmail(string $email)
     {
         $database = $this->connectDatabase();
         $myQuery = "SELECT * FROM _user where user_email = :email";
@@ -103,8 +118,12 @@ class User extends Database
         return $queryUser;
     }
 
-    //fonction permettant de modifier les données de l'utilisateur à sa demande
-    public function modifyUser()
+     /**
+      * function to modify the user's informations
+      *
+      * @return void
+      */
+    public function modifyUser(): void
     {
         $database = $this->connectDatabase();
         $lastName = htmlspecialchars($_POST["lastName"]);
@@ -122,12 +141,16 @@ class User extends Database
         $queryUser->bindValue(':city', $city, PDO::PARAM_STR);
         $queryUser->bindValue(':zipcode', $zipCode, PDO::PARAM_STR);
         $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
-        $execute = $queryUser->execute();
-        return $execute;
+        $queryUser->execute();
     }
 
-    //fonction permettant de vérifier que le pwd avant changement est bien celui de l'utilisateur connecté
-    public function verifyPwd()
+
+     /**
+      * function to verify the user's password
+      *
+      * @return array
+      */
+    public function verifyPwd(): array
     {
         $userId = $_SESSION["userId"];
         $database = $this->connectDatabase();
@@ -154,10 +177,26 @@ class User extends Database
     }
 
 
-    //fonction permettant de supprimer le compte à la demande de l'utilisateur depuis son compte
-    public function deleteUser()
+
+     /**
+      * function to delete the user's account
+      *
+      * @return void
+      */
+    public function deleteUser(): void
     {
         $userId = $_SESSION["userId"];
+        $database = $this->connectDatabase();
+        $myQuery = "DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
+        $queryUser = $database->prepare($myQuery);
+        $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $queryUser->execute();
+    }
+
+    //fonction permettant de supprimer le compte à la demande de l'admin
+    public function deleteUserByAdmin()
+    {
+        $userId = $_POST['idUserDelete'];
         $database = $this->connectDatabase();
         $myQuery = "DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
         $queryUser = $database->prepare($myQuery);
@@ -166,31 +205,17 @@ class User extends Database
         return $queryUser;
     }
 
-//fonction permettant de supprimer le compte à la demande de l'admin
-public function deleteUserByAdmin()
-{
-    $userId = $_POST['idUserDelete'];
-    $database = $this->connectDatabase();
-    $myQuery = "DELETE from `_user` where USER_ID = :userId; DELETE from `articlefavorite` where USER_ID = :userId;";
-    $queryUser = $database->prepare($myQuery);
-    $queryUser->bindValue(':userId', $userId, PDO::PARAM_INT);
-    $queryUser->execute();
-    return $queryUser;
-}
-
-// fonction permettant de modifier l'article
-public function modifyUserStatut()
-{
-    $userStatut = $_POST['userStatut'];
-    $userId = $_POST['validChangeStatut'];
-    $database = $this->connectDatabase();
-    $myQuery = "UPDATE `_user` SET STATUS_ID = :userStatut where USER_ID = :userId";
-    $queryArticle = $database->prepare($myQuery);
-    $queryArticle->bindValue(':userStatut', $userStatut, PDO::PARAM_INT);
-    $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
-    $execute = $queryArticle->execute();
-    return $execute;
-}
-
-
+    // fonction permettant de modifier l'article
+    public function modifyUserStatut()
+    {
+        $userStatut = $_POST['userStatut'];
+        $userId = $_POST['validChangeStatut'];
+        $database = $this->connectDatabase();
+        $myQuery = "UPDATE `_user` SET STATUS_ID = :userStatut where USER_ID = :userId";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':userStatut', $userStatut, PDO::PARAM_INT);
+        $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $execute = $queryArticle->execute();
+        return $execute;
+    }
 }

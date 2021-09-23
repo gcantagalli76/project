@@ -20,9 +20,12 @@ $regexName = "/^([a-zA-Z ]+)$/";
 $regexEmail = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
 $regexCity = "/^([a-zA-Z ]+)$/";
 $regexPostal = "/^[0-9]{1,10}$/";
-$regexPassword = "/^([a-zA-Z ]+)$/";
+$regexPassword = "/^(?=.*?[A-Z])(?=.*?[a-z]).{5,}$/";
 
-
+/**
+ * If we have not the good format we add 1 in the error array
+ *
+ */
 if (isset($_POST['myButton'])) {
   $yourName = htmlspecialchars($_POST['yourName']);
   $yourFirstName = htmlspecialchars($_POST['yourFirstName']);
@@ -170,7 +173,10 @@ if (isset($_POST['changeMyPwd'])) {
 
 /////////////////////////////////////////////////////////////////////////////USER//////////////////////////////////////////////////////////////////////
 
-// en cliquant sur le bouton qui valide l'ajout d'un compte, tu lances la fonction qui ajoute un utilisateur et tu enregistres son email en session puis tu renvois sur la page moncompte.php
+/**
+ * On click to validate the new count, we verify if the email adresse do not already exist in the database
+ * Else, if the error array is empty, we launch the function who add the new user in database and we confirm this addition whith a sweet alert
+ */
 if (isset($_POST['myButton']) && $userObj->displayEmail(htmlspecialchars($_POST["yourEmail"]))) {
   $titleSweet = "Adresse email déjà existante";
   $textSweet = "Cette adresse email existe déjà, veuillez en entrer une autre";
@@ -222,7 +228,11 @@ if (isset($_SESSION['email']) && isset($_SESSION['userId']) && $_SESSION['status
   }
 }
 
-// quand il clic sur la validation des modifs tu lances la fonction qui change les données utilisateurs avec les infos remplis dans les input et tu affiches une sweet de confirmation
+/**
+ * On click to validate modification, we launch the function who verify the user password and if the format was respected whith the regex
+ * If its ok we launch the function who modify the user's informations and we confirm whith a sweet alert
+ * We do a different redirection if the person connected is an admin or just a simple user
+ */
 if (isset($_POST['validModifyPwd']) && $emptyModifUser == 0) {
   $verifyPwdUser = $userObj->verifyPwd();
   if (password_verify($_POST["password"], $verifyPwdUser['USER_PASSWORD']) && $_SESSION['statusId'] == 2) {
@@ -305,13 +315,19 @@ if (isset($_POST['myMessages'])) {
 // alors tu lances la fonction qui prend ton new mdp et le change en bdd
 if (isset($_POST['changeMyPwd']) && $emptyModifPwd == 0) {
   $verifyPwdUser = $userObj->verifyPwd();
-  if (password_verify($_POST["yourExPassword"], $verifyPwdUser['USER_PASSWORD'])) {
+  if (password_verify($_POST["yourExPassword"], $verifyPwdUser['USER_PASSWORD']) && $_SESSION['statusId'] == 2) {
     $titleSweet = "Mot de passe modifié !";
-    $textSweet = "Votre mot de passe a bien été modifié, veuillez vous reconnecter";
+    $textSweet = "Votre nouveau mot de passe a bien été pris en compte";
     $iconSweet = "success";
-    $redirectionSweet = 'connection.php';
+    $redirectionSweet = 'moncompte.php';
     $userObj->changeMyPwd();
-    session_destroy();
+    // session_destroy();
+  } elseif (password_verify($_POST["yourExPassword"], $verifyPwdUser['USER_PASSWORD']) && $_SESSION['statusId'] == 1) {
+    $titleSweet = "Mot de passe modifié !";
+    $textSweet = "Votre nouveau mot de passe a bien été pris en compte";
+    $iconSweet = "success";
+    $redirectionSweet = 'myadmincount.php';
+    $userObj->changeMyPwd();
   } else {
     $titleSweet = "Ancien mot de passe invalide !";
     $textSweet = "L'ancien mot de passe que vous avez rentré n'est pas le bon";
@@ -320,10 +336,26 @@ if (isset($_POST['changeMyPwd']) && $emptyModifPwd == 0) {
   }
 }
 
-// au clic sur le bouton pour supprimer le compte utilisateur tu lances la fonction qui supprime le compte
+/**
+ * On click to delete the user, we launch the function who verify the user password
+ * If its ok we launch the function who delete the user and we confirm whith a sweet alert
+ * Else we launch a sweet alert to say the password is not valid
+ */
 if (isset($_POST['deleteUser'])) {
-  $userObj->deleteUser();
-  session_destroy();
+  $verifyPwdUser = $userObj->verifyPwd();
+  if (password_verify($_POST["password"], $verifyPwdUser['USER_PASSWORD'])) {
+    $titleSweetDelete = "Suppression de votre compte !";
+    $textSweetDelete = "Votre compte utilisateur a bien été supprimé !";
+    $iconSweetDelete = "success";
+    $redirectionSweetDelete = 'index.php';
+    $userObj->deleteUser();
+    session_destroy();
+  } else {
+    $titleSweetDelete = "Mot de passe invalide !";
+    $textSweetDelete = "Le mot de passe que vous avez rentré n'est pas le bon";
+    $iconSweetDelete = "error";
+    $redirectionSweetDelete = 'moncompte.php';
+  }
 }
 
 // lors du clic pour supprimer un utilisateur depuis le compte admin tu lances la fonction qui supprime en base les données de l'utilisateur pointé
@@ -331,6 +363,12 @@ if (isset($_POST['idUserDelete'])) {
   $userObj->deleteUserByAdmin();
   $displayAllUser = $userObj->displayUser();
   $deleteSuccess = true;
+}
+
+// si tu clics pour envoyer un message au vendeur mais que tu n'est pas connecté alors on te renvoi sur la page pour te connecter
+if (isset($_POST['sendMessage']) && !isset($_SESSION['userId'])) {
+  $_SESSION['connectFor'] = 'pour contacter un vendeur';
+  header("Location: connectfor.php");
 }
 
 /////////////////////////////////////////////////////////////////////////////ARTICLE//////////////////////////////////////////////////////////////////////

@@ -3,13 +3,14 @@
     const regexEmail = new RegExp("[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+");
     const button = document.getElementById("myButton");
     const regexCity = new RegExp(/^([a-zA-Z ]+)$/);
-    const regexPassword = new RegExp(/^([a-zA-Z ]+)$/); //a modifier
+    const regexPassword = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z]).{5,}$/);
     let verifResponse = [0, 0, 0, 0, 0, 0, 0];
 
 
-    //Partie concernant la création d'un compte
-
-
+    /**
+     * 
+     * Function allowing to block the validation button if we have not the good format
+     */
     function Verify(params) {
       if (!params.includes(0)) {
         button.disabled = false
@@ -22,9 +23,14 @@
 
     Verify(verifResponse);
 
+
+    /**
+     * If we have the good format we add 1 in the vérification array and we indicate the format is good
+     * Else we indicate the format is not good and we note 0 in the vérification array
+     */
     yourName.addEventListener("focusout", function () {
       if (regexName.test(yourName.value) && yourName.value != "") {
-        // J'écris le message dans l'element span et je lui attribue une classe
+        // I write the message in the element span whith a class
         messageInfosName.innerHTML = "Format valide"
         messageInfosName.className = "noerror"
         yourName.className = "form-control is-valid"
@@ -141,18 +147,21 @@
         messageInfosPassword.className = "noerror"
         yourPassword.className = "form-control is-valid"
         verifResponse[5] = 1
+        pwdInformation.hidden = true
         Verify(verifResponse);
       } else if (!regexPassword.test(yourPassword.value) && yourPassword.value != "") {
         messageInfosPassword.innerHTML = "Mauvais format"
         messageInfosPassword.className = "error"
         yourPassword.className = "form-control is-invalid"
         verifResponse[5] = 0
+        pwdInformation.hidden = false
         Verify(verifResponse);
       } else {
         messageInfosPassword.innerHTML = ""
         yourPassword.className = "form-control"
         verifResponse[5] = 0
         Verify(verifResponse);
+        pwdInformation.hidden = false
       }
     })
 
@@ -186,8 +195,7 @@
 
 
 
-  
+
     function onSubmit(token) {
       document.getElementById("createcount").submit();
     }
- 

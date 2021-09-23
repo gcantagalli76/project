@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Connection to Database
+ */
 class Database {
 
     private $dbname = 'bddproject';

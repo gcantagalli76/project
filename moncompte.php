@@ -79,7 +79,7 @@ require './controllers/controller.php';
   <!-- -------------- -->
   <!--  UNIQUE MODALE -->
   <!-- -------------- -->
-  <div class="modal fade" id="deleteModal" tabindex="-1">
+  <!-- <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-danger">
@@ -97,10 +97,34 @@ require './controllers/controller.php';
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- -------------- -->
   <!--  UNIQUE MODALE -->
   <!-- -------------- -->
+
+  <!-- Modal delete count--------------------------------------------------->
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content" method="POST">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Veuillez taper votre mot de passe pour confirmer la suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Mot de passe:</label>
+                    <input class="form-control" id="message-text" type="password" name="password"></input>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="submit" class="btn btnConnect" name="deleteUser">Valider</button>
+            </div>
+        </form>
+    </div>
+
+</div>
 
 
   <?php require 'views/footer.php'; ?>
@@ -150,12 +174,12 @@ require './controllers/controller.php';
 
     <script>
       Swal.fire({
-        title: "Suppression de votre compte !",
-        text: "Votre compte utilisateur a bien été supprimé !",
-        icon: "success",
+        title: "<?= $titleSweetDelete ?>",
+        text: "<?= $textSweetDelete ?>",
+        icon: "<?= $iconSweetDelete ?>",
         confirmButtonColor: '#000'
       }).then(function() {
-        window.location = "index.php";
+        window.location = "<?= $redirectionSweetDelete ?>";
       });
     </script>
 

@@ -63,7 +63,7 @@ require './controllers/controller.php';
           <button type="submit" class="btn btnConnect mt-3 mb-3" name="addFavorite" value="<?= $articles['ARTICLE_ID'] ?>"><i class="bi bi-heart"></i> Ajouter aux favoris</button>
         </form>
 
-        <div class="col-md-6 text-center">
+        <div class="col-md-6 text-center" method="post">
           <button type="submit" class="btn btnConnect mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
         </div>
 

@@ -1,4 +1,4 @@
-    const regexPassword = new RegExp(/^([a-zA-Z ]+)$/); //a modifier
+    const regexPassword = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z]).{5,}$/); 
     let verifResponse = [0, 0, 0];
 
 

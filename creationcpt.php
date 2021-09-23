@@ -69,8 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
                 <div class="row justify-content-center">
                     <div class="col-sm-5 bg-light">
                         <label class="form-label mt-2 d-flex justify-content-start"> Mot de passe :</label>
-                        <input type="password" class="form-control box" id="yourPassword" name="yourPassword">
+                        <input type="password" class="form-control box mb-2" id="yourPassword" name="yourPassword">
                         <span id="messageInfosPassword"></span>
+                        <span id='pwdInformation' class="informationPwd">5 caractères minimum / une majuscule / 1 chiffre minimum  / 1 caractère spécial</span>
                     </div>
                 </div>
 
