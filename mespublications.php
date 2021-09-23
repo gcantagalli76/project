@@ -1,24 +1,18 @@
 <?php require 'views/header.php';
 
-require './controllers/controller.php';
+require './controllers/controller.php'; ?>
 
-?>
-
-<!-- <div class="col-md-5"> -->
-<!-- <div class="mt-4 mx-5">Mon compte . Mes publications</div> -->
-<!-- <button type="submit" class="btn btnReturn mt-4 mx-5" name="connectButton">Retourner sur Mon compte</button>
-</div> -->
 
 <?php if (empty($displayUserArticleArray)) { ?>
-    <h1 class="text-center p-5">Vos publications sont vides</h1>
+  <h1 class="text-center p-5">Vos publications sont vides</h1>
 <?php } else { ?>
-    <h1 class="text-center p-5">Mes publications</h1>
+  <h1 class="text-center p-5">Mes publications</h1>
 <?php } ?>
 
 
 <div class="container-fluid">
   <?php foreach ($displayUserArticleArray as $articles) { ?>
-    <div class="card mb-3 favorite" style="width: 95%;">
+    <div class="card mb-3 favorite" style="width: 100%;">
       <div class="row g-0">
         <div class="col-md-2 d-flex align-items-center justify-content-center">
           <img src="data:image/png;base64, <?= $articles['picture1'] ?>" alt="picture1" width="150px" style="max-height: 150px;">
@@ -52,7 +46,7 @@ require './controllers/controller.php';
         </div>
       </div>
     </div>
-
+    <?php } ?>
 </div>
 
 <!-- -------------- -->
@@ -82,8 +76,8 @@ require './controllers/controller.php';
 <!-- -------------- -->
 
 
-<?php }
-  require 'views/footer.php'; ?>
+
+  <?php require 'views/footer.php'; ?>
 
 
 <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">

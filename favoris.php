@@ -7,7 +7,7 @@ require './controllers/controller.php';
 
 
   <?php if (empty($displayFavoriteArticleArray)) { ?>
-    <h1 class="text-center p-5">Vos favoris sont vides</h1>
+    <h1 class="text-center p-5">Vous n'avez pas d'annonces favorites</h1>
   <?php } else { ?>
     <h1 class="text-center p-5">Mes favoris</h1>
   <?php } ?>
@@ -16,7 +16,7 @@ require './controllers/controller.php';
 
   <div class="container-fluid">
     <?php foreach ($displayFavoriteArticleArray as $display) { ?>
-      <div class="card mb-3 favorite" style="width: 95%;">
+      <div class="card mb-3 favorite" style="width: 100%;">
         <div class="row g-0">
 
           <a class="col-md-2 d-flex align-items-center justify-content-center btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">
@@ -46,25 +46,16 @@ require './controllers/controller.php';
                 <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $display['ARTICLE_ID'] ?>"> Supprimer</div>
               </div>
 
-              <!-- <div class="d-flex align-items-center p-3 justify-content-center">
-                <i class="bi bi-envelope"></i>
-                <div class="ms-2">Envoyer un message</div>
-              </div> -->
-
               <div class="d-flex align-items-center p-3 justify-content-center btn" data-bs-toggle="modal" data-bs-target="#messageModal">
                 <i class="bi bi-envelope"></i>
                 <div class="ms-2">Envoyer un message</div>
               </div>
 
-              <!-- <div class="col-md-6 text-center">
-                <button type="submit" class="btn btnConnect mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#messageModal"><i class="bi bi-envelope"></i> Contacter le vendeur</button>
-              </div> -->
-
             </div>
           </div>
         </div>
       </div>
-
+      <?php } ?>
 
   </div>
 
@@ -127,8 +118,8 @@ require './controllers/controller.php';
   <!-- MODALE MESSAGE -->
   <!-- -------------- -->
 
-<?php }
-    require 'views/footer.php'; ?>
+
+   <?php require 'views/footer.php'; ?>
 
 
 

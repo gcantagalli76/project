@@ -7,8 +7,6 @@ renvoi un message d'erreur qui renvoi sur la page de connection
 
 4 - Ranger les pages dans le dossier views
 
-6 - Corriger le footer qui remonte....
-
 
 
 

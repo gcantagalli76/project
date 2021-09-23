@@ -11,7 +11,7 @@ require './controllers/controller.php'; ?>
 
 <div class="container-fluid">
   <?php foreach ($displayUserMessages as $messages) { ?>
-    <div class="card mb-3 favorite" style="width: 80%;">
+    <div class="card mb-3 favorite" style="width: 100%;">
       <div class="row g-0">
         <div class="col-md-2 d-flex align-items-center justify-content-center">
           <img src="data:image/png;base64, <?= $messages['picture1'] ?>" alt="picture1" width="150px" style="max-height: 150px;">
@@ -74,7 +74,10 @@ require './controllers/controller.php'; ?>
 <!--  UNIQUE MODALE -->
 <!-- -------------- -->
 
-<?php require 'views/footer.php'; ?>
+
+
+  <?php require 'views/footer.php'; ?>
+
 
 <!-- <div class="container-fluid centerPage text-center flex-end">
     <div class="row footer-size align-items-center">

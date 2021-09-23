@@ -14,6 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 
 ?>
 
+<script src="https://www.google.com/recaptcha/api.js?render=6LdWb3wcAAAAAH20lIKO6PfbrDFQF6HibZNcSX2R">
+  </script>
+  <script>
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LdWb3wcAAAAAH20lIKO6PfbrDFQF6HibZNcSX2R', {
+        action: 'label'
+      }).then(function(token) {
+        var recaptchaResponse = document.getElementById('recaptchaResponse');
+        recaptchaResponse.value = token;
+      });
+    });
+  </script>
+
 
 
 <div class="container-fluid centerPage text-center">
