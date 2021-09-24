@@ -4,22 +4,30 @@ require './controllers/controller.php';
 
 ?>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid"> -->
 
-  <img src="./assets/img/header.png" alt="depot" width="100%">
+  <!-- <img src="./assets/img/header.png" alt="depot" width="100%" id="width"> -->
 
-  <div class="col-sm-4">
+
+
+  <div id="width">
+  <img width="100%" id="changement">
+  </div>
+
+
+  <!-- <div class="col-sm-4">
     <form class="d-flex searchBar">
       <input class="search-form" type="search" placeholder="Rechercher..." aria-label="Search">
       <button class="btn btn-outline-white bg-white" type="submit"><img src="./assets/img/search.svg" alt="search"></button>
     </form>
-  </div>
-</div>
+  </div> -->
+
+<!-- </div> -->
 
 
 <div class="container-fluid centerPage text-center">
   <div class="row">
-    <div class="col-6 lastPublication justify-content-center">
+    <div class="col-md-6 lastPublication justify-content-center">
       Les dernières publications
     </div>
 
@@ -39,7 +47,7 @@ require './controllers/controller.php';
                 <b><?= $display['ARTICLE_PRICE'] ?>€</b>
               </div>
               <div class="col-md-6">
-                <a class="btn bi bi-heart" type="submit"  alt="heart" href="index.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>&amp;category_id=<?php echo $display['CATEGORY_ID'] ?>"> </a>
+                <a class="btn bi bi-heart" type="submit" alt="heart" href="index.php?idfavorite=<?php echo $display['ARTICLE_ID'] ?>&amp;category_id=<?php echo $display['CATEGORY_ID'] ?>"> </a>
               </div>
             </div>
             <div class="row mt-2">
@@ -151,6 +159,28 @@ require './controllers/controller.php';
 </script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+// fonction permettant d'adapter l'image selon le format de l'écran
+  const widthOutput = document.querySelector('#width');
+
+  function reportWindowSize() {
+    if (window.innerWidth < 500) {
+      console.log('toto');
+      document.getElementById("changement").src = "./assets/img/logo.png";
+    }else if (window.innerWidth > 500) {
+      console.log('tata');
+      document.getElementById("changement").src = "./assets/img/header.png";
+    }
+  }
+
+  reportWindowSize();
+
+  window.onresize = reportWindowSize;
+
+</script>
+
 
 <?php
 

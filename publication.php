@@ -6,7 +6,7 @@ require './controllers/controller.php';
 
 <body>
 
-  <div class="container-fluid centerPage text-center">
+  <div class="container-fluid  text-center">
     <div class="row justify-content-center">
       <div class="col-sm-10 border shadowblock">
         <h1 class="text-center">Votre annonce</h1>
@@ -77,31 +77,30 @@ require './controllers/controller.php';
                 <label class="form-label mt-2 d-flex justify-content-center"> Ajoutez vos photos :</label>
               </div>
 
-              <div class="row justify-content-center">
+              <div class="row justify-content-center mt-2">
+
                 <div class="col-sm-5 imgUp">
                   <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview"></div>
                   <label class="btn btn-primary">
                     Upload<input type="file" class="uploadFile img" value="Upload Photo1" id="fileToUpload" name="fileToUpload" style="width: 0px;height: 0px;overflow: hidden;">
                   </label>
                 </div>
-              </div>
 
-              <div class="row justify-content-center">
                 <div class="col-sm-5 imgUp">
                   <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview2"></div>
                   <label class="btn btn-primary">
                     Upload<input type="file" class="uploadFile img" value="Upload Photo2" id="fileToUpload2" name="fileToUpload2" style="width: 0px;height: 0px;overflow: hidden;">
                   </label>
                 </div>
-              </div>
 
-              <div class="row justify-content-center">
                 <div class="col-sm-5 imgUp">
                   <div class="imagePreview"><img class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview3"></div>
                   <label class="btn btn-primary">
                     Upload<input type="file" class="uploadFile img" value="Upload Photo3" id="fileToUpload3" name="fileToUpload3" style="width: 0px;height: 0px;overflow: hidden;">
                   </label>
                 </div>
+
+
               </div>
 
 
@@ -110,7 +109,7 @@ require './controllers/controller.php';
 
             <div class="row justify-content-center">
               <div class="col-sm-3 d-flex justify-content-center">
-                <button type="submit" class="btn btnConnect mt-5 mb-3" id="validPublication" name="validPublication">Valider ma publication</button>
+                <button type="submit" class="btn btnConnect mt-3 mb-3" id="validPublication" name="validPublication">Valider ma publication</button>
               </div>
               <span id='buttonInformation' style="font-style: italic">Veuillez remplir tous les champs et 3 photos pour valider votre annonce</span>
             </div>

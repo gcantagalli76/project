@@ -5,6 +5,10 @@ body {
   justify-content: space-between;
 }
 
+/* .indexImg{
+  object-fit: cover;
+} */
+
 .informationPwd{
   font-size: 12px;
   font-style: italic;
@@ -47,9 +51,9 @@ body {
 
 .lastPublication {
   margin-bottom: 1em;
-  margin-top: 3em;
+  /* margin-top: 3em; */
   font-size: 30px;
-  margin-left: 1em;
+  /* margin-left: 1em; */
   color: black;
   font-weight: bold;
   text-align: center;
