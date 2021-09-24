@@ -107,7 +107,7 @@ if (isset($_POST['validPublication']) || isset($_POST['validModification'])) {
   if (empty($yourPrice) || strlen($yourPrice) > 5 || !preg_match($regexPrice, $yourPrice)) {
     $emptyPublication = 1;
   }
-  if (empty($yourDescription) || strlen($yourDescription) > 170) {
+  if (empty($yourDescription) || strlen($yourDescription) >= 180) {
     $emptyPublication = 1;
   }
   if (empty($_FILES['fileToUpload'])) {

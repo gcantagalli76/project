@@ -9,7 +9,7 @@ renvoi un message d'erreur qui renvoi sur la page de connection
 
 6 - Voir pour ajouter les messages envoyés par l'utilisateur dans mes messages 
 
-7 - Mettre des mentions légales dans le footer
+8 - Rajouter des catégories nouvelles et du contenu
 
 
 
