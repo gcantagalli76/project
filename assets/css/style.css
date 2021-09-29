@@ -5,9 +5,26 @@ body {
   justify-content: space-between;
 }
 
-/* .indexImg{
-  object-fit: cover;
-} */
+@font-face {
+  font-family: "RalewayBold";
+  src: url(../font/Raleway-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "RalewayMedium";
+  src: url(../font/Raleway-Medium.ttf) format("truetype");
+}
+
+.recyclingTitle{
+  font-family: 'RalewayBold', 
+  sans-serif;
+  color: rgb(190, 211, 28);
+}
+
+.recyclingSubTitle{
+  font-family: 'RalewayMedium', 
+  sans-serif;
+}
 
 .informationPwd{
   font-size: 12px;

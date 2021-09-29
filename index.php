@@ -4,25 +4,9 @@ require './controllers/controller.php';
 
 ?>
 
-<!-- <div class="container-fluid"> -->
-
-  <!-- <img src="./assets/img/header.png" alt="depot" width="100%" id="width"> -->
-
-
-
-  <div id="width">
-  <img width="100%" id="changement">
-  </div>
-
-
-  <!-- <div class="col-sm-4">
-    <form class="d-flex searchBar">
-      <input class="search-form" type="search" placeholder="Rechercher..." aria-label="Search">
-      <button class="btn btn-outline-white bg-white" type="submit"><img src="./assets/img/search.svg" alt="search"></button>
-    </form>
-  </div> -->
-
-<!-- </div> -->
+<div id="width">
+  <img width="100%" id="descriptionSite">
+</div>
 
 
 <div class="container-fluid centerPage text-center">
@@ -66,17 +50,17 @@ require './controllers/controller.php';
 
   <div class="row mb-5">
     <div class="col-md-12 centerPage">
-      <h2 class="mb-0">Nos idées récup</h2><br>
-      <h5>Même avec peu de produit, on peut quand même faire plein de choses !</h5>
+      <h2 class="recyclingTitle">Nos idées récup'</h2><br> <img src='./assets/img/upcycling.svg' id="recyclingImg">
+      <h5 class="mt-3 recyclingSubTitle">Même avec peu de produit, on peut quand même faire plein de choses !</h5>
     </div>
   </div>
 
   <div class="row gallery-content" data-masonry='{"percentPosition": true }'>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <a href="">
-          <img src='./assets/img/paint.JPG' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-        </a>
+       
+          <img src='./assets/img/paint.JPG' class="card-img-top" width="100%" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+      
         <div class="card-body">
           <h5 class="card-title">Peinture murale</h5>
           <p class="card-text">Rien ne sert de peindre toute une pièce, vous pouvez simplement peindre un seul pant de mur ou simplement la moitié</p>
@@ -85,9 +69,7 @@ require './controllers/controller.php';
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <a href="">
           <img src='./assets/img/tvGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-        </a>
         <div class="card-body">
           <h5 class="card-title">Meuble TV</h5>
           <p class="card-text">Pour un rendu original et chaleureux, récupérez vos planches de parquet en trop et faite en un meuble tv</p>
@@ -96,9 +78,7 @@ require './controllers/controller.php';
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <a href="">
           <img src='./assets/img/carrelagelm.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-        </a>
         <div class="card-body">
           <h5 class="card-title">Lave main</h5>
           <p class="card-text">Rien de tel que quelques carreaux de carrelage pour habiller votre lave main et éviter les éclaboussures sur le mur !</p>
@@ -106,19 +86,20 @@ require './controllers/controller.php';
       </div>
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="card bg-primary text-white text-center p-3">
+      <!-- <div class="card bg-primary text-white text-center p-3">
         <figure class="mb-0">
           <blockquote class="blockquote">
             <p>La devise du bricoleur du dimanche : « <cite> Rien n'est parfois plus utile dans ce monde que les choses qui ont l'air de ne servir à rien </cite> ».</p>
           </blockquote>
         </figure>
-      </div>
+      </div> -->
+      <img src='./assets/img/devise.svg' width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <a href="">
           <img src='./assets/img/wcGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-        </a>
         <div class="card-body">
           <h5 class="card-title">WC suspendu</h5>
           <p class="card-text">Habiller votre wc suspendu avec du parquet et donnez du style à vos toilettes !</p>
@@ -127,20 +108,16 @@ require './controllers/controller.php';
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <a href="">
           <img src='./assets/img/tetelit.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-        </a>
         <div class="card-body">
           <h5 class="card-title">Tête de lit</h5>
-          <p class="card-text">Quelques lame de parquet en guize de tête de lite suffiront pour créer une ambiance naturelle à votre chambre</p>
+          <p class="card-text">Quelques lame de parquet en guise de tête de lite suffiront pour créer une ambiance naturelle dans votre chambre</p>
         </div>
       </div>
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <a href="">
           <img src='./assets/img/sdbGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-        </a>
         <div class="card-body">
           <h5 class="card-title">Douche</h5>
           <p class="card-text">Habillez les murs de votre douche avec les restes de votre faillance</p>
@@ -162,16 +139,16 @@ require './controllers/controller.php';
 
 
 <script>
-// fonction permettant d'adapter l'image selon le format de l'écran
+  // fonction permettant d'adapter l'image selon le format de l'écran
   const widthOutput = document.querySelector('#width');
 
   function reportWindowSize() {
     if (window.innerWidth < 500) {
-      console.log('toto');
-      document.getElementById("changement").src = "./assets/img/logo.png";
-    }else if (window.innerWidth > 500) {
-      console.log('tata');
-      document.getElementById("changement").src = "./assets/img/header.png";
+      document.getElementById("descriptionSite").src = "./assets/img/header-small.png";
+      document.getElementById('recyclingImg').style.width = '30%';
+    } else if (window.innerWidth > 500) {
+      document.getElementById("descriptionSite").src = "./assets/img/header.png";
+      document.getElementById('recyclingImg').style.width = '10%';
     }
   }
 

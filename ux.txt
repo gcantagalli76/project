@@ -1,0 +1,27 @@
+Code Postal au lieu de code postale
+Vérifier [ dans adresse email
+Ajout d'une catégorie "Autre"
+Prix d'achat "estimation"
+Date d'achat : ajout d'une fonction 'ignorer'
+upload de 1 photo min mais pas obligatoirement 3
+Annonce "validée" avant publication : changer le terme car l'annonce peut ne pas être validée (suite alerte)
+Modifier disposition upload sur publicationmodify.php + manque espace avant "!" pour "modifications prises en compte sweetalert
+Retravailler texte sweet alert annonce favoris "votre annonce" + "rajoutée" à changer en "ajoutée" + margin-top au dessus du titre des catégories
+
+Message d'erreur quand j'ai mis une annonce en favoris, que je clique sur l'annonce et que je fais ensuite un retour en arrière
+
+- Manque un profil pour les vendeurs ou il pourrait y avoir un système de notation quand la transaction s'est bien passée ou pas (exemple Vinted) + la géolocalisation n'apporte pas grand chose ou alors il faut que ça soit cliquable (plugin google map?)
+
+- on ne peut pas voir les messages envoyés
+
+- vos publications sont vides ... nan! Aucune annonce publiée pour le moment (c'est mieux!)
+
+- revoir message sweetalert quand on supprime une annonce des favoris car on a l'impression que c'est une annonce qu'on a publié que l'on supprime
+
+- manque un bouton retour pour chaque rubrique sous jacente à "mon compte" pour retourner au menu "mon compte" sans avoir à cliquer sur l'icône en haut à droite
+
+- Erreur sur accentuation dans la rubrique "modifier mon profil" (regexcity)
+
+- Veuillez saisir votre mot de passe au lieu de "taper" (dans suppression du compte)
+
+- Nous contacter : mettre un mailto: "contact@bricoleur.fr"
