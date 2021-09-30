@@ -469,8 +469,8 @@ if (isset($_POST['validModification']) && $emptyPublication == 0) {
     // Encode contents to Base64
     $picture3 = base64_encode($bin3);
   }
-  $titleSweet = "Modifications prises en compte!";
-  $textSweet = "Votre modification d'annonce a bien été prise en compte, elle sera validée sous 24h avant sa publication";
+  $titleSweet = "Modifications prises en compte !";
+  $textSweet = "Votre modification d'annonce a bien été prise en compte, elle est soumise à validation avant son éventuelle publication sous 24h";
   $iconSweet = "success";
   $swalRedirection = true;
   $articleObj->modifyArticle($picture1, $picture2, $picture3);
@@ -517,7 +517,7 @@ if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
     $displayCategoryArticleArray = $articleObj->displayArticleCategory();
     $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
     $titleSweet = "Annonce ajoutée à vos favoris !";
-    $textSweet = "Votre annonce a bien été rajoutée dans vos annonces favorites";
+    $textSweet = "Cette annonce a bien été ajoutée dans vos annonces favorites";
     $iconSweet = "success";
   }
 }
@@ -533,7 +533,7 @@ if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
     $articleObj->addFavouriteArticle();
     $displayDetailsArticleArray = $articleObj->displayArticleDetails();
     $titleSweet = "Annonce ajoutée à vos favoris !";
-    $textSweet = "Votre annonce a bien été rajoutée dans vos annonces favorites";
+    $textSweet = "Cette annonce a bien été ajoutée dans vos annonces favorites";
     $iconSweet = "success";
   }
 }

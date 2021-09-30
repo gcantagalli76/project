@@ -1,12 +1,6 @@
-Code Postal au lieu de code postale
-Vérifier [ dans adresse email
-Ajout d'une catégorie "Autre"
 Prix d'achat "estimation"
 Date d'achat : ajout d'une fonction 'ignorer'
 upload de 1 photo min mais pas obligatoirement 3
-Annonce "validée" avant publication : changer le terme car l'annonce peut ne pas être validée (suite alerte)
-Modifier disposition upload sur publicationmodify.php + manque espace avant "!" pour "modifications prises en compte sweetalert
-Retravailler texte sweet alert annonce favoris "votre annonce" + "rajoutée" à changer en "ajoutée" + margin-top au dessus du titre des catégories
 
 Message d'erreur quand j'ai mis une annonce en favoris, que je clique sur l'annonce et que je fais ensuite un retour en arrière
 

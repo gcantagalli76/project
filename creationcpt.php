@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
 
                 <div class="row justify-content-center">
                     <div class="col-sm-5 bg-light">
-                        <label class="form-label mt-2 d-flex justify-content-start"> Code postale :</label>
+                        <label class="form-label mt-2 d-flex justify-content-start"> Code postal :</label>
                         <input type="text" class="form-control box" id="yourPostalCode" name="yourPostalCode">
                         <span id="messageInfosPostalCode"></span>
                     </div>

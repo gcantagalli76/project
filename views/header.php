@@ -45,6 +45,7 @@
             <li><button type="submit" class="dropdown-item" value="1" name="selectCategory">Carrelage, parquet, sol</button></li>
             <li><button type="submit" class="dropdown-item" value="2" name="selectCategory">Peinture et droguerie</button></li>
             <li><button type="submit" class="dropdown-item" value="3" name="selectCategory">Matériaux de construction</button></li>
+            <li><button type="submit" class="dropdown-item" value="4" name="selectCategory">Autre</button></li>
             </form>
             </li>
 

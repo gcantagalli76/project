@@ -27,6 +27,7 @@ require './controllers/controller.php';
                       <option value="1" <?= ($displayB4Modif['CATEGORY_ID'] == 1) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 1) ? 'selected' : '' ?>>Carrelage, parquet, sol</option>
                       <option value="2" <?= ($displayB4Modif['CATEGORY_ID'] == 2) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 2) ? 'selected' : '' ?>>Peinture et droguerie</option>
                       <option value="3" <?= ($displayB4Modif['CATEGORY_ID'] == 3) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 3) ? 'selected' : '' ?>>Matériaux de construction</option>
+                      <option value="4" <?= ($displayB4Modif['CATEGORY_ID'] == 4) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 4) ? 'selected' : '' ?>>Autre</option>
                     </select>
                   </div>
                   <div class="col-sm-5 mt-2">
@@ -40,13 +41,13 @@ require './controllers/controller.php';
                 </div>
 
                 <div class="row mt-3">
-                <div class="col-sm-10">
-                  <label for="customRange3" class="form-label mt-2">Quantité restante comparée au produit neuf : </label>
-                  <span id="resultRange" class="fw-bold" name="yourQuantity"><?= isset($_POST['yourQuantity']) ? $_POST['yourQuantity'] : $displayB4Modif['ARTICLE_QUANTITY'] ?></span>
-                  <span class="fw-bold">%</span>
-                  <input type="range" class=form-range mt-2 min="1" max="100" value="<?= isset($_POST['yourQuantity']) ? $_POST['yourQuantity'] : $displayB4Modif['ARTICLE_QUANTITY'] ?>" id="yourQuantity" name="yourQuantity">
+                  <div class="col-sm-10">
+                    <label for="customRange3" class="form-label mt-2">Quantité restante comparée au produit neuf : </label>
+                    <span id="resultRange" class="fw-bold" name="yourQuantity"><?= isset($_POST['yourQuantity']) ? $_POST['yourQuantity'] : $displayB4Modif['ARTICLE_QUANTITY'] ?></span>
+                    <span class="fw-bold">%</span>
+                    <input type="range" class=form-range mt-2 min="1" max="100" value="<?= isset($_POST['yourQuantity']) ? $_POST['yourQuantity'] : $displayB4Modif['ARTICLE_QUANTITY'] ?>" id="yourQuantity" name="yourQuantity">
+                  </div>
                 </div>
-              </div>
 
 
                 <div class="row mt-1">
@@ -71,30 +72,28 @@ require './controllers/controller.php';
             </div>
 
 
-            <div class="col-sm-5 mt-3">
+            <div class="col-md-5 mt-3">
 
               <div class="row">
                 <label class="form-label mt-2 d-flex justify-content-center"> Ajoutez vos photos :</label>
               </div>
+
               <div class="row justify-content-center">
+
                 <div class="col-sm-5 imgUp">
                   <div class="imagePreview"><img src="data:image/png;base64, <?= $displayB4Modif['picture1'] ?>" alt="picture1" class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview"></div>
                   <label class="btn btn-primary">
                     Upload<input type="file" class="uploadFile img" value="Upload Photo1" id="fileToUpload" name="fileToUpload" style="width: 0px;height: 0px;overflow: hidden;">
                   </label>
                 </div>
-              </div>
 
-              <div class="row justify-content-center">
                 <div class="col-sm-5 imgUp">
                   <div class="imagePreview"><img src="data:image/png;base64, <?= $displayB4Modif['picture2'] ?>" alt="picture2" class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview2"></div>
                   <label class="btn btn-primary">
                     Upload<input type="file" class="uploadFile img" value="Upload Photo2" id="fileToUpload2" name="fileToUpload2" style="width: 0px;height: 0px;overflow: hidden;">
                   </label>
                 </div>
-              </div>
 
-              <div class="row justify-content-center">
                 <div class="col-sm-5 imgUp">
                   <div class="imagePreview"><img src="data:image/png;base64, <?= $displayB4Modif['picture3'] ?>" alt="picture3" class="imagePreview" class="mx-auto d-block" width="100%" id="imgPreview3"></div>
                   <label class="btn btn-primary">

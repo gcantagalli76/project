@@ -26,6 +26,7 @@ require './controllers/controller.php';
                     <option value="1">Carrelage, parquet, sol</option>
                     <option value="2">Peinture et droguerie</option>
                     <option value="3">Matériaux de construction</option>
+                    <option value="4">Autre</option>
                   </select>
                 </div>
                 <div class="col-sm-5 mt-2">
@@ -140,8 +141,8 @@ require './controllers/controller.php';
 
       <script>
         Swal.fire({
-          title: "Annonce ajoutée !",
-          text: "Votre annonce a bien été enregistrée, elle sera validée sous 24h avant sa publication",
+          title: "Annonce enregistrée !",
+          text: "Votre annonce a bien été enregistrée, elle est soumise à validation avant son éventuelle publication sous 24h",
           icon: "success",
           confirmButtonColor: '#000'
         }).then(function() {
