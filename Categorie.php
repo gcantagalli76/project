@@ -1,11 +1,11 @@
-<?php require 'views/header.php';
+<?php require './views/header.php';
 
 require './controllers/controller.php';
 
 ?>
 
 
-<h1 class="text-center p-5"> <?= $categoryTitle ?></h1>
+<h1 class="text-center p-5 categoryTitle"> <?= $categoryTitle ?></h1>
 
 <div class="container-fluid">
   <div class="row justify-content-start">
@@ -37,7 +37,7 @@ require './controllers/controller.php';
 
 
     <?php  }
-    require 'views/footer.php'; ?>
+    require './views/footer.php'; ?>
   </div>
 </div>
 

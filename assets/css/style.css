@@ -26,6 +26,11 @@ body {
   sans-serif;
 }
 
+.categoryTitle{
+  font-family: 'RalewayBold', 
+  sans-serif;
+}
+
 .informationPwd{
   font-size: 12px;
   font-style: italic;
@@ -68,11 +73,10 @@ body {
 
 .lastPublication {
   margin-bottom: 1em;
-  /* margin-top: 3em; */
+  font-family: 'RalewayBold';
   font-size: 30px;
-  /* margin-left: 1em; */
   color: black;
-  font-weight: bold;
+  /* font-weight: bold; */
   text-align: center;
 }
 

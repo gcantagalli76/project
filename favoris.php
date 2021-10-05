@@ -1,4 +1,4 @@
-<?php require 'views/header.php';
+<?php require './views/header.php';
 
 require './controllers/controller.php';
 
@@ -119,7 +119,7 @@ require './controllers/controller.php';
   <!-- -------------- -->
 
 
-   <?php require 'views/footer.php'; ?>
+   <?php require './views/footer.php'; ?>
 
 
 
@@ -133,7 +133,7 @@ require './controllers/controller.php';
   if (<?= $deleteSuccess ?>) {
     Swal.fire({
       icon: 'success',
-      text: 'Votre annonce a bien été supprimée !',
+      text: 'Cette annonce a bien été supprimée de vos favoris !',
       confirmButtonColor: '#000'
     })
   };

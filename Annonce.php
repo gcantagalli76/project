@@ -1,4 +1,4 @@
-<?php require 'views/header.php';
+<?php require './views/header.php';
 
 require './controllers/controller.php';
 
@@ -79,83 +79,83 @@ require './controllers/controller.php';
           <div class="col-md-6 text-center">
             <div class="btn bi bi-trash deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
           </div>
-          </div>
-        
+        </div>
+
       <?php } ?>
 
       <?php if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1 && isset($_GET['idArticleConsult'])) { ?>
         <div class="row mt-2 ">
-        <div class="col-md-6 text-center">
-          <div class="btn bi bi-trash deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
+          <div class="col-md-6 text-center">
+            <div class="btn bi bi-trash deletebtn btnConnect" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $articles['ARTICLE_ID'] ?>"> Supprimer l'annonce</div>
+          </div>
         </div>
-        </div>
-        
-
-  <?php } ?>
-
-  </div>
 
 
-  <!-- -------------- -->
-  <!--  MODALE DELETE -->
-  <!-- -------------- -->
-  <div class="modal fade" id="deleteModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Suppression d'une annonce</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-          <p>Êtes vous sûre de vouloir supprimer l'annonce <b><span id="articleNameDelete"></span></b></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <form action="" method="POST">
-            <button id="idArticleDelete" name="idArticleDelete" type="submit" class="btn btn-danger">Supprimer</button>
-          </form>
+      <?php } ?>
+
+    </div>
+
+
+    <!-- -------------- -->
+    <!--  MODALE DELETE -->
+    <!-- -------------- -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-danger">
+            <h5 class="modal-title text-white" id="exampleModalLabel">Suppression d'une annonce</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <p>Êtes vous sûre de vouloir supprimer l'annonce <b><span id="articleNameDelete"></span></b></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <form action="" method="POST">
+              <button id="idArticleDelete" name="idArticleDelete" type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- -------------- -->
-  <!--  MODALE DELETE -->
-  <!-- -------------- -->
+    <!-- -------------- -->
+    <!--  MODALE DELETE -->
+    <!-- -------------- -->
 
 
 
-  <!-- -------------- -->
-  <!-- MODALE MESSAGE -->
-  <!-- -------------- -->
+    <!-- -------------- -->
+    <!-- MODALE MESSAGE -->
+    <!-- -------------- -->
 
-  <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <form class="modal-content" method="POST">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Votre message</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <form class="modal-content" method="POST">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Votre message</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
 
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text" name="textMessage" style="height: 10em;"></textarea>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text" name="textMessage" style="height: 10em;"></textarea>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button id="sendMessage" name="sendMessage" type="submit" class="btn btnConnect">Envoyer votre message</button>
+            <input type="hidden" name="articleId" value="<?= $articles['ARTICLE_ID'] ?>">
           </div>
 
-        </div>
-        <div class="modal-footer">
-          <button id="sendMessage" name="sendMessage" type="submit" class="btn btnConnect">Envoyer votre message</button>
-          <input type="hidden" name="articleId" value="<?= $articles['ARTICLE_ID'] ?>">
-        </div>
 
-
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- -------------- -->
-  <!-- MODALE MESSAGE -->
-  <!-- -------------- -->
+    <!-- -------------- -->
+    <!-- MODALE MESSAGE -->
+    <!-- -------------- -->
 
   </div>
 
@@ -165,7 +165,7 @@ require './controllers/controller.php';
 
 
 <?php }
-        require 'views/footer.php'; ?>
+        require './views/footer.php'; ?>
 
 </div>
 

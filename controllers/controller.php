@@ -16,9 +16,9 @@ if (!isset($_SESSION)) {
 //regex User
 
 $error = 0;
-$regexName = "/^([a-zA-Z ]+)$/";
+$regexName = "/^([a-zA-Zéèàê ]+)$/";
 $regexEmail = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
-$regexCity = "/^([a-zA-Z ]+)$/";
+$regexCity = "/^([a-zA-Zéèàê ]+)$/";
 $regexPostal = "/^[0-9]{1,10}$/";
 $regexPassword = "/^(?=.*?[A-Z])(?=.*?[a-z]).{5,}$/";
 
@@ -58,8 +58,6 @@ if (isset($_POST['myButton'])) {
 }
 
 //Sécurité scaptcha
-
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
 
@@ -580,24 +578,3 @@ if (isset($_POST['messageDelete'])) {
 }
 
 
-
-
-
-
-
-// Si l'admin clics pour valider l'article, tu lances la fonction qui vérifie qu'il n'est pas déjà valider et sinon tu lances la fonction qui le valide
-// if (isset($_POST['validArticleBtn'])) {
-//   // $displayCategoryArticleArray = $articleObj->displayArticleCategory();
-//   if ($articleObj->verifyArticleValid($_SESSION['userId'], $_GET['idfavorite'])) {
-//     $titleSweet = "Annonce déjà enregistrée";
-//     $textSweet = "Cette annonce est déjà existante dans vos favoris";
-//     $iconSweet = "error";
-//   } else {
-//     $articleObj->validArticle();
-//     // $displayCategoryArticleArray = $articleObj->displayArticleCategory();
-//     // $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
-//     $titleSweet = "Annonce ajoutée à vos favoris !";
-//     $textSweet = "Votre annonce a bien été rajoutée dans vos annonces favorites";
-//     $iconSweet = "success";
-//   }
-// }

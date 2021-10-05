@@ -1,4 +1,4 @@
-<?php require 'views/header.php';
+<?php require './views/header.php';
 
 require './controllers/controller.php';
 
@@ -43,7 +43,7 @@ require './controllers/controller.php';
   </div>
 
 
-  <?php require 'views/footer.php'; ?>
+  <?php require './views/footer.php'; ?>
 
   <script type="text/javascript" src="/assets/js/scriptChangePwd.js"></script>
 

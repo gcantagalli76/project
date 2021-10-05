@@ -1,8 +1,8 @@
-    const regexName = new RegExp(/^([a-zA-Z ]+)$/);
+    const regexName = new RegExp(/^([a-zA-Zéèàê ]+)$/);
     const regexPostal = new RegExp("^[0-9]{1,10}$");
     const regexEmail = new RegExp("[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+");
     const button = document.getElementById("myButton");
-    const regexCity = new RegExp(/^([a-zA-Z ]+)$/);
+    const regexCity = new RegExp(/^([a-zA-Zéèàê ]+)$/);
     const regexPassword = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z]).{5,}$/);
     let verifResponse = [0, 0, 0, 0, 0, 0, 0];
 

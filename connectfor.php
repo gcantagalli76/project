@@ -1,4 +1,4 @@
-<?php require 'views/header.php'; 
+<?php require './views/header.php'; 
 
 require './controllers/controller.php';
 
@@ -24,7 +24,7 @@ require './controllers/controller.php';
 
   </form>
 
-  <?php require 'views/footer.php'; ?>
+  <?php require './views/footer.php'; ?>
 
 
 

@@ -1,10 +1,10 @@
-<?php require 'views/header.php';
+<?php require './views/header.php';
 
 require './controllers/controller.php'; ?>
 
 
 <?php if (empty($displayUserArticleArray)) { ?>
-  <h1 class="text-center p-5">Vos publications sont vides</h1>
+  <h1 class="text-center p-5">Aucune annonce publiée pour le moment</h1>
 <?php } else { ?>
   <h1 class="text-center p-5">Mes publications</h1>
 <?php } ?>
@@ -77,7 +77,7 @@ require './controllers/controller.php'; ?>
 
 
 
-  <?php require 'views/footer.php'; ?>
+  <?php require './views/footer.php'; ?>
 
 
 <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">

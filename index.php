@@ -4,19 +4,18 @@ require './controllers/controller.php';
 
 ?>
 
+
+
+
 <div id="width">
   <img width="100%" id="descriptionSite">
 </div>
-
-
 <div class="container-fluid centerPage text-center">
   <div class="row">
     <div class="col-md-6 lastPublication justify-content-center">
       Les dernières publications
     </div>
-
   </div>
-
   <div class="row justify-content-center">
 
     <?php foreach ($display5ArticleArray as $display) { ?>
@@ -54,13 +53,10 @@ require './controllers/controller.php';
       <h5 class="mt-3 recyclingSubTitle">Même avec peu de produit, on peut quand même faire plein de choses !</h5>
     </div>
   </div>
-
   <div class="row gallery-content" data-masonry='{"percentPosition": true }'>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-       
-          <img src='./assets/img/paint.JPG' class="card-img-top" width="100%" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-      
+        <img src='./assets/img/paint.JPG' class="card-img-top" width="100%" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
         <div class="card-body">
           <h5 class="card-title">Peinture murale</h5>
           <p class="card-text">Rien ne sert de peindre toute une pièce, vous pouvez simplement peindre un seul pant de mur ou simplement la moitié</p>
@@ -69,7 +65,7 @@ require './controllers/controller.php';
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-          <img src='./assets/img/tvGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <img src='./assets/img/tvGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
         <div class="card-body">
           <h5 class="card-title">Meuble TV</h5>
           <p class="card-text">Pour un rendu original et chaleureux, récupérez vos planches de parquet en trop et faite en un meuble tv</p>
@@ -78,7 +74,7 @@ require './controllers/controller.php';
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-          <img src='./assets/img/carrelagelm.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <img src='./assets/img/carrelagelm.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
         <div class="card-body">
           <h5 class="card-title">Lave main</h5>
           <p class="card-text">Rien de tel que quelques carreaux de carrelage pour habiller votre lave main et éviter les éclaboussures sur le mur !</p>
@@ -86,20 +82,11 @@ require './controllers/controller.php';
       </div>
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
-      <!-- <div class="card bg-primary text-white text-center p-3">
-        <figure class="mb-0">
-          <blockquote class="blockquote">
-            <p>La devise du bricoleur du dimanche : « <cite> Rien n'est parfois plus utile dans ce monde que les choses qui ont l'air de ne servir à rien </cite> ».</p>
-          </blockquote>
-        </figure>
-      </div> -->
       <img src='./assets/img/devise.svg' width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
-
-
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-          <img src='./assets/img/wcGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <img src='./assets/img/wcGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
         <div class="card-body">
           <h5 class="card-title">WC suspendu</h5>
           <p class="card-text">Habiller votre wc suspendu avec du parquet et donnez du style à vos toilettes !</p>
@@ -108,7 +95,7 @@ require './controllers/controller.php';
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-          <img src='./assets/img/tetelit.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <img src='./assets/img/tetelit.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
         <div class="card-body">
           <h5 class="card-title">Tête de lit</h5>
           <p class="card-text">Quelques lame de parquet en guise de tête de lite suffiront pour créer une ambiance naturelle dans votre chambre</p>
@@ -117,7 +104,7 @@ require './controllers/controller.php';
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-          <img src='./assets/img/sdbGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <img src='./assets/img/sdbGetM.jpg' class="card-img-top" width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
         <div class="card-body">
           <h5 class="card-title">Douche</h5>
           <p class="card-text">Habillez les murs de votre douche avec les restes de votre faillance</p>
@@ -125,7 +112,6 @@ require './controllers/controller.php';
       </div>
     </div>
   </div>
-
 </div>
 
 <?php require './views/footer.php'; ?>
@@ -155,7 +141,6 @@ require './controllers/controller.php';
   reportWindowSize();
 
   window.onresize = reportWindowSize;
-
 </script>
 
 
