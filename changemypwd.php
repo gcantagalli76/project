@@ -10,7 +10,7 @@ require './controllers/controller.php';
 
     <div class="row justify-content-center">
       <div class="col-sm-4 bg-light border shadowblock">
-        <h1>Création d'un nouveau mot de passe</h1>
+        <h1 class="countCategoryTitle">Création d'un nouveau mot de passe</h1>
         <form method="POST">
 
           <div class="row justify-content-center">

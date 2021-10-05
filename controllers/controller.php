@@ -493,7 +493,7 @@ if (isset($_POST['selectCategory'])) {
 
 // Si dans la catégorie selectionné il n'y a aucun article alors tu mets une phrase qui indique que nous n'avons pas d'article sinon tu mets la catégorie
 if (!isset($displayCategoryArticleArray[0]['CATEGORY_NAME'])) {
-  $categoryTitle = 'Aucun article';
+  $categoryTitle = 'Aucun article dans cette catégorie pour le moment';
 } else {
   $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
 }

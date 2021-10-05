@@ -7,9 +7,9 @@ require './controllers/controller.php';
 
 
   <?php if (empty($displayFavoriteArticleArray)) { ?>
-    <h1 class="text-center p-5">Vous n'avez pas d'annonces favorites</h1>
+    <h1 class="text-center p-5 countCategoryTitle">Vous n'avez pas d'annonces favorites</h1>
   <?php } else { ?>
-    <h1 class="text-center p-5">Mes favoris</h1>
+    <h1 class="text-center p-5 countCategoryTitle">Mes favoris</h1>
   <?php } ?>
 
 

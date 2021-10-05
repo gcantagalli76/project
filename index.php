@@ -82,7 +82,7 @@ require './controllers/controller.php';
       </div>
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
-      <img src='./assets/img/devise.svg' width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <img src='./assets/img/6935-[Converti].png' width="100%" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
     </div>
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">

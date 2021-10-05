@@ -8,7 +8,7 @@ require './controllers/controller.php';
 
     <div class="col justify-content-center">
         <div class="col-sm-6 border shadowblock">
-            <h1 class="text-center">Modifier mon profil</h1>
+            <h1 class="text-center countCategoryTitle">Modifier mon profil</h1>
 
             <form action="" method="post">
                 <?php foreach ($displayUserArray as $user) {

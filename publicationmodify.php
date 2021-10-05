@@ -24,10 +24,11 @@ require './controllers/controller.php';
                   <div class="col-sm-5 mt-2">
                     <select class="form-select" aria-label="Default select example" id="yourCategory" name="yourCategory">
                       <option selected disabled>Catégorie :</option>
-                      <option value="1" <?= ($displayB4Modif['CATEGORY_ID'] == 1) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 1) ? 'selected' : '' ?>>Carrelage, parquet, sol</option>
+                      <option value="1" <?= ($displayB4Modif['CATEGORY_ID'] == 1) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 1) ? 'selected' : '' ?>>Revêtements sols et murs</option>
                       <option value="2" <?= ($displayB4Modif['CATEGORY_ID'] == 2) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 2) ? 'selected' : '' ?>>Peinture et droguerie</option>
-                      <option value="3" <?= ($displayB4Modif['CATEGORY_ID'] == 3) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 3) ? 'selected' : '' ?>>Matériaux de construction</option>
-                      <option value="4" <?= ($displayB4Modif['CATEGORY_ID'] == 4) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 4) ? 'selected' : '' ?>>Autre</option>
+                      <option value="3" <?= ($displayB4Modif['CATEGORY_ID'] == 3) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 3) ? 'selected' : '' ?>>Matériaux construction, isolation</option>
+                      <option value="4" <?= ($displayB4Modif['CATEGORY_ID'] == 4) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 4) ? 'selected' : '' ?>>Menuiseries, bois</option>
+                      <option value="4" <?= ($displayB4Modif['CATEGORY_ID'] == 5) || (isset($_POST['yourCategory']) && $_POST['yourCategory'] == 5) ? 'selected' : '' ?>>Autre</option>
                     </select>
                   </div>
                   <div class="col-sm-5 mt-2">

@@ -15,7 +15,7 @@ require './controllers/controller.php';
 
       <?php foreach ($displayUserArray as $user) {
         if ($_SESSION['userId'] == $user['USER_ID']) { ?>
-          <h1 class="text-center">Bonjour <?= $user['USER_FIRSTNAME'] ?></h1>
+          <h1 class="text-center countCategoryTitle">Bonjour <?= $user['USER_FIRSTNAME'] ?></h1>
       <?php }
       } ?>
 

@@ -9,9 +9,9 @@ require './controllers/controller.php';
 
 
   <?php if (empty($displayAdminArticleArray)) { ?>
-    <h1 class="text-center p-5">Vous n'avez pas de publications à valider</h1>
+    <h1 class="text-center p-5 countCategoryTitle">Vous n'avez pas de publications à valider</h1>
   <?php } else { ?>
-    <h1 class="text-center p-5">Publications à valider</h1>
+    <h1 class="text-center p-5 countCategoryTitle">Publications à valider</h1>
   <?php } ?>
 
 

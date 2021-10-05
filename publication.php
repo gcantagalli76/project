@@ -9,7 +9,7 @@ require './controllers/controller.php';
   <div class="container-fluid  text-center">
     <div class="row justify-content-center">
       <div class="col-sm-10 border shadowblock">
-        <h1 class="text-center">Votre annonce</h1>
+        <h1 class="text-center countCategoryTitle">Votre annonce</h1>
         <form action="" method="post" enctype="multipart/form-data">
           <div class="row justify-content-around">
             <div class="col-sm-6">
@@ -23,10 +23,11 @@ require './controllers/controller.php';
                 <div class="col-sm-5 mt-2">
                   <select class="form-select" aria-label="Default select example" id="yourCategory" name="yourCategory">
                     <option selected disabled>Catégorie :</option>
-                    <option value="1">Carrelage, parquet, sol</option>
+                    <option value="1">Revêtements sols et murs</option>
                     <option value="2">Peinture et droguerie</option>
-                    <option value="3">Matériaux de construction</option>
-                    <option value="4">Autre</option>
+                    <option value="3">Matériaux construction, isolation</option>
+                    <option value="4">Menuiseries, bois</option>
+                    <option value="5">Autre</option>
                   </select>
                 </div>
                 <div class="col-sm-5 mt-2">

@@ -7,7 +7,7 @@ require './controllers/controller.php';
 
 <body>
 
-  <h1 class="text-center p-5">Gestion des comptes utilisateurs</h1>
+  <h1 class="text-center p-5 countCategoryTitle">Gestion des comptes utilisateurs</h1>
 
 
   <div class="container-fluid">

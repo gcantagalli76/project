@@ -12,7 +12,7 @@ require './controllers/controller-changepwd.php';
 
       <div class="row justify-content-center">
         <div class="col-sm-4 bg-light border shadowblock">
-          <h1>Mot de passe oublié</h1>
+          <h1 class="countCategoryTitle">Mot de passe oublié</h1>
           <form method="POST">
             <label class="form-label mt-4 d-flex justify-content-start"> Adresse email :</label>
             <input type="email" class="form-control box" name="yourEmail">

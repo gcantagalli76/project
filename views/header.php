@@ -42,10 +42,11 @@
             <li class="nav-item dropdown d-flex align-items-center">
               <a class="nav-link dropdown-toggle navbarDropdown2" id="navbarDropdown" role="button" data-bs-toggle="dropdown">Catégories</a>
               <form class="dropdown-menu" aria-labelledby="navbarDropdown" action="Categorie.php" method="POST">
-            <li><button type="submit" class="dropdown-item" value="1" name="selectCategory">Carrelage, parquet, sol</button></li>
+            <li><button type="submit" class="dropdown-item" value="1" name="selectCategory">Revêtements sols et murs</button></li>
             <li><button type="submit" class="dropdown-item" value="2" name="selectCategory">Peinture et droguerie</button></li>
-            <li><button type="submit" class="dropdown-item" value="3" name="selectCategory">Matériaux de construction</button></li>
-            <li><button type="submit" class="dropdown-item" value="4" name="selectCategory">Autre</button></li>
+            <li><button type="submit" class="dropdown-item" value="3" name="selectCategory">Matériaux construction, isolation</button></li>
+            <li><button type="submit" class="dropdown-item" value="4" name="selectCategory">Menuiseries, bois</button></li>
+            <li><button type="submit" class="dropdown-item" value="5" name="selectCategory">Autre</button></li>
             </form>
             </li>
 

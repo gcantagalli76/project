@@ -3,13 +3,15 @@ A faire pour la prochaine fois :
 1 - Si le token n'existe plus vu qu'il est supprimé et que tu retourne sur le lien envoyé par email alors tu
 renvoi un message d'erreur qui renvoi sur la page de connection
 
-3 - Corriger ton code en mettant des form sur chaque bouton pour éviter d'avoir un controller dégueu
+2 - Corriger ton code en mettant des form sur chaque bouton pour éviter d'avoir un controller dégueu
 
-4 - Ranger les pages dans le dossier views
+3 - Ranger les pages dans le dossier views
 
-6 - Voir pour ajouter les messages envoyés par l'utilisateur dans mes messages 
+4 - Voir pour ajouter les messages envoyés par l'utilisateur dans mes messages 
 
-8 - Rajouter des catégories nouvelles et du contenu
+
+
+
 
 
 

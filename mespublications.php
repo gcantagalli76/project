@@ -4,9 +4,9 @@ require './controllers/controller.php'; ?>
 
 
 <?php if (empty($displayUserArticleArray)) { ?>
-  <h1 class="text-center p-5">Aucune annonce publiée pour le moment</h1>
+  <h1 class="text-center p-5 countCategoryTitle">Aucune annonce publiée pour le moment</h1>
 <?php } else { ?>
-  <h1 class="text-center p-5">Mes publications</h1>
+  <h1 class="text-center p-5 countCategoryTitle">Mes publications</h1>
 <?php } ?>
 
 

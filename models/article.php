@@ -62,6 +62,7 @@ class Article extends Database
                            B.USER_CITY as ARTICLE_CITY  
                            FROM `article` as A left join _user as B on A.USER_ID = B.USER_ID 
                            where A.valid = 1 
+                           order by ARTICLE_ID desc
                            limit 5";
         $queryArticle = $database->query($myQuery);
         $fetch = $queryArticle->fetchAll();

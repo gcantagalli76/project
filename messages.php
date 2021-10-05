@@ -4,9 +4,9 @@ require './controllers/controller.php'; ?>
 
 
 <?php if (empty($displayUserMessages)) { ?>
-  <h1 class="text-center p-5">Vous n'avez pas de message</h1>
+  <h1 class="text-center p-5 countCategoryTitle">Vous n'avez pas de message</h1>
 <?php } else { ?>
-  <h1 class="text-center p-5">Mes messages</h1>
+  <h1 class="text-center p-5 countCategoryTitle">Mes messages</h1>
 <?php } ?>
 
 <div class="container-fluid">
