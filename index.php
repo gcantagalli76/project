@@ -5,8 +5,6 @@ require './controllers/controller.php';
 ?>
 
 
-
-
 <div id="width">
   <img width="100%" id="descriptionSite">
 </div>

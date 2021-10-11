@@ -576,5 +576,3 @@ if (isset($_POST['messageDelete'])) {
   $displayUserMessages = $articleObj->displayUserMessages();
   $deleteSuccess = true;
 }
-
-

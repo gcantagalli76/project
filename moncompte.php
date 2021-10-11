@@ -76,55 +76,30 @@ require './controllers/controller.php';
 
   </div>
 
-  <!-- -------------- -->
-  <!--  UNIQUE MODALE -->
-  <!-- -------------- -->
-  <!-- <div class="modal fade" id="deleteModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Suppression de votre compte</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-          <p>Êtes vous sûre de vouloir supprimer votre compte utilisateur ???</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <form action="" method="POST">
-            <button id="deleteUser" name="deleteUser" type="submit" class="btn btn-danger">Supprimer</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- -------------- -->
-  <!--  UNIQUE MODALE -->
-  <!-- -------------- -->
 
   <!-- Modal delete count--------------------------------------------------->
 
 
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form class="modal-content" method="POST">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Veuillez saisir votre mot de passe pour confirmer la suppression</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="message-text" class="col-form-label">Mot de passe:</label>
-                    <input class="form-control" id="message-text" type="password" name="password"></input>
-                </div>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="submit" class="btn btnConnect" name="deleteUser">Valider</button>
-            </div>
-        </form>
+      <form class="modal-content" method="POST">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Veuillez saisir votre mot de passe pour confirmer la suppression</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Mot de passe:</label>
+            <input class="form-control" id="message-text" type="password" name="password"></input>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="submit" class="btn btnConnect" name="deleteUser">Valider</button>
+        </div>
+      </form>
     </div>
 
-</div>
+  </div>
 
 
   <?php require './views/footer.php'; ?>

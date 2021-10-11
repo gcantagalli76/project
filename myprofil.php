@@ -95,8 +95,6 @@ require './controllers/controller.php';
 </div>
 
 
-
-
 <?php require 'views/footer.php'; ?>
 
 
@@ -136,7 +134,6 @@ if (isset($_POST['validModifyPwd'])) { ?>
     </script>
 
 <?php } ?>
-
 
 
 </body>

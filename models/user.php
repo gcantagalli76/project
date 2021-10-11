@@ -90,12 +90,12 @@ class User extends Database
         return $queryUser;
     }
 
-      /**
-       * Function to display all the email addresses of the users
-       *
-       * @param string $email
-       * 
-       */
+    /**
+     * Function to display all the email addresses of the users
+     *
+     * @param string $email
+     * 
+     */
     public function displayEmail(string $email)
     {
         $database = $this->connectDatabase();
@@ -118,11 +118,11 @@ class User extends Database
         return $queryUser;
     }
 
-     /**
-      * function to modify the user's informations
-      *
-      * @return void
-      */
+    /**
+     * function to modify the user's informations
+     *
+     * @return void
+     */
     public function modifyUser(): void
     {
         $database = $this->connectDatabase();
@@ -145,11 +145,11 @@ class User extends Database
     }
 
 
-     /**
-      * function to verify the user's password
-      *
-      * @return array
-      */
+    /**
+     * function to verify the user's password
+     *
+     * @return array
+     */
     public function verifyPwd(): array
     {
         $userId = $_SESSION["userId"];
@@ -178,11 +178,11 @@ class User extends Database
 
 
 
-     /**
-      * function to delete the user's account
-      *
-      * @return void
-      */
+    /**
+     * function to delete the user's account
+     *
+     * @return void
+     */
     public function deleteUser(): void
     {
         $userId = $_SESSION["userId"];

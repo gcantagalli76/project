@@ -1,4 +1,4 @@
-A faire pour la prochaine fois :
+A faire :
 
 1 - Si le token n'existe plus vu qu'il est supprimé et que tu retourne sur le lien envoyé par email alors tu
 renvoi un message d'erreur qui renvoi sur la page de connection

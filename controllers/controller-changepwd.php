@@ -63,7 +63,7 @@ if ((isset($_POST['token']) && isset($_POST['createPwd'])) && ($_POST['yourPassw
   $infoMessage = 'Mot de passe incorrect !';
   $bodyInfoMessage = 'Le premier mot de passe ne semble pas identique au second';
   $colorInfoMessage = 'error';
-}elseif ((isset($_POST['token']) && isset($_POST['createPwd'])) && (empty($_POST['yourPassword']) || empty($_POST['yourConfirmPassword']))) {
+} elseif ((isset($_POST['token']) && isset($_POST['createPwd'])) && (empty($_POST['yourPassword']) || empty($_POST['yourConfirmPassword']))) {
   $infoMessage = 'Données vides';
   $bodyInfoMessage = 'Veuillez saisir un nouveau mot de passe et le confirmer';
   $colorInfoMessage = 'error';

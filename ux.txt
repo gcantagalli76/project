@@ -1,4 +1,3 @@
-Prix d'achat "estimation"
 Date d'achat : ajout d'une fonction 'ignorer'
 upload de 1 photo min mais pas obligatoirement 3
 

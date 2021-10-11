@@ -9,9 +9,10 @@ require './controllers/controller.php';
   <div class="container-fluid centerPage text-center">
 
     <div class="row justify-content-center">
-      <div class="col-sm-4 bg-light border shadowblock">
+      <div class="col-sm-4 border shadowblock">
         <h1 class="countCategoryTitle">Création d'un nouveau mot de passe</h1>
-        <form method="POST">
+        <div>5 caractères minimum / une majuscule / 1 chiffre minimum / 1 caractère spécial</div>
+        <form method="POST" class="mt-3">
 
           <div class="row justify-content-center">
             <label class="form-label mt-2 d-flex justify-content-start"> Ancien mot de passe :</label>
@@ -32,7 +33,7 @@ require './controllers/controller.php';
             <span id="messageInfosNotSamePassword"></span>
           </div>
 
-          <div class="row justify-content-center">
+          <div class="row justify-content-center mt-3">
             <button type="submit" class="btn btnConnect mt-3" name="changeMyPwd" id="changeMyPwd">Changer le mot de passe</button>
             <span id='buttonInformation' style="font-style: italic">Veuillez remplir tous les champs pour valider</span>
           </div>
@@ -64,8 +65,8 @@ require './controllers/controller.php';
         icon: "<?= $iconSweet ?>",
         confirmButtonColor: '#000'
       }).then(function() {
-            window.location = "<?= $redirectionSweet ?>";
-        });
+        window.location = "<?= $redirectionSweet ?>";
+      });
     </script>
 
   <?php } ?>

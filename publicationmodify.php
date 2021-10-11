@@ -9,7 +9,7 @@ require './controllers/controller.php';
   <div class="container-fluid centerPage text-center">
     <div class="row justify-content-center">
       <div class="col-sm-10 border shadowblock">
-        <h1 class="text-center">Votre annonce à modifier</h1>
+        <h1 class="text-center countCategoryTitle">Votre annonce à modifier</h1>
         <form action="" method="post" enctype="multipart/form-data">
           <div class="row justify-content-around">
             <div class="col-sm-6">
@@ -52,8 +52,8 @@ require './controllers/controller.php';
 
 
                 <div class="row mt-1">
-                  <div class="col-sm-4">
-                    <label class="form-label mt-2 d-flex justify-content-start"> Date d'achat :</label>
+                  <div class="col-sm-5">
+                    <label class="form-label mt-2 d-flex justify-content-start"> Date d'achat (approximation) :</label>
                     <input type="date" class="form-control box" id="yourBuyDate" name="yourBuyDate" value="<?= isset($_POST['yourBuyDate']) ? $_POST['yourBuyDate'] : $displayB4Modif['ARTICLE_BUYDATE'] ?>">
                     <span id="messageInfosTitle"></span>
                   </div>

@@ -7,40 +7,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_secret = '6LdWb3wcAAAAABa5myVJze51bGXtk0basocwQcCg';
     $recaptcha_response = $_POST['recaptcha_response'];
-  
+
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
-  }
+}
 
 ?>
 
 <script src="https://www.google.com/recaptcha/api.js?render=6LdWb3wcAAAAAH20lIKO6PfbrDFQF6HibZNcSX2R">
-  </script>
-  <script>
+</script>
+<script>
     grecaptcha.ready(function() {
-      grecaptcha.execute('6LdWb3wcAAAAAH20lIKO6PfbrDFQF6HibZNcSX2R', {
-        action: 'label'
-      }).then(function(token) {
-        var recaptchaResponse = document.getElementById('recaptchaResponse');
-        recaptchaResponse.value = token;
-      });
+        grecaptcha.execute('6LdWb3wcAAAAAH20lIKO6PfbrDFQF6HibZNcSX2R', {
+            action: 'label'
+        }).then(function(token) {
+            var recaptchaResponse = document.getElementById('recaptchaResponse');
+            recaptchaResponse.value = token;
+        });
     });
-  </script>
+</script>
 
 
 
 <div class="container-fluid centerPage text-center">
 
     <div class="col justify-content-center">
-        <div class="col-sm-6 bg-light border shadowblock">
-            <h1 class="text-center">Créez votre compte</h1>
+        <div class="col-sm-6 border shadowblock">
+            <h1 class="text-center countCategoryTitle">Créez votre compte</h1>
             <div class="d-flex justify-content-start">Créez votre compte rapidement et retrouvez toutes les informations
                 sur vos annonces postées et vos favoris</div>
 
             <form action="" method="post" id="createcount">
 
                 <div class="row justify-content-center">
-                    <div class="col-sm-5 bg-light">
+                    <div class="col-sm-5">
                         <label class="form-label mt-3 d-flex justify-content-start"> Nom :</label>
                         <input type="text" class="form-control box" name="yourName" id="yourName">
                         <span id="messageInfosName"></span>
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm-5 bg-light">
+                    <div class="col-sm-5">
                         <label class="form-label mt-2 d-flex justify-content-start"> Prénom :</label>
                         <input type="text" class="form-control box" id="yourFirstName" name="yourFirstName">
                         <span id="messageInfosFirstName"></span>
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm-5 bg-light">
+                    <div class="col-sm-5">
                         <label class="form-label mt-2 d-flex justify-content-start"> Adresse email :</label>
                         <input type="text" class="form-control box" id="yourEmail" name="yourEmail">
                         <span id="messageInfosEmail" name="occupedEmail"></span>
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm-5 bg-light">
+                    <div class="col-sm-5">
                         <label class="form-label mt-2 d-flex justify-content-start"> Ville :</label>
                         <input type="text" class="form-control box" id="yourCity" name="yourCity">
                         <span id="messageInfosCity"></span>
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm-5 bg-light">
+                    <div class="col-sm-5">
                         <label class="form-label mt-2 d-flex justify-content-start"> Code postal :</label>
                         <input type="text" class="form-control box" id="yourPostalCode" name="yourPostalCode">
                         <span id="messageInfosPostalCode"></span>
@@ -80,16 +80,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm-5 bg-light">
+                    <div class="col-sm-5">
                         <label class="form-label mt-2 d-flex justify-content-start"> Mot de passe :</label>
                         <input type="password" class="form-control box mb-2" id="yourPassword" name="yourPassword">
                         <span id="messageInfosPassword"></span>
-                        <span id='pwdInformation' class="informationPwd">5 caractères minimum / une majuscule / 1 chiffre minimum  / 1 caractère spécial</span>
+                        <span id='pwdInformation' class="informationPwd">5 caractères minimum / une majuscule / 1 chiffre minimum / 1 caractère spécial</span>
                     </div>
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-sm-5 bg-light">
+                    <div class="col-sm-5">
                         <label class="form-label mt-2 d-flex justify-content-start"> Confirmation du mot de passe
                             :</label>
                         <input type="password" class="form-control box" id="yourConfirmPassword" name="yourConfirmPassword">

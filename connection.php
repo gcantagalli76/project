@@ -12,8 +12,8 @@ require './controllers/controller.php';
     <div class="container-fluid centerPage text-center">
 
       <div class="row justify-content-center">
-        <div class="col-sm-3 bg-light border shadowblock">
-          <h1>Connectez-vous à votre compte</h1>
+        <div class="col-sm-3 border shadowblock">
+          <h1 class="countCategoryTitle">Connectez-vous à votre compte</h1>
 
           <label class="form-label mt-4 d-flex justify-content-start"> Adresse email :</label>
           <input type="email" class="form-control box" name="yourEmail">

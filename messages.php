@@ -75,27 +75,7 @@ require './controllers/controller.php'; ?>
 <!-- -------------- -->
 
 
-
-  <?php require 'views/footer.php'; ?>
-
-
-<!-- <div class="container-fluid centerPage text-center flex-end">
-    <div class="row footer-size align-items-center">
-      <div class="col-md-3">
-        <a class="nav-link active text-white">Nous contacter</a>
-        <img src="./assets/img/envelope.svg" alt="heart" width="25px">
-      </div>
-      <div class="col-md-6">
-        <a class="nav-link active text-white">Mentions légales - Conditions générales d'utilisation - Gestion des données personnelles</a>
-      </div>
-      <div class="col-md-3">
-        <a class="nav-link active text-white">Rejoignez nous !</a>
-        <img src="./assets/img/facebook.svg" alt="heart" width="25px">
-        <img src="./assets/img/instagram.svg" alt="heart" width="25px">
-        <img src="./assets/img/twitter.svg" alt="heart" width="25px">
-      </div>
-    </div>
-  </div> -->
+<?php require 'views/footer.php'; ?>
 
 
 <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">

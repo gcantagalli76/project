@@ -105,7 +105,7 @@ class Article extends Database
 
 
     // fonction permettant de modifier l'article
-    public function modifyArticle($picture1,$picture2,$picture3)
+    public function modifyArticle($picture1, $picture2, $picture3)
     {
         $database = $this->connectDatabase();
         $title = htmlspecialchars($_POST["yourTitle"]);
@@ -202,30 +202,30 @@ class Article extends Database
         return $fetch;
     }
 
-     //fonction permettant d'afficher les articles favoris de l'utilisateur connecté et d'éviter qu'il ne mette 2 fois le même en favoris
-     public function verifyArticleFavorite($userId,$articleId)
-     {
-         $database = $this->connectDatabase();
-         $myQuery = "SELECT * FROM `articlefavorite` where USER_ID = :userId and ARTICLE_ID = :articleId";
-         $queryArticle = $database->prepare($myQuery);
-         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
-         $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
-         $queryArticle->execute();
-         $fetch = $queryArticle->fetch();
-         return $fetch;
-     }
+    //fonction permettant d'afficher les articles favoris de l'utilisateur connecté et d'éviter qu'il ne mette 2 fois le même en favoris
+    public function verifyArticleFavorite($userId, $articleId)
+    {
+        $database = $this->connectDatabase();
+        $myQuery = "SELECT * FROM `articlefavorite` where USER_ID = :userId and ARTICLE_ID = :articleId";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
+        $queryArticle->execute();
+        $fetch = $queryArticle->fetch();
+        return $fetch;
+    }
 
-      //fonction permettant de vérifier que l'article n'a pas déjà été validé par l'admin
-      public function verifyArticleValid($articleId)
-      {
-          $database = $this->connectDatabase();
-          $myQuery = "SELECT * FROM `article` where ARTICLE_ID = :articleId and valid = 1";
-          $queryArticle = $database->prepare($myQuery);
-          $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
-          $queryArticle->execute();
-          $fetch = $queryArticle->fetch();
-          return $fetch;
-      }
+    //fonction permettant de vérifier que l'article n'a pas déjà été validé par l'admin
+    public function verifyArticleValid($articleId)
+    {
+        $database = $this->connectDatabase();
+        $myQuery = "SELECT * FROM `article` where ARTICLE_ID = :articleId and valid = 1";
+        $queryArticle = $database->prepare($myQuery);
+        $queryArticle->bindValue(':articleId', $articleId, PDO::PARAM_INT);
+        $queryArticle->execute();
+        $fetch = $queryArticle->fetch();
+        return $fetch;
+    }
 
 
 
@@ -255,7 +255,7 @@ class Article extends Database
         $queryArticle = $database->query($myQuery);
         $queryArticle->execute();
         $fetch = $queryArticle->fetchAll();
-         return $fetch;
+        return $fetch;
     }
 
     // fonction permettant de valider l'article par l'admin
@@ -306,7 +306,7 @@ class Article extends Database
         $queryArticle->bindValue(':userId', $userId, PDO::PARAM_INT);
         $queryArticle->execute();
         $fetch = $queryArticle->fetchAll();
-         return $fetch;
+        return $fetch;
     }
 
     // fonction permettant de supprimer un message reçu par l'utilisateur
@@ -320,5 +320,4 @@ class Article extends Database
         $execute = $queryArticle->execute();
         return $execute;
     }
-
 }

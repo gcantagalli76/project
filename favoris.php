@@ -6,120 +6,120 @@ require './controllers/controller.php';
 
 
 
-  <?php if (empty($displayFavoriteArticleArray)) { ?>
-    <h1 class="text-center p-5 countCategoryTitle">Vous n'avez pas d'annonces favorites</h1>
-  <?php } else { ?>
-    <h1 class="text-center p-5 countCategoryTitle">Mes favoris</h1>
+<?php if (empty($displayFavoriteArticleArray)) { ?>
+  <h1 class="text-center p-5 countCategoryTitle">Vous n'avez pas d'annonces favorites</h1>
+<?php } else { ?>
+  <h1 class="text-center p-5 countCategoryTitle">Mes favoris</h1>
+<?php } ?>
+
+
+
+<div class="container-fluid">
+  <?php foreach ($displayFavoriteArticleArray as $display) { ?>
+    <div class="card mb-3 favorite" style="width: 100%;">
+      <div class="row g-0">
+
+        <a class="col-md-2 d-flex align-items-center justify-content-center btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">
+          <img src="data:image/png;base64, <?= $display['picture1'] ?>" alt="picture1" width="150px" style="max-height: 150px;">
+        </a>
+
+        <a class="col-md-3 btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">
+          <div class="card-body">
+            <h4 id="<?= $display['ARTICLE_ID'] ?>-article" class="card-title"><?= $display['ARTICLE_TITLE'] ?></h4>
+            <p class="card-text"><?= $display['ARTICLE_PRICE'] ?>€</p>
+            <p class="card-text"><small class="text-muted">CATEGORIE: <?= $display['CATEGORY_NAME'] ?></small></p>
+          </div>
+        </a>
+
+        <a class="col-md-4 btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">
+          <div class="card-body">
+            <h6 class="card-title">Descriptif :</h6>
+            <p class="card-text"><?= $display['ARTICLE_DESCRIPTION'] ?></p>
+          </div>
+        </a>
+
+
+        <div class="col-md-3">
+          <div class="card-body">
+
+            <div class="d-flex align-items-center p-3 justify-content-center">
+              <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $display['ARTICLE_ID'] ?>"> Supprimer</div>
+            </div>
+
+            <div class="d-flex align-items-center p-3 justify-content-center btn" data-bs-toggle="modal" data-bs-target="#messageModal">
+              <i class="bi bi-envelope"></i>
+              <div class="ms-2">Envoyer un message</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   <?php } ?>
 
+</div>
 
-
-  <div class="container-fluid">
-    <?php foreach ($displayFavoriteArticleArray as $display) { ?>
-      <div class="card mb-3 favorite" style="width: 100%;">
-        <div class="row g-0">
-
-          <a class="col-md-2 d-flex align-items-center justify-content-center btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">
-            <img src="data:image/png;base64, <?= $display['picture1'] ?>" alt="picture1" width="150px" style="max-height: 150px;">
-          </a>
-
-          <a class="col-md-3 btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">
-            <div class="card-body">
-              <h4 id="<?= $display['ARTICLE_ID'] ?>-article" class="card-title"><?= $display['ARTICLE_TITLE'] ?></h4>
-              <p class="card-text"><?= $display['ARTICLE_PRICE'] ?>€</p>
-              <p class="card-text"><small class="text-muted">CATEGORIE: <?= $display['CATEGORY_NAME'] ?></small></p>
-            </div>
-          </a>
-
-          <a class="col-md-4 btn" type="submit" href="Annonce.php?idarticle=<?php echo $display['ARTICLE_ID'] ?>">
-            <div class="card-body">
-              <h6 class="card-title">Descriptif :</h6>
-              <p class="card-text"><?= $display['ARTICLE_DESCRIPTION'] ?></p>
-            </div>
-          </a>
-
-
-          <div class="col-md-3">
-            <div class="card-body">
-
-              <div class="d-flex align-items-center p-3 justify-content-center">
-                <div class="btn bi bi-trash ms-2 deletebtn" id="deletebtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-article-id="<?= $display['ARTICLE_ID'] ?>"> Supprimer</div>
-              </div>
-
-              <div class="d-flex align-items-center p-3 justify-content-center btn" data-bs-toggle="modal" data-bs-target="#messageModal">
-                <i class="bi bi-envelope"></i>
-                <div class="ms-2">Envoyer un message</div>
-              </div>
-
-            </div>
-          </div>
-        </div>
+<!-- -------------- -->
+<!--  UNIQUE MODALE -->
+<!-- -------------- -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="exampleModalLabel">Suppression d'une annonce</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <?php } ?>
-
-  </div>
-
-  <!-- -------------- -->
-  <!--  UNIQUE MODALE -->
-  <!-- -------------- -->
-  <div class="modal fade" id="deleteModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header bg-danger">
-          <h5 class="modal-title text-white" id="exampleModalLabel">Suppression d'une annonce</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body text-center">
-          <p>Êtes vous sûre de vouloir supprimer l'annonce <b><span id="articleNameDelete"></span></b></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <form action="" method="POST">
-            <button id="idArticleDelete" name="idArticleFavoriteDelete" type="submit" class="btn btn-danger">Supprimer</button>
-          </form>
-        </div>
+      <div class="modal-body text-center">
+        <p>Êtes vous sûre de vouloir supprimer l'annonce <b><span id="articleNameDelete"></span></b></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <form action="" method="POST">
+          <button id="idArticleDelete" name="idArticleFavoriteDelete" type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
       </div>
     </div>
   </div>
-  <!-- -------------- -->
-  <!--  UNIQUE MODALE -->
-  <!-- -------------- -->
+</div>
+<!-- -------------- -->
+<!--  UNIQUE MODALE -->
+<!-- -------------- -->
 
-  <!-- -------------- -->
-  <!-- MODALE MESSAGE -->
-  <!-- -------------- -->
+<!-- -------------- -->
+<!-- MODALE MESSAGE -->
+<!-- -------------- -->
 
-  <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <form class="modal-content" method="POST">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Votre message</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form class="modal-content" method="POST">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Votre message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
 
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text" name="textMessage" style="height: 10em;"></textarea>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button id="sendMessage" name="sendMessageInFavorite" type="submit" class="btn btnConnect">Envoyer votre message</button>
-          <input type="hidden" name="articleId" value="<?= $display['ARTICLE_ID'] ?>">
+        <div class="mb-3">
+          <label for="message-text" class="col-form-label">Message:</label>
+          <textarea class="form-control" id="message-text" name="textMessage" style="height: 10em;"></textarea>
         </div>
 
+      </div>
+      <div class="modal-footer">
+        <button id="sendMessage" name="sendMessageInFavorite" type="submit" class="btn btnConnect">Envoyer votre message</button>
+        <input type="hidden" name="articleId" value="<?= $display['ARTICLE_ID'] ?>">
+      </div>
 
-      </form>
-    </div>
+
+    </form>
   </div>
+</div>
 
-  <!-- -------------- -->
-  <!-- MODALE MESSAGE -->
-  <!-- -------------- -->
+<!-- -------------- -->
+<!-- MODALE MESSAGE -->
+<!-- -------------- -->
 
 
-   <?php require './views/footer.php'; ?>
+<?php require './views/footer.php'; ?>
 
 
 

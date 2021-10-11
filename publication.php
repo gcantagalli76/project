@@ -52,8 +52,8 @@ require './controllers/controller.php';
 
 
               <div class="row mt-1">
-                <div class="col-sm-4">
-                  <label class="form-label mt-2 d-flex justify-content-start"> Date d'achat :</label>
+                <div class="col-sm-5">
+                  <label class="form-label mt-2 d-flex justify-content-start"> Date d'achat (approximation) :</label>
                   <input type="date" class="form-control box" id="yourBuyDate" name="yourBuyDate">
                   <span id="messageInfosTitle"></span>
                 </div>

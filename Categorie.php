@@ -11,7 +11,7 @@ require './controllers/controller.php';
   <div class="row justify-content-start">
 
     <?php foreach ($displayCategoryArticleArray as $display) { ?>
-      <form class="col-md-2 d-flex justify-content-center" method="GET" action="Annonce.php">
+      <form class="col-md-2 d-flex justify-content-center mt-3" method="GET" action="Annonce.php">
         <button class="card" style="width: 14rem;" name="idArticleConsult" id="idArticleConsult" value="<?php echo $display['ARTICLE_ID'] ?>">
           <img src="data:image/png;base64, <?= $display['picture1'] ?>" class="card-img-top imagePreview" alt="picture1">
           <div class="card-body">
