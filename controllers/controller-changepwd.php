@@ -28,13 +28,13 @@ if (isset($_POST['createToken']) && $userObj->displayEmail($_POST['yourEmail']))
   $mail->isSMTP(); // Paramétrer le Mailer pour utiliser SMTP 
   $mail->Host = 'smtp.gmail.com'; // Spécifier le serveur SMTP
   $mail->SMTPAuth = true; // Activer authentication SMTP
-  $mail->Username = 'gcantagalli76@gmail.com'; // Votre adresse email d'envoi
-  $mail->Password = 'pescara85'; // Le mot de passe de cette adresse email
+  $mail->Username = 'xxx'; // Votre adresse email d'envoi
+  $mail->Password = 'xxx'; // Le mot de passe de cette adresse email
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Accepter SSL
   $mail->Port = 465;
 
   $mail->setFrom('from@example.com', 'Bricoleur du Dimanche'); // Personnaliser l'envoyeur
-  $mail->addAddress('gcantagalli76@gmail.com', ''); // Ajouter le destinataire
+  $mail->addAddress('xxx', ''); // Ajouter le destinataire
 
   $mail->isHTML(true); // Paramétrer le format des emails en HTML ou non
 

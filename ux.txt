@@ -1,6 +1,0 @@
-Date d'achat : ajout d'une fonction 'ignorer'
-upload de 1 photo min mais pas obligatoirement 3
-
-- Manque un profil pour les vendeurs ou il pourrait y avoir un système de notation quand la transaction s'est bien passée ou pas (exemple Vinted) + la géolocalisation n'apporte pas grand chose ou alors il faut que ça soit cliquable (plugin google map?)
-
-- manque un bouton retour pour chaque rubrique sous jacente à "mon compte" pour retourner au menu "mon compte" sans avoir à cliquer sur l'icône en haut à droite

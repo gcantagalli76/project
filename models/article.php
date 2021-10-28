@@ -5,7 +5,10 @@
 class Article extends Database
 {
 
-    // je créé une fonction qui récupère les champs remplis sur le formulaire et qui les insert dans la bdd via sql après connection à la bdd
+    /**
+     * Function to insert the elements from the form into the database after connection to database
+     *
+     */
     public function addArticle($picture1, $picture2, $picture3)
     {
         $title = htmlspecialchars($_POST["yourTitle"]);
@@ -35,7 +38,10 @@ class Article extends Database
         return $execute;
     }
 
-    //fonction permettant d'afficher sur la page mespublications les articles publiés par l'utilisateur connecté
+    /**
+     * Function to display in my publications all articles published by the user
+     *
+     */
     public function articleUser()
     {
         $database = $this->connectDatabase();
@@ -54,7 +60,11 @@ class Article extends Database
         return $fetch;
     }
 
-    //fonction permettant d'afficher sur la page d'accueil les 5 derniers articles publiés par tous les utilisateurs
+
+    /**
+     * Function to display on homepage the last 5 articles
+     *
+     */
     public function display5Article()
     {
         $database = $this->connectDatabase();
@@ -69,7 +79,10 @@ class Article extends Database
         return $fetch;
     }
 
-    //fonction permettant d'afficher sur les détails de l'article sur la page annonce.php
+    /**
+     * Function to display article's details on annonce.php
+     *
+     */
     public function displayArticleDetails()
     {
         $database = $this->connectDatabase();
@@ -90,7 +103,11 @@ class Article extends Database
     }
 
 
-    //fonction permettant d'afficher l'article à modifier avant la modification
+
+    /**
+     * Function to display the artile to modify before modification
+     *
+     */
     public function displayArticleB4Modif()
     {
         $database = $this->connectDatabase();
@@ -104,7 +121,10 @@ class Article extends Database
     }
 
 
-    // fonction permettant de modifier l'article
+    /**
+     * Function to modify the article
+     *
+     */
     public function modifyArticle($picture1, $picture2, $picture3)
     {
         $database = $this->connectDatabase();
@@ -135,7 +155,11 @@ class Article extends Database
         return $execute;
     }
 
-    // fonction permettant de supprimer un article
+
+    /**
+     * Function to delete the article
+     *
+     */
     public function deleteArticle()
     {
         $database = $this->connectDatabase();
@@ -149,7 +173,10 @@ class Article extends Database
         return $execute;
     }
 
-    //fonction permettant d'afficher les articles par catégorie
+    /**
+     * Function to display article by category
+     *
+     */
     public function displayArticleCategory()
     {
         $database = $this->connectDatabase();
@@ -167,7 +194,11 @@ class Article extends Database
         return $fetch;
     }
 
-    // je créé une fonction qui ajoute les données de l'article mis en favori par l'utilisateur dans la table articlefavorite
+
+    /**
+     * Function to add the data of the article add in favorite by the user in the table articlefavorite
+     *
+     */
     public function addFavouriteArticle()
     {
         $articleId = $_GET['idfavorite'] ?? $_POST['addFavorite'];
@@ -182,7 +213,10 @@ class Article extends Database
         return $execute;
     }
 
-    //fonction permettant d'afficher les articles favoris de l'utilisateur connecté
+    /**
+     * Function to display articles of the connected user
+     *
+     */
     public function displayArticleFavorite()
     {
         $database = $this->connectDatabase();
@@ -202,7 +236,11 @@ class Article extends Database
         return $fetch;
     }
 
-    //fonction permettant d'afficher les articles favoris de l'utilisateur connecté et d'éviter qu'il ne mette 2 fois le même en favoris
+
+    /**
+     * Function to display favorite articles of the connected user and to avoid he add twice the same article in favorite
+     *
+     */
     public function verifyArticleFavorite($userId, $articleId)
     {
         $database = $this->connectDatabase();
@@ -215,7 +253,11 @@ class Article extends Database
         return $fetch;
     }
 
-    //fonction permettant de vérifier que l'article n'a pas déjà été validé par l'admin
+
+    /**
+     * Function to verify the article was not already validate by the admin
+     *
+     */
     public function verifyArticleValid($articleId)
     {
         $database = $this->connectDatabase();
@@ -229,7 +271,10 @@ class Article extends Database
 
 
 
-    // fonction permettant de supprimer un article
+    /**
+     * Function to delete an article in favorite
+     *
+     */
     public function deleteFavoriteArticle()
     {
         $database = $this->connectDatabase();
@@ -244,7 +289,10 @@ class Article extends Database
     }
 
 
-    // fonction permettant d'affchier les publications à valider par l'admin
+    /**
+     * Function to display the publication for admin validation
+     *
+     */
     public function displayArticleToValid()
     {
         $database = $this->connectDatabase();
@@ -258,7 +306,11 @@ class Article extends Database
         return $fetch;
     }
 
-    // fonction permettant de valider l'article par l'admin
+
+    /**
+     * Function who valid the article by admin
+     *
+     */
     public function validArticle()
     {
         $database = $this->connectDatabase();
@@ -270,7 +322,11 @@ class Article extends Database
         return $execute;
     }
 
-    // fonction permettant d'envoyer un message au vendeur
+
+    /**
+     * Function who send a message to the seller
+     *
+     */
     public function sendMessage()
     {
         $database = $this->connectDatabase();
@@ -287,7 +343,10 @@ class Article extends Database
         return $execute;
     }
 
-    // fonction permettant d'afficher tous les messages reçu par l'utilisateur
+    /**
+     * Function to display all message received by the user
+     *
+     */
     public function displayUserMessages()
     {
         $database = $this->connectDatabase();
@@ -309,7 +368,11 @@ class Article extends Database
         return $fetch;
     }
 
-    // fonction permettant de supprimer un message reçu par l'utilisateur
+
+    /**
+     * Function to display a message received by the user
+     *
+     */
     public function deleteUserMessages()
     {
         $database = $this->connectDatabase();

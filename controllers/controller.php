@@ -8,7 +8,10 @@ $articleObj = new Article();
 $deleteSuccess = 0;
 $swalRedirection = 0;
 
-// si il n'y a pas de session d'ouverte tu peux ouvrir une session
+
+/**
+ * if there is no session open, you can open a session
+ */
 if (!isset($_SESSION)) {
   session_start();
 }
@@ -23,7 +26,7 @@ $regexPostal = "/^[0-9]{1,10}$/";
 $regexPassword = "/^(?=.*?[A-Z])(?=.*?[a-z]).{5,}$/";
 
 /**
- * If we have not the good format we add 1 in the error array
+ * If we have not the good format in the form we add 1 in the error array
  *
  */
 if (isset($_POST['myButton'])) {
@@ -57,7 +60,10 @@ if (isset($_POST['myButton'])) {
   }
 }
 
-//Sécurité scaptcha
+
+/**
+ * Scaptcha Security
+ */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
 
@@ -77,7 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])
   }
 }
 
-// Verification que les champs publications sont bien tous remplis que ce soit en publication ou en modification
+/**
+ * On the publication we verify if all fields are filled and with the good format (also for the modification)
+ */
 
 $emptyPublication = 0;
 $regexPrice = "/^[0-9]{1,10}$/";
@@ -119,7 +127,10 @@ if (isset($_POST['validPublication']) || isset($_POST['validModification'])) {
   }
 }
 
-// Verification que les champs modification de mon compte sont bien tous remplis
+
+/**
+ * verify if all fields are filled when we modify count information
+ */
 
 $emptyModifUser = 0;
 
@@ -146,7 +157,10 @@ if (isset($_POST['validModify'])) {
   }
 }
 
-// Verification que les champs modification de pwd sont bien tous remplis et respectent les regex et autres contraintes
+
+/**
+ * verify if all fields are filled and whith the good format when we change pwd
+ */
 
 $emptyModifPwd = 0;
 
@@ -190,19 +204,28 @@ if (isset($_POST['myButton']) && $userObj->displayEmail(htmlspecialchars($_POST[
   $redirectionSweet = "connection.php";
 }
 
-// si tu clics sur le bouton deconnecter cela supprimera la session
+
+/**
+ * On click to disconnect we kill the session
+ */
 if (isset($_POST['disconnect'])) {
   session_destroy();
 }
 
-// si tu as une session en cours avec un email alors tu peux afficher les données de l'utilisateur sur son compte et créer une session avec son id
+
+/**
+ * if we have a session with an email, we launch the function who display information about the user
+ */
 if (isset($_SESSION['email'])) {
   $displayUserArray = $userObj->displayUser(htmlspecialchars($_SESSION['email']));
 }
 
-// Si tu clics dans mon compte et que tu as une sessions email d'enregistrée alors tu rentres direct sur ton compte
-// Sinon si tu clic sur le bouton connection on vérifie que ton mail et mdp est bien egal à ce qu'il y a en bdd on t'envoi sur ton compte et on enregistre une session email pour ne pas te reconnecter à chaque fois
-// Sinon on affiche un message d'erreur pour indiquer que le mdp ou l'email n'est pas valide
+
+/**
+ * if you have a session email you go directy on user count
+ * else if you click on connectbuton whe verify if your email and password are ok and we open a session
+ * else we diplay an error message to indicate the email or password are not valid
+ */
 if (isset($_SESSION['email']) && isset($_SESSION['userId']) && $_SESSION['statusId'] == 2 && isset($_POST['myAcount'])) {
   header("Location: moncompte.php");
 } elseif (isset($_SESSION['email']) && isset($_SESSION['userId']) && $_SESSION['statusId'] == 1 && isset($_POST['myAcount'])) {
@@ -259,39 +282,55 @@ if (isset($_POST['validModifyPwd']) && $emptyModifUser == 0) {
   }
 }
 
-// au clic sur mes publications tu renvois sur la pages mes publications
+/**
+ * On click on mypublication you go in my publication
+ */
 if (isset($_POST['myPublications'])) {
   header("Location: mespublications.php");
 }
 
-// au clic sur publication à valider tu renvois sur la pages des publications à valider par l'admin
+/**
+ * On click on publiToValid you go to publication to valid by admin
+ */
 if (isset($_POST['publiToValid'])) {
   header("Location: publitovalid.php");
 }
 
-// au clic sur modifier mon profil tu vas sur la page myprofil.php
+/**
+ * On click on changeYourInformation you go to myprofils.php
+ */
 if (isset($_POST['changeYourInformation'])) {
   header("Location: myprofil.php");
 }
 
-// au clic sur gestion de comptes utilisateurs tu vas sur la page usergestion.php
+/**
+ * On click on userGestion you go to usergestion.php
+ */
 if (isset($_POST['userGestion'])) {
   header("Location: usergestion.php");
   $displayAllUser = $userObj->displayUser();
 }
 
-// si tu es l'admin tu peux lancer la fonction permettant d'afficher tous les comptes utilisateurs
+/**
+ * If your sessionid is 1 you can see all user from database
+ */
 if (isset($_SESSION['statusId']) && $_SESSION['statusId'] == 1) {
   $displayAllUser = $userObj->displayUser();
 }
 
-// si tu clics sur le bouton valider le changement de statut tu lances la fonction qui change le statut de l'utilisateur et celle qui affiche tous les utilisateurs
+
+/**
+ * On click on validChangeStatut you lauch function who change the user status and display all users
+ */
 if (isset($_POST['validChangeStatut'])) {
   $userObj->modifyUserStatut();
   $displayAllUser = $userObj->displayUser();
 }
 
-// au clic sur mes favoris tu renvois sur la pages mes favoris
+/**
+ * on click on myFavorite and whith a session id opened, you go to favoris.php
+ * else you go to connectfor.php
+ */
 if (isset($_POST['myFavorite']) && isset($_SESSION['userId'])) {
   header("Location: favoris.php");
 } elseif (isset($_POST['myFavorite']) && !isset($_SESSION['userId'])) {
@@ -299,18 +338,25 @@ if (isset($_POST['myFavorite']) && isset($_SESSION['userId'])) {
   header("Location: connectfor.php");
 }
 
-// au clic sur changer mon mot de passe tu renvois sur la pages changemypwd
+/**
+ * On click on changePwd you go to changemypwd.php
+ */
 if (isset($_POST['changePwd'])) {
   header("Location: changemypwd.php");
 }
 
-// au clic sur mes messages tu renvois sur la pages messages.php
+
+/**
+ * On click on myMessages you go to messages.php
+ */
 if (isset($_POST['myMessages'])) {
   header("Location: messages.php");
 }
 
-// Si tu clic sur changer mon mot de passe et si ton ex mot de pass correspond bien à ce que nous avons en bdd
-// alors tu lances la fonction qui prend ton new mdp et le change en bdd
+
+/**
+ * If you click to change your pwd and if your ex pwd is the same whith what we have in database, we launch function who take the new pwd and to change him in database
+ */
 if (isset($_POST['changeMyPwd']) && $emptyModifPwd == 0) {
   $verifyPwdUser = $userObj->verifyPwd();
   if (password_verify($_POST["yourExPassword"], $verifyPwdUser['USER_PASSWORD']) && $_SESSION['statusId'] == 2) {
@@ -356,14 +402,18 @@ if (isset($_POST['deleteUser'])) {
   }
 }
 
-// lors du clic pour supprimer un utilisateur depuis le compte admin tu lances la fonction qui supprime en base les données de l'utilisateur pointé
+/**
+ * When you click on idUserDelete we launch function who delete the user concerned
+ */
 if (isset($_POST['idUserDelete'])) {
   $userObj->deleteUserByAdmin();
   $displayAllUser = $userObj->displayUser();
   $deleteSuccess = true;
 }
 
-// si tu clics pour envoyer un message au vendeur mais que tu n'est pas connecté alors on te renvoi sur la page pour te connecter
+/**
+ * if you click to send a message but you are not connected, we transfer you on connectfor.php
+ */
 if (isset($_POST['sendMessage']) && !isset($_SESSION['userId'])) {
   $_SESSION['connectFor'] = 'pour contacter un vendeur';
   header("Location: connectfor.php");
@@ -372,11 +422,16 @@ if (isset($_POST['sendMessage']) && !isset($_SESSION['userId'])) {
 /////////////////////////////////////////////////////////////////////////////ARTICLE//////////////////////////////////////////////////////////////////////
 
 // si il n'y a pas d'email dans la session alors tu renvois l'utilisateur direct sur la page connectpourpubli sinon tu lances le reste
+/**
+ * if we have not a session opened and you click on newPublication we transfer the user to connectfor.php
+ */
 if ((!isset($_SESSION['userId'])) && isset($_POST['newPublication'])) {
   $_SESSION['connectFor'] = 'pour publier une annonce';
   header("Location: connectfor.php");
 } else {
-  // si il valide la publication alors tu récupère les différents post et photos et lance la fonction pour rajouter l'article dans la bdd
+  /**
+   * if you click on validPublication and there is no error, we launch function to add all informations in database and to convert photos in base64
+   */
   if (isset($_POST['validPublication']) && $emptyPublication == 0) {
 
     //changement de l'image1 au format base64 pour import dans la bdd
@@ -407,31 +462,42 @@ if ((!isset($_SESSION['userId'])) && isset($_POST['newPublication'])) {
   }
 }
 
-// si il n'y a pas d'email dans la session alors tu renvois l'utilisateur direct sur la page de connection sinon tu lances le reste
+/**
+ * If we dont have an email session and you click on myPublications we transfer the user to connection.php, else you launch the function to display user's article
+ */
 if (!isset($_SESSION['email']) && isset($_POST['myPublications'])) {
   header("Location: connection.php");
 } else if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
-  // tu lances la fonction permettant d'afficher les produits liés à l'utilisateur connecté
   $displayUserArticleArray = $articleObj->articleUser();
 }
 
-// si il n'y a pas d'email dans la session alors tu renvois l'admin direct sur la page de connection sinon tu lances le reste
+
+/**
+ * If we dont have an email session and you click on publiToValid we transfer the user to connection.php, else you launch the function to display article to validate
+ */
 if (!isset($_SESSION['email']) && isset($_POST['publiToValid'])) {
   header("Location: connection.php");
 } else if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
-  // tu lances la fonction permettant d'afficher les produits à valider par l'admin
   $displayAdminArticleArray = $articleObj->displayArticleToValid();
 }
 
-// nous mettons la fonction dans une variable pour ensuite afficher les 5 derniers articles sur la page d'accueil
+/**
+ * Function to display the last 5 article
+ */
 $display5ArticleArray = $articleObj->display5Article();
 
-// lors du clic sur le bouton modifier la publication nous renvoyer sur la page publicationmodify avec les infos concernant le produit à modifier
+
+/**
+ * If you click on idArticleModify we launch function to display the artile to modify before modification
+ */
 if (isset($_POST['idArticleModify'])) {
   $displayArticleToModifArray = $articleObj->displayArticleB4Modif();
 }
 
-// lors du clic pour valider la modif tu lances la fonction qui modifie en base les données de l'article concerné et tu affiche de nouveau l'article
+
+/**
+ * If you click on validModification and if we dont have any error we launch function to modify the article
+ */
 if (isset($_POST['validModification']) && $emptyPublication == 0) {
 
   if (empty($_FILES['fileToUpload']['tmp_name'])) {
@@ -479,31 +545,45 @@ if (isset($_POST['validModification']) && $emptyPublication == 0) {
   $iconSweet = "error";
 }
 
-// lors du clic pour supprimer un article tu lances la fonction qui supprime en base les données de l'article concerné
+
+/**
+ * If you click on idArticleDelete we launch function to delete the artile 
+ */
 if (isset($_POST['idArticleDelete'])) {
   $articleObj->deleteArticle();
   $displayUserArticleArray = $articleObj->articleUser();
   $deleteSuccess = true;
 }
 
-// lors du clic sur les catégories tu affiches les articles sur la catégories concernée
+
+/**
+ * If you click on selectCategory we launch function to display the category concerned 
+ */
 if (isset($_POST['selectCategory'])) {
   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
 }
 
-// Si dans la catégorie selectionné il n'y a aucun article alors tu mets une phrase qui indique que nous n'avons pas d'article sinon tu mets la catégorie
+/**
+ * if we don't have any article in the selected category, we indicate we have nothing else we diplay the category name
+ */
 if (!isset($displayCategoryArticleArray[0]['CATEGORY_NAME'])) {
   $categoryTitle = 'Aucun article dans cette catégorie pour le moment';
 } else {
   $categoryTitle = $displayCategoryArticleArray[0]['CATEGORY_NAME'];
 }
 
-// Si tu clics sur un article dans la catégorie ou dans tes favoris alors tu lance la fonction qui affiche les détails de cet article dans annonce.php
+
+/**
+ * If you click on idArticleConsult or idarticle, we launch function to display details about this article on annonce.php
+ */
 if (isset($_GET['idArticleConsult']) || isset($_GET['idarticle'])) {
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
 }
 
-// Si tu clics sur le coeur pour mettre dans les favoris tu lances la fonction qui rajoute l'article dans les favoris de l'utilisateur
+
+/**
+ * If you click on idfavorite to add an article in favorite, we launch function to add this article in the favorite article of the connected user
+ */
 if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
   $displayCategoryArticleArray = $articleObj->displayArticleCategory();
   if ($articleObj->verifyArticleFavorite($_SESSION['userId'], $_GET['idfavorite'])) {
@@ -520,7 +600,9 @@ if (isset($_GET['idfavorite']) && isset($_SESSION['email'])) {
   }
 }
 
-// Si dans l'annonce tu clics sur pour mettre dans les favoris tu lance la fonction qui rajoute l'article dans les favoris de l'utilisateur
+/**
+ * If you click on idfavorite to add an article in favorite, we launch function to add this article in the favorite article of the connected user
+ */
 if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
   if ($articleObj->verifyArticleFavorite($_SESSION['userId'], $_POST['addFavorite'])) {
@@ -536,41 +618,56 @@ if (isset($_POST['addFavorite']) && isset($_SESSION['email'])) {
   }
 }
 
-// Si tu clics sur mesfavoris alors tu lances la fonction permettant d'afficher les favoris de l'utilisateur connecté
+/**
+ * if you have a session email and a session userid we launch function who display the favorite article of the user connected
+ */
 if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
 }
 
-// lors du clic pour supprimer un article dans mesfavoris tu lances la fonction qui supprime en base les données l'article concerné
+
+/**
+ * When you click to delete an article in favorite, we launch function who delete the article of the user connected
+ */
 if (isset($_POST['idArticleFavoriteDelete'])) {
   $articleObj->deleteFavoriteArticle();
   $displayFavoriteArticleArray = $articleObj->displayArticleFavorite();
   $deleteSuccess = true;
 }
 
-// lors du clic pour valider un article par l'admin, tu lances la fonction qui passe cette article en validé en bdd
+/**
+ * When you click to validate an article, we launch function who valid the article in database
+ */
 if (isset($_POST['validArticleBtn'])) {
   $articleObj->validArticle();
 }
 
-// si tu clics sur le bouton valider l'envoi du message au vendeur, tu lances la fonction qui enregistre le message dans la bdd
+/**
+ * When you click to send a message, we launch function who send a message
+ */
 if (isset($_POST['sendMessage'])) {
   $articleObj->sendMessage();
   $displayDetailsArticleArray = $articleObj->displayArticleDetails();
 }
 
-// si tu clics sur le bouton valider l'envoi du message au vendeur depuis tes favoris, tu lances la fonction qui enregistre le message dans la bdd
+/**
+ * When you click to send a message from favorite article, we launch function who send a message
+ */
 if (isset($_POST['sendMessageInFavorite'])) {
   $articleObj->sendMessage();
   $displayDetailsArticleArray = $articleObj->displayArticleFavorite();
 }
 
-// si tu clics sur le bouton mes messages, tu lances la fonction qui affiche les messages de l'utilisateur connecté
+/**
+ * if you have a session email and a session userid we launch function who display the message of the user connected
+ */
 if (isset($_SESSION['email']) && isset($_SESSION['userId'])) {
   $displayUserMessages = $articleObj->displayUserMessages();
 }
 
-// si tu clics sur le bouton supprimer un message, tu lances la fonction qui supprimer le message dans la bdd
+/**
+ * When you click to delete a message from favorite article, we launch function who delete a message
+ */
 if (isset($_POST['messageDelete'])) {
   $articleObj->deleteUserMessages();
   $displayUserMessages = $articleObj->displayUserMessages();

@@ -48,7 +48,7 @@ class User extends Database
     }
 
     /**
-     * fonction permettant de vérifier dans la bdd si l'utilisateur qui se connecte a bien un compte de créé en base
+     * Function who verify if in database the user who is connected as a count
      *
      * 
      */
@@ -64,7 +64,11 @@ class User extends Database
         return $fetch;
     }
 
-    //fonction permettant de rajouter un token dans la table user lorsqu'il a oublié son mdp
+
+    /**
+     * Function to add a token in the user table when he forget his password
+     *
+     */
     public function addToken($token)
     {
         $mail = htmlspecialchars($_POST["yourEmail"]);
@@ -77,7 +81,11 @@ class User extends Database
         return $queryUser;
     }
 
-    //fonction permettant de créer un nouveau mdp
+
+    /**
+     * Function to create a new password
+     *
+     */
     public function newPwd($token)
     {
         $newPwd = password_hash($_POST['yourPassword'], PASSWORD_DEFAULT);
@@ -107,7 +115,11 @@ class User extends Database
         return $fetch;
     }
 
-    //fonction permettant de supprimer le token généré pour le changement de mdp
+
+    /**
+     * Function to delete the generated token after the password modification
+     *
+     */
     public function deleteToken($token)
     {
         $database = $this->connectDatabase();
@@ -162,7 +174,11 @@ class User extends Database
         return $fetch;
     }
 
-    //fonction permettant de créer un nouveau mdp à la demande de l'utilisateur depuis son compte
+
+    /**
+     * Function to create a new password from the user's count
+     *
+     */
     public function changeMyPwd()
     {
         $userId = $_SESSION["userId"];
@@ -193,7 +209,11 @@ class User extends Database
         $queryUser->execute();
     }
 
-    //fonction permettant de supprimer le compte à la demande de l'admin
+
+    /**
+     * Function to delete one user by the admin
+     *
+     */
     public function deleteUserByAdmin()
     {
         $userId = $_POST['idUserDelete'];
@@ -205,7 +225,11 @@ class User extends Database
         return $queryUser;
     }
 
-    // fonction permettant de modifier l'article
+
+    /**
+     * Function to midify an article
+     *
+     */
     public function modifyUserStatut()
     {
         $userStatut = $_POST['userStatut'];
